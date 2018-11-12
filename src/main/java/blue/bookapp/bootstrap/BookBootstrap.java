@@ -5,6 +5,7 @@ import blue.bookapp.domain.Book;
 import blue.bookapp.domain.Pages;
 import blue.bookapp.domain.Publisher;
 import blue.bookapp.repositories.BookRepository;
+import blue.bookapp.services.BookService;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
@@ -20,22 +21,30 @@ import java.util.Set;
 public class BookBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
     private BookRepository bookRepository;
+    BookService bookService;
 
-    public BookBootstrap(BookRepository bookRepository) {
+
+    public BookBootstrap(BookRepository bookRepository, BookService bookService) {
         this.bookRepository = bookRepository;
+        this.bookService = bookService;
     }
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         bookRepository.saveAll(getBooks());
+        //System.out.println(bookService.listBooksByAuthorName("test"));
+        //System.out.println(bookService.listBooksByAuthorName("Jake Sorey"));
     }
 
     private List<Book> getBooks()
     {
         Book book = new Book();
         book.setDescription("A book about absolutely nothing");
-        book.setEAN(new BigDecimal(1284712894));
+        book.setEAN(new Long(1284712894));
         book.setPrice(new BigDecimal(200));
+        book.setTitle("Blue and the Green!");
+
+        book.setYear(2018);
 
         Author author = new Author();
         author.setName("Jake Sorey");
@@ -60,6 +69,7 @@ public class BookBootstrap implements ApplicationListener<ContextRefreshedEvent>
 
         List<Book> books = new ArrayList<>(1);
         books.add(book);
+
         return books;
 
     }

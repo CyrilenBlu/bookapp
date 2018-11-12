@@ -1,19 +1,18 @@
 package blue.bookapp.services;
 
-import blue.bookapp.domain.Author;
 import blue.bookapp.domain.Book;
 import blue.bookapp.domain.Publisher;
 
 import java.math.BigDecimal;
-import java.time.Year;
+import java.util.Set;
 
 public interface BookService {
 
-    void listBooksByAuthor(Author author);
+    Set<Book> listBooksByAuthorName(String author);
 
-    void listBooksByPublisher(Publisher publisher);
+    Set<Book> listBooksByPublisher(Publisher publisher);
 
-    void listBooksByYear(Year year);
+    void listBooksByYear(int year);
 
     void findByEAN(BigDecimal ean);
 

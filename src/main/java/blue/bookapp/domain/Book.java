@@ -5,7 +5,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.time.Year;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,8 +21,8 @@ public class Book {
     private String description;
 
     private BigDecimal price;
-    private BigDecimal EAN;
-    private Year year;
+    private Long EAN;
+    private int year;
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Author author;
