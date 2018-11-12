@@ -1,0 +1,7 @@
+package blue.bookapp.domain;
+
+public enum GENRE {
+    HORROR, FANTASY, COMEDY, SUPERNATURAL,
+    ROMANCE, MYSTERY, THRILLER, SHORT_STORY,
+    TEEN_FICTION, CHILDREN_BOOKS
+}
