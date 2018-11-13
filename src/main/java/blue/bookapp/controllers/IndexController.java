@@ -13,6 +13,12 @@ public class IndexController {
     public String indexPage(Model model)
     {
         log.debug("Loading index page.");
-        return "index";
+        return "home";
+    }
+
+    @GetMapping("/list")
+    public String listPage(Model model)
+    {
+        return "list";
     }
 }
