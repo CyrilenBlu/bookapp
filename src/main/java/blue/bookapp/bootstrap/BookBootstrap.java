@@ -21,7 +21,7 @@ import java.util.Set;
 public class BookBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
     private BookRepository bookRepository;
-    BookService bookService;
+    private BookService bookService;
 
 
     public BookBootstrap(BookRepository bookRepository, BookService bookService) {
@@ -40,7 +40,7 @@ public class BookBootstrap implements ApplicationListener<ContextRefreshedEvent>
     {
         Book book = new Book();
         book.setDescription("A book about absolutely nothing");
-        book.setEAN(new Long(1284712894));
+        book.setEAN(Long.valueOf(1284712894));
         book.setPrice(new BigDecimal(200));
         book.setTitle("Blue and the Green!");
 
