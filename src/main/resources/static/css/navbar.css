@@ -1,0 +1,38 @@
+/*
+	tswtabs.css		1.2.1
+	Please use the CSS Menu Button Wizard at
+		https://www.thesitewizard.com/wizards/css-menu-buttons.shtml
+	to generate your own customized menu buttons.
+*/
+
+#tswcsstabs ul {
+	margin: 0 ;
+	padding: 0 ;
+	list-style: none ;
+	display: inline ;
+  float: right;
+}
+#tswcsstabs ul li {
+	margin: 0 ;
+	padding: 0 ;
+	display: inline ;
+	text-align: center ;
+	list-style: none ;
+	font-family: Arial, Helvetica, sans-serif ;
+	border-radius: 25px;
+}
+#tswcsstabs li a {
+	color: #98ebf1 ;
+	background-color: #179b66 ;
+	border-radius: 15px;
+	border: 1px solid #000000 ;
+	width: 15px;
+	height: 15px;
+	padding: 8px ;
+	text-decoration: none ;
+	display: inline ;
+}
+#tswcsstabs li a:hover {
+	color: #eefe25 ;
+	background-color: #179b66 ;
+}
