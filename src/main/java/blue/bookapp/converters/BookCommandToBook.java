@@ -3,7 +3,9 @@ package blue.bookapp.converters;
 import blue.bookapp.commands.BookCommand;
 import blue.bookapp.domain.Book;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Component;
 
+@Component
 public class BookCommandToBook implements Converter<BookCommand, Book> {
     @Override
     public Book convert(BookCommand bookCommand) {

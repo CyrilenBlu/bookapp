@@ -3,7 +3,9 @@ package blue.bookapp.converters;
 import blue.bookapp.commands.AuthorCommand;
 import blue.bookapp.domain.Author;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Component;
 
+@Component
 public class AuthorCommandToAuthor implements Converter<AuthorCommand, Author> {
 
     @Override

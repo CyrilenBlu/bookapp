@@ -3,7 +3,9 @@ package blue.bookapp.converters;
 import blue.bookapp.commands.PublisherCommand;
 import blue.bookapp.domain.Publisher;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PublisherCommandToPublisher implements Converter<PublisherCommand, Publisher> {
     @Override
     public Publisher convert(PublisherCommand publisherCommand) {
