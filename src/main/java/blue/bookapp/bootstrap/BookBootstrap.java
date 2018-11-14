@@ -1,9 +1,6 @@
 package blue.bookapp.bootstrap;
 
-import blue.bookapp.domain.Author;
-import blue.bookapp.domain.Book;
-import blue.bookapp.domain.Pages;
-import blue.bookapp.domain.Publisher;
+import blue.bookapp.domain.*;
 import blue.bookapp.repositories.BookRepository;
 import blue.bookapp.services.BookService;
 import org.springframework.context.ApplicationListener;
@@ -43,6 +40,8 @@ public class BookBootstrap implements ApplicationListener<ContextRefreshedEvent>
         book.setEAN(Long.valueOf(1284712894));
         book.setPrice(new BigDecimal(200));
         book.setTitle("Blue and the Green!");
+        book.setGenre(Genre.TEEN_FICTION);
+        //todo image storage
 
         book.setYear(2018);
 

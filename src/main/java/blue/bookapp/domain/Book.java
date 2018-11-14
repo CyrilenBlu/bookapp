@@ -24,6 +24,11 @@ public class Book {
     private Long EAN;
     private int year;
 
+    @Enumerated(value = EnumType.STRING)
+    private Genre genre;
+
+    private Byte[] image;
+
     @ManyToOne(cascade = CascadeType.ALL)
     private Author author;
 
