@@ -1,11 +1,15 @@
 package blue.bookapp.services;
 
+import blue.bookapp.commands.BookCommand;
+import blue.bookapp.converters.BookCommandToBook;
+import blue.bookapp.converters.BookToBookCommand;
 import blue.bookapp.domain.Book;
 import blue.bookapp.domain.Publisher;
 import blue.bookapp.repositories.BookRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Optional;
@@ -16,9 +20,13 @@ import java.util.Set;
 public class BookServiceImpl implements BookService {
 
     private BookRepository bookRepository;
+    private BookCommandToBook bookCommandToBook;
+    private BookToBookCommand bookToBookCommand;
 
-    public BookServiceImpl(BookRepository bookRepository) {
+    public BookServiceImpl(BookRepository bookRepository, BookCommandToBook bookCommandToBook, BookToBookCommand bookToBookCommand) {
         this.bookRepository = bookRepository;
+        this.bookCommandToBook = bookCommandToBook;
+        this.bookToBookCommand = bookToBookCommand;
     }
 
     @Override
@@ -53,8 +61,18 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void listBooksByYear(int year) {
-        bookRepository.findAll().forEach(book -> new Integer(year).equals(book.getYear()));
+    public Set<Book> listBooksByYear(int year) {
+        Set<Book> books = new HashSet<>();
+        bookRepository.findAll().iterator().forEachRemaining(books::add);
+        Set<Book> savedBooks = new HashSet<>();
+        books.stream().forEach(book ->
+        {
+            if (book.getYear() == year)
+            {
+                savedBooks.add(book);
+            }
+        });
+        return savedBooks;
     }
 
     @Override
@@ -64,9 +82,18 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void listByTitle(String title) {
-        bookRepository.findAll().forEach(book -> book.getTitle().equals(title));
-        log.debug("Found Title");
+    public Set<Book> listByTitle(String title) {
+        Set<Book> books = new HashSet<>();
+        bookRepository.findAll().iterator().forEachRemaining(books::add);
+        Set<Book> savedBooks = new HashSet<>();
+        books.stream().forEach(book ->
+        {
+            if (book.getTitle() == title)
+            {
+                savedBooks.add(book);
+            }
+        });
+        return savedBooks;
     }
 
     @Override
@@ -81,12 +108,17 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    @Transactional
     public void removeBookById(Long id) {
         bookRepository.deleteById(id);
     }
 
     @Override
-    public void updateBookById(Long id) {
-
+    @Transactional
+    public BookCommand updateBookById(BookCommand bookCommand) {
+        Book detachedBook = bookCommandToBook.convert(bookCommand);
+        Book savedBook = bookRepository.save(detachedBook);
+        log.debug("Saved book id: " + savedBook.getId());
+        return bookToBookCommand.convert(savedBook);
     }
 }

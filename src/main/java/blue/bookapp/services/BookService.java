@@ -1,5 +1,6 @@
 package blue.bookapp.services;
 
+import blue.bookapp.commands.BookCommand;
 import blue.bookapp.domain.Book;
 import blue.bookapp.domain.Publisher;
 
@@ -12,15 +13,15 @@ public interface BookService {
 
     Set<Book> listBooksByPublisher(Publisher publisher);
 
-    void listBooksByYear(int year);
+    Set<Book> listBooksByYear(int year);
 
     void findByEAN(BigDecimal ean);
 
-    void listByTitle(String title);
+    Set<Book> listByTitle(String title);
 
     void addBook(Book book);
 
     void removeBookById(Long id);
 
-    void updateBookById(Long id);
+    BookCommand updateBookById(BookCommand bookCommand);
 }
