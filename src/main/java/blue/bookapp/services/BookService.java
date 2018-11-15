@@ -19,9 +19,11 @@ public interface BookService {
 
     Set<Book> listByTitle(String title);
 
-    void addBook(Book book);
+    void addBook(BookCommand bookCommand);
 
     void removeBookById(Long id);
+
+    Set<Book> listBooks();
 
     BookCommand updateBookById(BookCommand bookCommand);
 }

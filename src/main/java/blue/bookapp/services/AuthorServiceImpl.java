@@ -1,5 +1,7 @@
 package blue.bookapp.services;
 
+import blue.bookapp.commands.AuthorCommand;
+import blue.bookapp.converters.AuthorCommandToAuthor;
 import blue.bookapp.domain.Author;
 import blue.bookapp.repositories.AuthorRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -12,26 +14,28 @@ import java.util.Optional;
 public class AuthorServiceImpl implements AuthorService {
 
     private AuthorRepository authorRepository;
+    private AuthorCommandToAuthor authorCommandToAuthor;
 
-    public AuthorServiceImpl(AuthorRepository authorRepository) {
+    public AuthorServiceImpl(AuthorRepository authorRepository, AuthorCommandToAuthor authorCommandToAuthor) {
         this.authorRepository = authorRepository;
+        this.authorCommandToAuthor = authorCommandToAuthor;
     }
 
     @Override
-    public void addAuthor(Author author) {
-        Optional<Author> optionalAuthor = authorRepository.findById(author.getId());
+    public void addAuthor(AuthorCommand authorCommand) {
+        Optional<Author> optionalAuthor = authorRepository.findById(authorCommandToAuthor.convert(authorCommand).getId());
         if (!optionalAuthor.isPresent())
         {
             throw new RuntimeException("Author already exists.");
         }
 
         log.debug("Saving new author.");
-        authorRepository.save(author);
+        authorRepository.save(authorCommandToAuthor.convert(authorCommand));
     }
 
     @Override
-    public void removeAuthor(Author author) {
-        authorRepository.delete(author);
+    public void removeAuthor(AuthorCommand authorCommand) {
+        authorRepository.delete(authorCommandToAuthor.convert(authorCommand));
     }
 
     @Override

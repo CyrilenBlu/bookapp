@@ -3,6 +3,7 @@ package blue.bookapp.services;
 import blue.bookapp.commands.BookCommand;
 import blue.bookapp.converters.BookCommandToBook;
 import blue.bookapp.converters.BookToBookCommand;
+import blue.bookapp.converters.PublisherCommandToPublisher;
 import blue.bookapp.domain.Book;
 import blue.bookapp.domain.Publisher;
 import blue.bookapp.repositories.BookRepository;
@@ -22,11 +23,13 @@ public class BookServiceImpl implements BookService {
     private BookRepository bookRepository;
     private BookCommandToBook bookCommandToBook;
     private BookToBookCommand bookToBookCommand;
+    private PublisherCommandToPublisher publisherCommandToPublisher;
 
-    public BookServiceImpl(BookRepository bookRepository, BookCommandToBook bookCommandToBook, BookToBookCommand bookToBookCommand) {
+    public BookServiceImpl(BookRepository bookRepository, BookCommandToBook bookCommandToBook, BookToBookCommand bookToBookCommand, PublisherCommandToPublisher publisherCommandToPublisher) {
         this.bookRepository = bookRepository;
         this.bookCommandToBook = bookCommandToBook;
         this.bookToBookCommand = bookToBookCommand;
+        this.publisherCommandToPublisher = publisherCommandToPublisher;
     }
 
     @Override
@@ -97,7 +100,8 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void addBook(Book book) {
+    public void addBook(BookCommand bookCommand) {
+        Book book = bookCommandToBook.convert(bookCommand);
         Optional<Book> optionalBook = bookRepository.findById(book.getId());
         if (!optionalBook.isPresent())
         {
@@ -120,5 +124,12 @@ public class BookServiceImpl implements BookService {
         Book savedBook = bookRepository.save(detachedBook);
         log.debug("Saved book id: " + savedBook.getId());
         return bookToBookCommand.convert(savedBook);
+    }
+
+    @Override
+    public Set<Book> listBooks() {
+        Set<Book> books = new HashSet<>();
+        bookRepository.findAll().iterator().forEachRemaining(books::add);
+        return books;
     }
 }
