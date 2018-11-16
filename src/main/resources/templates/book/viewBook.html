@@ -6,5 +6,6 @@
 </head>
 <body>
 <p th:text="${book.getTitle()}"> Hey Dad </p>
+<a href="#" th:text="'Read ' + ${book.getTitle()}" th:href="@{'/book/' + ${book.getId()} + '/read/page/1'}">Read</a>
 </body>
 </html>

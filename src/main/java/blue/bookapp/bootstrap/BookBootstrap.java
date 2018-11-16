@@ -49,15 +49,15 @@ public class BookBootstrap implements ApplicationListener<ContextRefreshedEvent>
         author1.setName("Jake Sorey");
         book1.setAuthor(author1);
 
-        Set<Pages> pages = new HashSet<>();
+        Set<Pages> pages1 = new HashSet<>();
         Pages page1 = new Pages();
         page1.setBook(book1);
         page1.setChapter("Chapter 1");
         page1.setContent("To do the worst is to do the opposite of the best.");
         page1.setPage(1);
-        pages.add(page1);
+        pages1.add(page1);
 
-        book1.setPages(pages);
+        book1.setPages(pages1);
 
         Publisher publisher1 = new Publisher();
         publisher1.setCity("Cape Town");
@@ -86,6 +86,23 @@ public class BookBootstrap implements ApplicationListener<ContextRefreshedEvent>
         publisher2.setName("England is my City");
         publisher2.setDate(LocalDate.now());
         book2.setPublisher(publisher2);
+
+        Set<Pages> pages2 = new HashSet<>();
+        Pages page2_1 = new Pages();
+        page2_1.setChapter("Chapter 1");
+        page2_1.setContent("Hello world he said!");
+        page2_1.setPage(1);
+
+        Pages pages2_2 = new Pages();
+        pages2_2.setChapter("Chapter 1");
+        pages2_2.setContent("Hello world pt.2");
+        pages2_2.setPage(2);
+
+        pages2.add(page2_1);
+        pages2.add(pages2_2);
+
+        book2.setPages(pages2);
+
 
         books.add(book1);
         books.add(book2);
