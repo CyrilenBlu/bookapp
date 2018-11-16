@@ -6,6 +6,7 @@ import blue.bookapp.repositories.BookRepository;
 import blue.bookapp.repositories.PagesRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -33,14 +34,28 @@ public class PagesServiceImpl implements PagesService {
     }
 
     @Override
-    public Pages getPagesByBookById(Long id) {
+    public Pages getPagesByBookById(Long id, Long pageNumber) {
         Optional<Book> bookOptional = bookRepository.findById(id);
 
+        if (!bookOptional.isPresent())
+        {
+            throw new RuntimeException("Book or Page not found!");
+        }
+        /*
+            Book detects more than one issue.
+         */
         Book book = bookOptional.get();
+        Set<Pages> savedPages = new HashSet<>();
+        book.getPages().stream().forEach(pages ->
+        {
+            if (pageNumber == pages.getPage() && pages.getBook().equals(book)) //fail-safe :).
+            {
+                savedPages.add(pages);
+            }
+        });
+        Pages pages = savedPages.iterator().next();
+        return pages;
 
-        Set<Pages> pagesSet = book.getPages();
-
-        return pagesSet.stream().findFirst().get();
 
     }
 }

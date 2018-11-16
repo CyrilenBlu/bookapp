@@ -23,15 +23,15 @@ public class BookController {
     public String viewBook(Model model, @PathVariable String id)
     {
         model.addAttribute("book", bookService.bookInfoById(Long.valueOf(id)));
-        model.addAttribute("page", pagesService.getPagesByBookById(Long.valueOf(id)));
+        model.addAttribute("page", pagesService.listPagesByBookId(Long.valueOf(id)));
         return "book/viewBook";
     }
 
-    @GetMapping("book/{id}/read/page/{pageId}")
-    public String readBook(@PathVariable String id, @PathVariable String pageId, Model model)
+    @GetMapping("book/{id}/read/page/{pageNumber}")
+    public String readBook(@PathVariable String id, @PathVariable String pageNumber, Model model)
     {
         model.addAttribute("pages", pagesService.listPagesByBookId(Long.valueOf(id)));
-        model.addAttribute("page", pagesService.getPagesByBookById(Long.valueOf(pageId)));
+        model.addAttribute("page", pagesService.getPagesByBookById(Long.valueOf(id), Long.valueOf(pageNumber)));
         return "book/read";
 
     }

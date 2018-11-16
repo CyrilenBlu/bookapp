@@ -92,11 +92,13 @@ public class BookBootstrap implements ApplicationListener<ContextRefreshedEvent>
         page2_1.setChapter("Chapter 1");
         page2_1.setContent("Hello world he said!");
         page2_1.setPage(1);
+        page2_1.setBook(book2);
 
         Pages pages2_2 = new Pages();
         pages2_2.setChapter("Chapter 1");
         pages2_2.setContent("Hello world pt.2");
         pages2_2.setPage(2);
+        pages2_2.setBook(book2);
 
         pages2.add(page2_1);
         pages2.add(pages2_2);
