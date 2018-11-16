@@ -132,4 +132,15 @@ public class BookServiceImpl implements BookService {
         bookRepository.findAll().iterator().forEachRemaining(books::add);
         return books;
     }
+
+    @Override
+    public Book bookInfoById(Long id) {
+        Optional<Book> optionalBook = bookRepository.findById(id);
+        if (!optionalBook.isPresent())
+        {
+            throw new RuntimeException("Book not found!");
+        }
+
+        return optionalBook.get();
+    }
 }

@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 @Slf4j
@@ -15,11 +16,10 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    @GetMapping("/list")
-    public String listPage(Model model)
+    @GetMapping("book/{id}/info")
+    public String viewBok(Model model, @PathVariable String id)
     {
-        model.addAttribute("books", bookService.listBooks());
-        log.debug("Loading book list page.");
-        return "book/list";
+        model.addAttribute("book", bookService.bookInfoById(Long.valueOf(id)));
+        return "book/viewBook";
     }
 }
