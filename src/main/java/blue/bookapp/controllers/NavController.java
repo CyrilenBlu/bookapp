@@ -38,10 +38,4 @@ public class NavController {
         return "contact";
     }
 
-    @GetMapping("/admin-cpl")
-    public String adminControl(Model model)
-    {
-        model.addAttribute("books", bookService.listBooks());
-        return "admin/admin-cpl";
-    }
 }

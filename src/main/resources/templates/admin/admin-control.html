@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body >
+    <div th:if="${not admin.isCheckLogged()}">
+        <p>Error please login</p>
+        <a type="button" href="#" th:href="@{'/error'}"></a>
+    </div>
+
+    <div th:if="${admin.isCheckLogged()}">
+        <p>hello</p>
+    </div>
+</body>
+</html>

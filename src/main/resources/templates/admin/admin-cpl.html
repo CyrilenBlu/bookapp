@@ -1,10 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title></title>
 </head>
 <body>
+<p> default text</p>
+    <form th:object="${admin}" th:action="@{'/check'}" method="get">
+        <input type="hidden" th:field="*{id}"/>
+        <p>Username</p>
+        <input type="text" th:field="*{username}"/>
+        <br/>
+        <p>Password</p>
+        <input type="text" th:field="*{password}"/>
+
+        <button type="submit"></button>
+
+    </form>
 
 </body>
 </html>
