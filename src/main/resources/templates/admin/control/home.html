@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link type="text/css" rel="stylesheet" href="../static/css/navbar.css" th:href="@{/css/navbar.css}" title="navbar">
+</head>
+<body background="/static/images/background.jpg" th:background="@{/images/background.jpg}" style="background-size:cover;">
+    <div th:if="${not admin.isCheckLogged()}">
+        <p>Error please login</p>
+        <a type="button" href="#" th:href="@{'/error'}"></a>
+    </div>
+
+    <div th:if="${admin.isCheckLogged()}">
+        <div id="tswcsstabs">
+            <ul>
+                <li><a href="admin-book-list">Book List </a></li>
+                 
+                <li><a href="admin-author-list">Author List</a></li>
+                 
+                <li><a href="admin-publisher-list">Publisher List</a></li>
+                 
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        <p>hello</p>
+    </div>
+</body>
+</html>

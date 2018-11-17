@@ -30,6 +30,7 @@ public class BookController {
     @GetMapping("book/{id}/read/page/{pageId}")
     public String readBook(@PathVariable String id, @PathVariable String pageId, Model model)
     {
+        model.addAttribute("book", bookService.bookInfoById(Long.valueOf(id)));
         model.addAttribute("pages", pagesService.listPagesByBookId(Long.valueOf(id)));
         model.addAttribute("page", pagesService.getPagesByBookById(Long.valueOf(id), Long.valueOf(pageId)));
         return "book/read";

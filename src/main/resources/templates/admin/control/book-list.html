@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table >
+    <tr>
+        <th>Id</th>
+        <th>Image</th>
+        <th>Title</th>
+        <th>View</th>
+        <th>Update</th>
+        <th>Delete</th>
+    </tr>
+    <tr th:each="book : ${books}">
+        <td th:text="${book.getId()}">Id</td>
+        <td th:text="${book.getImage()}">Image</td>
+        <td th:text="${book.getTitle()}">Title</td>
+        <td ><a href="#" th:href="@{'book/' + ${book.getId()} +'/view'}">View</a></td>
+        <td ><a href="#" th:href="@{'book/' + ${book.getId()} +'/update'}">Update</a></td>
+        <td><a href="#" th:href="@{'book/' + ${book.getId()} +'/delete'}">Delete</a></td>
+    </tr>
+</table>
+</body>
+</html>
