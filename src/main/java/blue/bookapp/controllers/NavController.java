@@ -17,7 +17,7 @@ public class NavController {
     }
 
     @GetMapping({"/","/home"})
-    public String indexPage(Model model)
+    public String indexPage()
     {
         log.debug("Loading index page.");
         return "home";
