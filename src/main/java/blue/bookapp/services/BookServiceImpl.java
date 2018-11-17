@@ -143,4 +143,15 @@ public class BookServiceImpl implements BookService {
 
         return optionalBook.get();
     }
+
+    @Override
+    public BookCommand findCommandById(Long id) {
+        Optional<Book> bookOptional = bookRepository.findById(id);
+        if (!bookOptional.isPresent())
+        {
+            throw new RuntimeException("Book not found!");
+        }
+
+        return bookToBookCommand.convert(bookOptional.get());
+    }
 }

@@ -9,6 +9,8 @@ import java.util.Set;
 
 public interface BookService {
 
+    BookCommand findCommandById(Long id);
+
     Set<Book> listBooksByAuthorName(String author);
 
     Set<Book> listBooksByPublisher(Publisher publisher);
