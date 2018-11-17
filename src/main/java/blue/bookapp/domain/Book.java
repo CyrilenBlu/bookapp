@@ -27,6 +27,7 @@ public class Book {
     @Enumerated(value = EnumType.STRING)
     private Genre genre;
 
+    @Lob
     private Byte[] image;
 
     @ManyToOne(cascade = CascadeType.ALL)
