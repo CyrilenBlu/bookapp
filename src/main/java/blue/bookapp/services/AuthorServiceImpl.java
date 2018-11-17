@@ -54,16 +54,4 @@ public class AuthorServiceImpl implements AuthorService {
 
         return author;
     }
-
-    @Override
-    public void changeAuthorImageById(Long id, Byte[] image) {
-        Optional<Author> optionalAuthor = authorRepository.findById(id);
-        if (!optionalAuthor.isPresent())
-        {
-            throw new RuntimeException("Author not found!");
-        }
-        Author author = optionalAuthor.get();
-        author.setImage(image);
-        authorRepository.save(author);
-    }
 }

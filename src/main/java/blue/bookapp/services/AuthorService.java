@@ -11,6 +11,4 @@ public interface AuthorService {
     void removeAuthorById(Long id);
 
     Author findAuthorById(Long id);
-
-    void changeAuthorImageById(Long id, Byte[] image);
 }
