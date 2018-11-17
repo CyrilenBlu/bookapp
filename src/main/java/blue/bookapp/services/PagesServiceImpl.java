@@ -36,26 +36,20 @@ public class PagesServiceImpl implements PagesService {
     @Override
     public Pages getPagesByBookById(Long id, Long pageNumber) {
         Optional<Book> bookOptional = bookRepository.findById(id);
-
         if (!bookOptional.isPresent())
         {
-            throw new RuntimeException("Book or Page not found!");
+            throw new RuntimeException("Book not found!");
         }
-        /*
-            Book detects more than one issue.
-         */
-        Book book = bookOptional.get();
+        Set<Pages> pages = bookOptional.get().getPages();
         Set<Pages> savedPages = new HashSet<>();
-        book.getPages().stream().forEach(pages ->
+        pages.stream().forEach(pages1 ->
         {
-            if (pageNumber == pages.getPage() && pages.getBook().equals(book)) //fail-safe :).
+            if (pages1.getPage() == pageNumber && bookOptional.get().getPages().contains(pages1))
             {
-                savedPages.add(pages);
+                savedPages.add(pages1);
             }
         });
-        Pages pages = savedPages.iterator().next();
-        return pages;
 
-
+        return savedPages.iterator().next();
     }
 }

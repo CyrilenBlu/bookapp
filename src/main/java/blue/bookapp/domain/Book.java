@@ -35,7 +35,11 @@ public class Book {
     @ManyToOne(cascade = CascadeType.ALL)
     private Publisher publisher;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "page")
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "book_pages",
+    joinColumns = @JoinColumn(name = "book_id"),
+    inverseJoinColumns = @JoinColumn(name = "pages_id"))
     private Set<Pages> pages = new HashSet<>();
 
     public void setAuthor(Author author) {

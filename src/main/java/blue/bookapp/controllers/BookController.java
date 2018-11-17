@@ -27,11 +27,11 @@ public class BookController {
         return "book/viewBook";
     }
 
-    @GetMapping("book/{id}/read/page/{pageNumber}")
-    public String readBook(@PathVariable String id, @PathVariable String pageNumber, Model model)
+    @GetMapping("book/{id}/read/page/{pageId}")
+    public String readBook(@PathVariable String id, @PathVariable String pageId, Model model)
     {
         model.addAttribute("pages", pagesService.listPagesByBookId(Long.valueOf(id)));
-        model.addAttribute("page", pagesService.getPagesByBookById(Long.valueOf(id), Long.valueOf(pageNumber)));
+        model.addAttribute("page", pagesService.getPagesByBookById(Long.valueOf(id), Long.valueOf(pageId)));
         return "book/read";
 
     }

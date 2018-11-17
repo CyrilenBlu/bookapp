@@ -35,6 +35,8 @@ public class BookBootstrap implements ApplicationListener<ContextRefreshedEvent>
 
     private List<Book> getBooks()
     {
+        List<Book> books = new ArrayList<>(2);
+
         Book book1 = new Book();
         book1.setDescription("A book about absolutely nothing");
         book1.setEAN(Long.valueOf(1284712894));
@@ -51,12 +53,12 @@ public class BookBootstrap implements ApplicationListener<ContextRefreshedEvent>
 
         Set<Pages> pages1 = new HashSet<>();
         Pages page1 = new Pages();
-        page1.setBook(book1);
         page1.setChapter("Chapter 1");
         page1.setContent("To do the worst is to do the opposite of the best.");
         page1.setPage(1);
-        pages1.add(page1);
+        page1.setBook(book1);
 
+        pages1.add(page1);
         book1.setPages(pages1);
 
         Publisher publisher1 = new Publisher();
@@ -66,7 +68,7 @@ public class BookBootstrap implements ApplicationListener<ContextRefreshedEvent>
         publisher1.setDate(LocalDate.now());
         book1.setPublisher(publisher1);
 
-        List<Book> books = new ArrayList<>(2);
+
 
         Book book2 = new Book();
         book2.setTitle("My life as a sushi investor.");
@@ -94,6 +96,7 @@ public class BookBootstrap implements ApplicationListener<ContextRefreshedEvent>
         page2_1.setPage(1);
         page2_1.setBook(book2);
 
+
         Pages pages2_2 = new Pages();
         pages2_2.setChapter("Chapter 1");
         pages2_2.setContent("Hello world pt.2");
@@ -102,7 +105,6 @@ public class BookBootstrap implements ApplicationListener<ContextRefreshedEvent>
 
         pages2.add(page2_1);
         pages2.add(pages2_2);
-
         book2.setPages(pages2);
 
 
