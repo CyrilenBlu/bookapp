@@ -3,10 +3,16 @@ package blue.bookapp.bootstrap;
 import blue.bookapp.domain.*;
 import blue.bookapp.repositories.BookRepository;
 import blue.bookapp.services.BookService;
+import blue.bookapp.services.ImageService;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -19,16 +25,23 @@ public class BookBootstrap implements ApplicationListener<ContextRefreshedEvent>
 
     private BookRepository bookRepository;
     private BookService bookService;
+    private ImageService imageService;
 
 
-    public BookBootstrap(BookRepository bookRepository, BookService bookService) {
+    public BookBootstrap(BookRepository bookRepository, BookService bookService, ImageService imageService) {
         this.bookRepository = bookRepository;
         this.bookService = bookService;
+        this.imageService = imageService;
     }
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         bookRepository.saveAll(getBooks());
+        try {
+            saveImages();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         //System.out.println(bookService.listBooksByAuthorName("test"));
         //System.out.println(bookService.listBooksByAuthorName("Jake Sorey"));
     }
@@ -67,8 +80,6 @@ public class BookBootstrap implements ApplicationListener<ContextRefreshedEvent>
         publisher1.setName("Idk WallStreet Journal Incorpreitated.");
         publisher1.setDate(LocalDate.now());
         book1.setPublisher(publisher1);
-
-
 
         Book book2 = new Book();
         book2.setTitle("My life as a sushi investor.");
@@ -119,6 +130,19 @@ public class BookBootstrap implements ApplicationListener<ContextRefreshedEvent>
         books.add(book2);
 
         return books;
+    }
 
+    private void saveImages() throws IOException
+    {
+        Set<Book> books = bookService.listBooks();
+        MultipartFile multipartFile1 = new MockMultipartFile("book1.jpg", new FileInputStream(new File(".bootstrapBookImages/book1.jpg")));
+        MultipartFile multipartFile2 = new MockMultipartFile("book2.jpg", new FileInputStream(new File(".bootstrapBookImages/book2.jpg")));
+        books.iterator().forEachRemaining(book ->
+        {
+            if (book.getId() == 1)
+                imageService.saveImageFile(book.getId(), multipartFile1);
+            if (book.getId() == 2)
+                imageService.saveImageFile(book.getId(), multipartFile2);
+        });
     }
 }

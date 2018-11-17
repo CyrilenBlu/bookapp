@@ -24,21 +24,20 @@
     <hr style="color: #2f5266;height:5px;border:1px solid black;background-color:black;margin:0;">
 
 
-      <table>
-        <tbody th:each="book : ${books}">
+      <table style="float:left;">
+        <tbody th:each="book : ${books}" style="float:right;border: 2px solid #98ebf1">
         <tr>
-          <th>Image</th>
+            <th><a th:href="@{'book/' + ${book.getId()} + '/info'}">
+                <img src="../../../../../.bootstrapBookImages/book1.jpg"
+                     th:src="@{'book/' + ${book.getId()} + '/bookimage'}" style="width:100px;length:150px;"/></a></th>
         </tr>
         <tr>
-          <th><a th:text="${book.getTitle()}" href="#">John</a></th>
+          <th><a th:text="${book.getTitle()}" href="#" th:href="@{'book/' + ${book.getId()} + '/info'}">John</a></th>
         </tr>
         <tr>
           <th><a th:text="${book.getDescription()}" href="#" th:href="@{'book/' + ${book.getId()} + '/info'}">Carter</a></th>
         </tr>
         </tbody>
       </table>
-
-
-    <hr style="color: #2f5266;height:5px;border:1px solid black;background-color:black;margin:0;">
   </body>
 </html>
