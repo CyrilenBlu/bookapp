@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Pages</title>
+</head>
+<body>
+<table>
+    <tbody>
+    <tr>
+        <th>ID</th>
+        <th>Page Number</th>
+        <th>Content</th>
+        <th>Update</th>
+        <th>Delete</th>
+    </tr>
+    <tr th:each="page : ${pages}">
+        <td th:text="${page.getId()}">ID</td>
+        <td th:text="${page.getPage()}">Page Number</td>
+        <td th:text="${page.getContent()}">Content</td>
+        <td><a href="#">Update</a></td>
+        <td><a href="#">Delete</a></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

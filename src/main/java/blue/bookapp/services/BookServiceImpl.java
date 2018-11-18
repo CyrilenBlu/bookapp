@@ -119,7 +119,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional
-    public BookCommand updateBookById(BookCommand bookCommand) {
+    public BookCommand updateBook(BookCommand bookCommand) {
         Book detachedBook = bookCommandToBook.convert(bookCommand);
         Book savedBook = bookRepository.save(detachedBook);
         log.debug("Saved book id: " + savedBook.getId());
@@ -145,6 +145,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    @Transactional
     public BookCommand findCommandById(Long id) {
         Optional<Book> bookOptional = bookRepository.findById(id);
         if (!bookOptional.isPresent())

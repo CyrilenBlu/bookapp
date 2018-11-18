@@ -1,15 +1,14 @@
 package blue.bookapp.controllers;
 
+import blue.bookapp.commands.BookCommand;
 import blue.bookapp.domain.Admin;
-import blue.bookapp.services.AdminService;
-import blue.bookapp.services.AuthorService;
-import blue.bookapp.services.BookService;
-import blue.bookapp.services.PublisherService;
+import blue.bookapp.services.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class AdminController {
@@ -18,13 +17,15 @@ public class AdminController {
     private BookService bookService;
     private AuthorService authorService;
     private PublisherService publisherService;
+    private PagesService pagesService;
     private Admin loggedAdmin = new Admin();
 
-    public AdminController(AdminService adminService, BookService bookService, AuthorService authorService, PublisherService publisherService) {
+    public AdminController(AdminService adminService, BookService bookService, AuthorService authorService, PublisherService publisherService, PagesService pagesService) {
         this.adminService = adminService;
         this.bookService = bookService;
         this.authorService = authorService;
         this.publisherService = publisherService;
+        this.pagesService = pagesService;
     }
 
     @GetMapping({"/admin-cpl", "/error"})
@@ -82,6 +83,28 @@ public class AdminController {
     {
         model.addAttribute("book", bookService.bookInfoById(Long.valueOf(id)));
         return "admin/control/book-show";
+    }
+
+    @GetMapping("/book/{id}/update")
+    public String updateBook_Admin(@PathVariable String id, Model model)
+    {
+        model.addAttribute("book", bookService.bookInfoById(Long.valueOf(id)));
+        model.addAttribute("pages", pagesService.listPagesByBookId(Long.valueOf(id)));
+        return "admin/control/book-update";
+    }
+
+    @PostMapping("book")
+    public String updateBook(@ModelAttribute BookCommand bookCommand)
+    {
+        BookCommand savedCommand = bookService.updateBook(bookCommand);
+        return "redirect:/book/" + savedCommand.getId() + "/show";
+    }
+
+    @GetMapping("/book/{id}/pages")
+    public String pagesBook_Admin(@PathVariable String id, Model model)
+    {
+        model.addAttribute("pages", pagesService.listPagesByBookId(Long.valueOf(id)));
+        return "admin/control/book-pages";
     }
 
     @GetMapping("/admin-author-list")

@@ -29,5 +29,5 @@ public interface BookService {
 
     Book bookInfoById(Long id);
 
-    BookCommand updateBookById(BookCommand bookCommand);
+    BookCommand updateBook(BookCommand bookCommand);
 }
