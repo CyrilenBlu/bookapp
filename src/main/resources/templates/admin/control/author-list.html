@@ -11,11 +11,15 @@
                 <th>ID</th>
                 <th>Name</th>
                 <th>No. of Books</th>
+                <th>Update</th>
+                <th>Delete</th>
             </tr>
             <tr th:each="author : ${authors}">
                 <td th:text="${author.getId()}">ID</td>
                 <td th:text="${author.getName()}">Name</td>
                 <td th:text="${author.getBooks().size()}">No. of Books</td>
+                <td><a href="#" th:href="@{'author/' + ${author.getId()} + '/update'}">Update</a></td>
+                <td><a href="#" th:href="@{'author' + ${author.getId()} +'/delete'}">Delete</a></td>
             </tr>
         </tbody>
     </table>

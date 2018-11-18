@@ -18,7 +18,7 @@
         <td th:text="${book.getId()}">Id</td>
         <td th:text="${book.getImage()}">Image</td>
         <td th:text="${book.getTitle()}">Title</td>
-        <td ><a href="#" th:href="@{'book/' + ${book.getId()} +'/view'}">View</a></td>
+        <td ><a href="#" th:href="@{'book/' + ${book.getId()} +'/show'}">View</a></td>
         <td ><a href="#" th:href="@{'book/' + ${book.getId()} +'/update'}">Update</a></td>
         <td><a href="#" th:href="@{'book/' + ${book.getId()} +'/delete'}">Delete</a></td>
     </tr>

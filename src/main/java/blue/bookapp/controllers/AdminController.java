@@ -77,6 +77,13 @@ public class AdminController {
         return "admin/control/book-list";
     }
 
+    @GetMapping("/book/{id}/show")
+    public String viewBook_Admin(@PathVariable String id, Model model)
+    {
+        model.addAttribute("book", bookService.bookInfoById(Long.valueOf(id)));
+        return "admin/control/book-show";
+    }
+
     @GetMapping("/admin-author-list")
     public String listAuthors_Admin(Model model)
     {
@@ -90,6 +97,7 @@ public class AdminController {
         model.addAttribute("publishers", publisherService.findAll());
         return "admin/control/publisher-list";
     }
+
 
 
     @GetMapping("book/{id}/delete")
