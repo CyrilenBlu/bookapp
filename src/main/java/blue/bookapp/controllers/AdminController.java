@@ -2,7 +2,9 @@ package blue.bookapp.controllers;
 
 import blue.bookapp.domain.Admin;
 import blue.bookapp.services.AdminService;
+import blue.bookapp.services.AuthorService;
 import blue.bookapp.services.BookService;
+import blue.bookapp.services.PublisherService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,11 +16,15 @@ public class AdminController {
 
     private AdminService adminService;
     private BookService bookService;
+    private AuthorService authorService;
+    private PublisherService publisherService;
     private Admin loggedAdmin = new Admin();
 
-    public AdminController(AdminService adminService, BookService bookService) {
+    public AdminController(AdminService adminService, BookService bookService, AuthorService authorService, PublisherService publisherService) {
         this.adminService = adminService;
         this.bookService = bookService;
+        this.authorService = authorService;
+        this.publisherService = publisherService;
     }
 
     @GetMapping({"/admin-cpl", "/error"})
@@ -70,6 +76,21 @@ public class AdminController {
         model.addAttribute("books", bookService.listBooks());
         return "admin/control/book-list";
     }
+
+    @GetMapping("/admin-author-list")
+    public String listAuthors_Admin(Model model)
+    {
+        model.addAttribute("authors", authorService.findAll());
+        return "admin/control/author-list";
+    }
+
+    @GetMapping("/admin-publisher-list")
+    public String listPublishers_Admin(Model model)
+    {
+        model.addAttribute("publishers", publisherService.findAll());
+        return "admin/control/publisher-list";
+    }
+
 
     @GetMapping("book/{id}/delete")
     public String deleteBook(@PathVariable String id)

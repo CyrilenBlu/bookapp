@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Publisher List</title>
+</head>
+<body>
+<table>
+    <tbody>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>City</th>
+            <th>Country</th>
+            <th>Date</th>
+            <th>No. of Books</th>
+        </tr>
+        <tr th:each="publisher : ${publishers}">
+            <td th:text="${publisher.getId()}">ID</td>
+            <td th:text="${publisher.getName()}">Name</td>
+            <td th:text="${publisher.getCity()}">City</td>
+            <td th:text="${publisher.getCountry()}">Country</td>
+            <td th:text="${publisher.getDate()}">Date</td>
+            <td th:text="${publisher.getBooks().size()}">No. of Books</td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>

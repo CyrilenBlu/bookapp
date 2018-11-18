@@ -4,7 +4,9 @@ import blue.bookapp.domain.Publisher;
 import blue.bookapp.repositories.PublisherRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class PublisherServiceImpl implements PublisherService{
@@ -40,5 +42,12 @@ public class PublisherServiceImpl implements PublisherService{
         Publisher publisher = optionalPublisher.get();
 
         return publisher;
+    }
+
+    @Override
+    public Set<Publisher> findAll() {
+        Set<Publisher> publishers = new HashSet<>();
+        publisherRepository.findAll().forEach(publishers::add);
+        return publishers;
     }
 }

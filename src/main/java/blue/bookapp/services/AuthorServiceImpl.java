@@ -7,7 +7,9 @@ import blue.bookapp.repositories.AuthorRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @Slf4j
@@ -53,5 +55,12 @@ public class AuthorServiceImpl implements AuthorService {
         Author author = authorOptional.get();
 
         return author;
+    }
+
+    @Override
+    public Set<Author> findAll() {
+        Set<Author> authors = new HashSet<>();
+        authorRepository.findAll().forEach(authors::add);
+        return authors;
     }
 }
