@@ -11,4 +11,5 @@ public class PagesCommand {
     private int page;
     private String chapter;
     private String content;
+    private BookCommand bookCommand;
 }

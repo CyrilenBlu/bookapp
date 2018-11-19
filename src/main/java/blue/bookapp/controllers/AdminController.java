@@ -42,7 +42,7 @@ public class AdminController {
     {
         model.addAttribute("admins", adminService.getAdmins());
         model.addAttribute("admin", loggedAdmin);
-        return "admin/control/home";
+        return "admin/home";
     }
 
     @GetMapping("/check")
@@ -75,14 +75,14 @@ public class AdminController {
     public String listBooks_Admin(Model model)
     {
         model.addAttribute("books", bookService.listBooks());
-        return "admin/control/book-list";
+        return "admin/book/book-list";
     }
 
     @GetMapping("/book/{id}/show")
     public String viewBook_Admin(@PathVariable String id, Model model)
     {
         model.addAttribute("book", bookService.bookInfoById(Long.valueOf(id)));
-        return "admin/control/book-show";
+        return "admin/book/book-show";
     }
 
     @GetMapping("/book/{id}/update")
@@ -90,7 +90,7 @@ public class AdminController {
     {
         model.addAttribute("book", bookService.bookInfoById(Long.valueOf(id)));
         model.addAttribute("pages", pagesService.listPagesByBookId(Long.valueOf(id)));
-        return "admin/control/book-update";
+        return "admin/book/book-update";
     }
 
     @PostMapping("book")
@@ -104,21 +104,40 @@ public class AdminController {
     public String pagesBook_Admin(@PathVariable String id, Model model)
     {
         model.addAttribute("pages", pagesService.listPagesByBookId(Long.valueOf(id)));
-        return "admin/control/book-pages";
+        model.addAttribute("book", bookService.bookInfoById(Long.valueOf(id)));
+        return "admin/book/book-pages";
+    }
+
+    @GetMapping("/book/{id}/pages/{pageId}/update")
+    public String viewPage_Admin(@PathVariable String id, @PathVariable String pageId, Model model) {
+        model.addAttribute("book", bookService.bookInfoById(Long.valueOf(id)));
+        model.addAttribute("page", pagesService.listPagesByBookId(Long.valueOf(id)));
+        return "admin/book/pages/pages-update";
+    }
+
+    @GetMapping("/book/{id}/pages/{pageId}/delete")
+    public String removePage_Admin(@PathVariable String id, @PathVariable String pageId)
+    {
+        if (loggedAdmin.isCheckLogged())
+        {
+            pagesService.removeById(Long.valueOf(id), Long.valueOf(pageId));
+        } else return "redirect:/admin-book-list";
+        return "redirect:/book/{id}/pages";
+
     }
 
     @GetMapping("/admin-author-list")
     public String listAuthors_Admin(Model model)
     {
         model.addAttribute("authors", authorService.findAll());
-        return "admin/control/author-list";
+        return "admin/author/author-list";
     }
 
     @GetMapping("/admin-publisher-list")
     public String listPublishers_Admin(Model model)
     {
         model.addAttribute("publishers", publisherService.findAll());
-        return "admin/control/publisher-list";
+        return "admin/publisher/publisher-list";
     }
 
 

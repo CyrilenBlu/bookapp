@@ -7,6 +7,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class BookToBookCommand implements Converter<Book, BookCommand> {
+
+    private PagesToPagesCommand pagesToPagesCommand;
+
+    public BookToBookCommand(PagesToPagesCommand pagesToPagesCommand) {
+        this.pagesToPagesCommand = pagesToPagesCommand;
+    }
+
     @Override
     public BookCommand convert(Book book) {
         if (book == null)
@@ -24,7 +31,12 @@ public class BookToBookCommand implements Converter<Book, BookCommand> {
         bookCommand.setAuthor(book.getAuthor());
         bookCommand.setPublisher(book.getPublisher());
         bookCommand.setGenre(book.getGenre());
-        bookCommand.setPages(book.getPages());
+
+        if (book.getPages() != null && book.getPages().size() > 0)
+        {
+            book.getPages().forEach(pages ->
+                                    bookCommand.getPagesCommands().add(pagesToPagesCommand.convert(pages)));
+        }
 
         return bookCommand;
     }

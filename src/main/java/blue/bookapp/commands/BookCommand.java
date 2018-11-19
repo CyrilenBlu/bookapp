@@ -2,7 +2,6 @@ package blue.bookapp.commands;
 
 import blue.bookapp.domain.Author;
 import blue.bookapp.domain.Genre;
-import blue.bookapp.domain.Pages;
 import blue.bookapp.domain.Publisher;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,5 +23,5 @@ public class BookCommand {
     private Author author;
     private Publisher publisher;
     private Genre genre;
-    private Set<Pages> pages;
+    private Set<PagesCommand> pagesCommands;
 }

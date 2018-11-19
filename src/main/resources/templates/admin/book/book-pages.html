@@ -18,8 +18,8 @@
         <td th:text="${page.getId()}">ID</td>
         <td th:text="${page.getPage()}">Page Number</td>
         <td th:text="${page.getContent()}">Content</td>
-        <td><a href="#">Update</a></td>
-        <td><a href="#">Delete</a></td>
+        <td><a href="#" th:href="@{'pages/'+${page.getId()} + '/update'}">Update</a></td>
+        <td><a href="#" th:href="@{'pages/'+${page.getId()} + '/delete'}">Delete</a></td>
     </tr>
     </tbody>
 </table>

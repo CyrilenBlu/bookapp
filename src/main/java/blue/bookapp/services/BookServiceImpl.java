@@ -7,6 +7,7 @@ import blue.bookapp.converters.PublisherCommandToPublisher;
 import blue.bookapp.domain.Book;
 import blue.bookapp.domain.Publisher;
 import blue.bookapp.repositories.BookRepository;
+import blue.bookapp.repositories.PagesRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -24,12 +25,14 @@ public class BookServiceImpl implements BookService {
     private BookCommandToBook bookCommandToBook;
     private BookToBookCommand bookToBookCommand;
     private PublisherCommandToPublisher publisherCommandToPublisher;
+    private PagesRepository pagesRepository;
 
-    public BookServiceImpl(BookRepository bookRepository, BookCommandToBook bookCommandToBook, BookToBookCommand bookToBookCommand, PublisherCommandToPublisher publisherCommandToPublisher) {
+    public BookServiceImpl(BookRepository bookRepository, BookCommandToBook bookCommandToBook, BookToBookCommand bookToBookCommand, PublisherCommandToPublisher publisherCommandToPublisher, PagesRepository pagesRepository) {
         this.bookRepository = bookRepository;
         this.bookCommandToBook = bookCommandToBook;
         this.bookToBookCommand = bookToBookCommand;
         this.publisherCommandToPublisher = publisherCommandToPublisher;
+        this.pagesRepository = pagesRepository;
     }
 
     @Override
