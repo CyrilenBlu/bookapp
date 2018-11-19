@@ -20,16 +20,15 @@ public class PagesToPagesCommand implements Converter<Pages, PagesCommand> {
         {
             return null;
         }
-        PagesCommand pagesCommand = new PagesCommand();
+        final PagesCommand pagesCommand = new PagesCommand();
         pagesCommand.setId(pages.getId());
+        if (pages.getBook() != null)
+        {
+            pagesCommand.setBookId(pages.getBook().getId());
+        }
         pagesCommand.setPage(pages.getPage());
         pagesCommand.setChapter(pages.getChapter());
         pagesCommand.setContent(pages.getContent());
-
-        if (pages.getBook() != null)
-        {
-            pagesCommand.setBookCommand(bookToBookCommand.convert(pages.getBook()));
-        }
         
         return  pagesCommand;
     }

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class BookCommandToBook implements Converter<BookCommand, Book> {
 
-    private PagesCommandToPages pagesCommandToPages;
+    private final PagesCommandToPages pagesCommandToPages;
 
     public BookCommandToBook(PagesCommandToPages pagesCommandToPages) {
         this.pagesCommandToPages = pagesCommandToPages;
@@ -35,8 +35,6 @@ public class BookCommandToBook implements Converter<BookCommand, Book> {
         if (bookCommand.getPagesCommands() != null && bookCommand.getPagesCommands().size() > 0)
             bookCommand.getPagesCommands().forEach(pagesCommand ->
                                                     book.getPages().add(pagesCommandToPages.convert(pagesCommand)));
-
-
 
         return book;
     }

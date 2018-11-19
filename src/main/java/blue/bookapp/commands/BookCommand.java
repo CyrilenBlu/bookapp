@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter@Setter
@@ -23,5 +24,5 @@ public class BookCommand {
     private Author author;
     private Publisher publisher;
     private Genre genre;
-    private Set<PagesCommand> pagesCommands;
+    private Set<PagesCommand> pagesCommands = new HashSet<>();
 }

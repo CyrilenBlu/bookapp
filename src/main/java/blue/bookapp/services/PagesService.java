@@ -8,7 +8,8 @@ import java.util.Set;
 public interface PagesService {
     void addPages(Set<Pages> pages);
     Set<Pages> listPagesByBookId(Long id);
-    Pages getPagesByBookById(Long id, Long pageNumber);
+    PagesCommand getCommandByBookById(Long id, Long pageNumber);
     void removeById(Long bookId,Long pageId);
     PagesCommand updatePageCommand(PagesCommand pagesCommand);
+    Pages findByBookId(Long bookId, Long pageId);
 }

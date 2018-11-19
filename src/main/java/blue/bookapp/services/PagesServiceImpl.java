@@ -44,7 +44,7 @@ public class PagesServiceImpl implements PagesService {
     }
 
     @Override
-    public Pages getPagesByBookById(Long id, Long pageNumber) {
+    public PagesCommand getCommandByBookById(Long id, Long pageNumber) {
         Optional<Book> bookOptional = bookRepository.findById(id);
         if (!bookOptional.isPresent())
         {
@@ -60,7 +60,7 @@ public class PagesServiceImpl implements PagesService {
             }
         });
 
-        return savedPages.iterator().next();
+        return pagesToPagesCommand.convert(savedPages.iterator().next());
     }
 
     @Override
@@ -92,7 +92,9 @@ public class PagesServiceImpl implements PagesService {
     @Override
     @Transactional
     public PagesCommand updatePageCommand(PagesCommand pagesCommand) {
-        Optional<Book> optionalBook = bookRepository.findById(pagesCommand.getBookCommand().getId());
+        /* todo fix null id.
+
+        Optional<Book> optionalBook = bookRepository.findById(pagesCommand.getBookId());
         if (!optionalBook.isPresent())
         {
             log.error("Book not found for id: " + pagesCommand.getId());
@@ -117,9 +119,33 @@ public class PagesServiceImpl implements PagesService {
             Optional<Pages> savedPagesOptional = savedBook.getPages()
                     .stream().filter(bookPages -> bookPages.getId().equals(pagesCommand.getId()))
                     .findFirst();
-            //todo test
+
             return pagesToPagesCommand.convert(savedPagesOptional.get());
 
+        }*/
+        return new PagesCommand();
+    }
+
+    @Override
+    public Pages findByBookId(Long bookId, Long pageId) {
+        Optional<Book> bookOptional = bookRepository.findById(bookId);
+        if (!bookOptional.isPresent())
+            throw new RuntimeException("Book not found!");
+        Book book = bookOptional.get();
+        Set<Pages> pagesSet = new HashSet<>();
+        book.getPages().forEach(pages ->
+        {
+            if (pages.getId() == pageId)
+            {
+                pagesSet.add(pages);
+            }
+        });
+
+        if (pagesSet.size() > 1)
+        {
+            log.error("Found more than one page for ID!");
         }
+
+        return pagesSet.iterator().next();
     }
 }

@@ -1,8 +1,10 @@
 package blue.bookapp.controllers;
 
 import blue.bookapp.commands.BookCommand;
+import blue.bookapp.commands.PagesCommand;
 import blue.bookapp.domain.Admin;
 import blue.bookapp.services.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
+@Slf4j
 public class AdminController {
 
     private AdminService adminService;
@@ -111,8 +114,18 @@ public class AdminController {
     @GetMapping("/book/{id}/pages/{pageId}/update")
     public String viewPage_Admin(@PathVariable String id, @PathVariable String pageId, Model model) {
         model.addAttribute("book", bookService.bookInfoById(Long.valueOf(id)));
-        model.addAttribute("page", pagesService.listPagesByBookId(Long.valueOf(id)));
+        model.addAttribute("page", pagesService.getCommandByBookById(Long.valueOf(id), Long.valueOf(pageId)));
         return "admin/book/pages/pages-update";
+    }
+
+    @PostMapping("/book/{id}/page")
+    public String updatePage(@ModelAttribute PagesCommand pagesCommand)
+    {
+        PagesCommand savedCommand = pagesService.updatePageCommand(pagesCommand);
+        log.debug("Saved Book id: " + savedCommand.getBookId());
+        log.debug("Saved page id: " + savedCommand.getId());
+
+        return "redirect:/book/{id}/update";
     }
 
     @GetMapping("/book/{id}/pages/{pageId}/delete")

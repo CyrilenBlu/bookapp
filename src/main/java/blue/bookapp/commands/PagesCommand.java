@@ -8,8 +8,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class PagesCommand {
     private Long id;
+    private Long bookId;
     private int page;
     private String chapter;
     private String content;
-    private BookCommand bookCommand;
 }

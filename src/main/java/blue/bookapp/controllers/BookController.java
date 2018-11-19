@@ -32,7 +32,7 @@ public class BookController {
     {
         model.addAttribute("book", bookService.bookInfoById(Long.valueOf(id)));
         model.addAttribute("pages", pagesService.listPagesByBookId(Long.valueOf(id)));
-        model.addAttribute("page", pagesService.getPagesByBookById(Long.valueOf(id), Long.valueOf(pageId)));
+        model.addAttribute("page", pagesService.findByBookId(Long.valueOf(id), Long.valueOf(pageId)));
         return "book/read";
 
     }
