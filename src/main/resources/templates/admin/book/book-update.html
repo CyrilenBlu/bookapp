@@ -44,7 +44,6 @@
 
         <div>
             <a href="#" th:href="@{'pages'}">View</a>
-            <label>Pages</label>
             <ul>
                 <li th:each="page : ${pages}"
                 th:text="${page.getContent()}">

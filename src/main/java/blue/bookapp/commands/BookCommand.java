@@ -24,5 +24,5 @@ public class BookCommand {
     private Author author;
     private Publisher publisher;
     private Genre genre;
-    private Set<PagesCommand> pagesCommands = new HashSet<>();
+    private Set<PagesCommand> pages = new HashSet<>();
 }

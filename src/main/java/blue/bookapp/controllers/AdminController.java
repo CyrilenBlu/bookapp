@@ -102,6 +102,11 @@ public class AdminController {
         BookCommand savedCommand = bookService.updateBook(bookCommand);
         return "redirect:/book/" + savedCommand.getId() + "/show";
     }
+    @GetMapping("/error")
+    public String errorRedirect()
+    {
+        return "redirect:/home";
+    }
 
     @GetMapping("/book/{id}/pages")
     public String pagesBook_Admin(@PathVariable String id, Model model)
@@ -114,13 +119,14 @@ public class AdminController {
     @GetMapping("/book/{id}/pages/{pageId}/update")
     public String viewPage_Admin(@PathVariable String id, @PathVariable String pageId, Model model) {
         model.addAttribute("book", bookService.bookInfoById(Long.valueOf(id)));
-        model.addAttribute("page", pagesService.getCommandByBookById(Long.valueOf(id), Long.valueOf(pageId)));
+        model.addAttribute("page", pagesService.getCommandByBookByIdAndPageId(Long.valueOf(id), Long.valueOf(pageId)));
         return "admin/book/pages/pages-update";
     }
 
     @PostMapping("/book/{id}/page")
     public String updatePage(@ModelAttribute PagesCommand pagesCommand)
     {
+        System.out.println(pagesCommand.getBookId() + " pageId: " + pagesCommand.getId());
         PagesCommand savedCommand = pagesService.updatePageCommand(pagesCommand);
         log.debug("Saved Book id: " + savedCommand.getBookId());
         log.debug("Saved page id: " + savedCommand.getId());

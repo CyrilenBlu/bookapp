@@ -11,5 +11,5 @@ public interface PagesService {
     PagesCommand getCommandByBookById(Long id, Long pageNumber);
     void removeById(Long bookId,Long pageId);
     PagesCommand updatePageCommand(PagesCommand pagesCommand);
-    Pages findByBookId(Long bookId, Long pageId);
+    PagesCommand getCommandByBookByIdAndPageId(Long bookId, Long pageId);
 }

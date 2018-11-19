@@ -7,6 +7,7 @@
 <body>
 <form th:object="${page}" th:action="@{'/book/' + ${page.getBookId()} + '/page'}" method="post">
     <input type="hidden" th:field="*{id}"/>
+    <input type="hidden" th:field="*{bookId}"/>
     <div>
         <div>
             <label>Page</label>
@@ -18,7 +19,7 @@
         </div>
         <div>
             <label>Content</label>
-            <textarea type="text" th:field="*{content}"/>
+            <textarea th:field="*{content}"></textarea>
         </div>
     </div>
 

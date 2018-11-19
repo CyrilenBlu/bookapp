@@ -92,60 +92,30 @@ public class PagesServiceImpl implements PagesService {
     @Override
     @Transactional
     public PagesCommand updatePageCommand(PagesCommand pagesCommand) {
-        /* todo fix null id.
 
-        Optional<Book> optionalBook = bookRepository.findById(pagesCommand.getBookId());
-        if (!optionalBook.isPresent())
-        {
-            log.error("Book not found for id: " + pagesCommand.getId());
-            return new PagesCommand();
-        } else
-        {
-            Book book = optionalBook.get();
-
-            Optional<Pages> pagesOptional =
-                    book.getPages().stream()
-                    .filter(pages -> pages.getId().equals(pagesCommand.getId()))
-                    .findFirst();
-
-
-            Pages pages = pagesOptional.get();
-            pages.setPage(pagesCommand.getPage());
-            pages.setChapter(pagesCommand.getChapter());
-            pages.setContent(pagesCommand.getContent());
-
-            Book savedBook = bookRepository.save(book);
-
-            Optional<Pages> savedPagesOptional = savedBook.getPages()
-                    .stream().filter(bookPages -> bookPages.getId().equals(pagesCommand.getId()))
-                    .findFirst();
-
-            return pagesToPagesCommand.convert(savedPagesOptional.get());
-
-        }*/
-        return new PagesCommand();
+        Pages pages = pagesCommandToPages.convert(pagesCommand);
+        Pages savedPage = pagesRepository.save(pages);
+        return pagesToPagesCommand.convert(savedPage);
     }
 
+
     @Override
-    public Pages findByBookId(Long bookId, Long pageId) {
+    public PagesCommand getCommandByBookByIdAndPageId(Long bookId, Long pageId) {
         Optional<Book> bookOptional = bookRepository.findById(bookId);
         if (!bookOptional.isPresent())
-            throw new RuntimeException("Book not found!");
-        Book book = bookOptional.get();
-        Set<Pages> pagesSet = new HashSet<>();
-        book.getPages().forEach(pages ->
         {
-            if (pages.getId() == pageId)
+            throw new RuntimeException("Book not found!");
+        }
+        Set<Pages> pages = bookOptional.get().getPages();
+        Set<Pages> savedPages = new HashSet<>();
+        pages.stream().forEach(pages1 ->
+        {
+            if (pages1.getId() == pageId && bookOptional.get().getPages().contains(pages1))
             {
-                pagesSet.add(pages);
+                savedPages.add(pages1);
             }
         });
 
-        if (pagesSet.size() > 1)
-        {
-            log.error("Found more than one page for ID!");
-        }
-
-        return pagesSet.iterator().next();
+        return pagesToPagesCommand.convert(savedPages.iterator().next());
     }
 }

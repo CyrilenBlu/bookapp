@@ -2,13 +2,22 @@ package blue.bookapp.converters;
 
 import blue.bookapp.commands.BookCommand;
 import blue.bookapp.domain.Book;
+import lombok.Synchronized;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
 @Component
 public class BookToBookCommand implements Converter<Book, BookCommand> {
-    
 
+    private PagesToPagesCommand pagesToPagesCommand;
+
+    public BookToBookCommand(PagesToPagesCommand pagesToPagesCommand) {
+        this.pagesToPagesCommand = pagesToPagesCommand;
+    }
+
+    @Synchronized
+    @Nullable
     @Override
     public BookCommand convert(Book book) {
         if (book == null)
@@ -27,6 +36,11 @@ public class BookToBookCommand implements Converter<Book, BookCommand> {
         bookCommand.setPublisher(book.getPublisher());
         bookCommand.setGenre(book.getGenre());
 
+        if (book.getPages() != null && book.getPages().size() > 0)
+        {
+            book.getPages()
+                    .forEach(pages -> bookCommand.getPages().add(pagesToPagesCommand.convert(pages)));
+        }
 
         return bookCommand;
     }

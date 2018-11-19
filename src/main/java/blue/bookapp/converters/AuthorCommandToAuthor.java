@@ -2,12 +2,16 @@ package blue.bookapp.converters;
 
 import blue.bookapp.commands.AuthorCommand;
 import blue.bookapp.domain.Author;
+import lombok.Synchronized;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
 @Component
 public class AuthorCommandToAuthor implements Converter<AuthorCommand, Author> {
 
+    @Synchronized
+    @Nullable
     @Override
     public Author convert(AuthorCommand authorCommand) {
         if (authorCommand == null)
