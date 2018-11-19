@@ -1,10 +1,10 @@
 package blue.bookapp.services;
 
 import blue.bookapp.commands.BookCommand;
-import blue.bookapp.converters.BookCommandToBook;
-import blue.bookapp.converters.BookToBookCommand;
-import blue.bookapp.converters.PublisherCommandToPublisher;
+import blue.bookapp.commands.PagesCommand;
+import blue.bookapp.converters.*;
 import blue.bookapp.domain.Book;
+import blue.bookapp.domain.Pages;
 import blue.bookapp.domain.Publisher;
 import blue.bookapp.repositories.BookRepository;
 import blue.bookapp.repositories.PagesRepository;
@@ -26,13 +26,17 @@ public class BookServiceImpl implements BookService {
     private BookToBookCommand bookToBookCommand;
     private PublisherCommandToPublisher publisherCommandToPublisher;
     private PagesRepository pagesRepository;
+    private PagesCommandToPages pagesCommandToPages;
+    private PagesToPagesCommand pagesToPagesCommand;
 
-    public BookServiceImpl(BookRepository bookRepository, BookCommandToBook bookCommandToBook, BookToBookCommand bookToBookCommand, PublisherCommandToPublisher publisherCommandToPublisher, PagesRepository pagesRepository) {
+    public BookServiceImpl(BookRepository bookRepository, BookCommandToBook bookCommandToBook, BookToBookCommand bookToBookCommand, PublisherCommandToPublisher publisherCommandToPublisher, PagesRepository pagesRepository, PagesCommandToPages pagesCommandToPages, PagesToPagesCommand pagesToPagesCommand) {
         this.bookRepository = bookRepository;
         this.bookCommandToBook = bookCommandToBook;
         this.bookToBookCommand = bookToBookCommand;
         this.publisherCommandToPublisher = publisherCommandToPublisher;
         this.pagesRepository = pagesRepository;
+        this.pagesCommandToPages = pagesCommandToPages;
+        this.pagesToPagesCommand = pagesToPagesCommand;
     }
 
     @Override
@@ -123,10 +127,21 @@ public class BookServiceImpl implements BookService {
     @Override
     @Transactional
     public BookCommand updateBook(BookCommand bookCommand) {
-        Book detachedBook = bookCommandToBook.convert(bookCommand);
-        Book savedBook = bookRepository.save(detachedBook);
-        log.debug("Saved book id: " + savedBook.getId());
-        return bookToBookCommand.convert(savedBook);
+
+        Set<Pages> pages = bookRepository.findById(bookCommandToBook.convert(bookCommand).getId()).get().getPages();
+        System.out.println("Pages size: " + pages);
+
+        Set<PagesCommand> pagesCommands = new HashSet<>();
+        pages.forEach(pages1 -> pagesCommands.add(pagesToPagesCommand.convert(pages1)));
+
+        pagesCommands.forEach(pagesCommand -> pagesCommand.setBookId(bookCommand.getId()));
+
+        bookCommand.setPages(pagesCommands);
+
+        Book book = bookCommandToBook.convert(bookCommand);
+
+        bookRepository.save(book);
+        return bookToBookCommand.convert(book);
     }
 
     @Override
