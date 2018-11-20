@@ -8,6 +8,7 @@ import blue.bookapp.repositories.AuthorRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -46,6 +47,7 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
+    @Transactional
     public void removeById(Long id) {
         Optional<Author> authorOptional = authorRepository.findById(id);
         if (!authorOptional.isPresent())

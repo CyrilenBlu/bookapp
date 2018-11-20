@@ -1,5 +1,6 @@
 package blue.bookapp.services;
 
+import blue.bookapp.commands.PublisherCommand;
 import blue.bookapp.domain.Publisher;
 
 import java.util.Set;
@@ -14,4 +15,6 @@ public interface PublisherService {
     Publisher findPublisherById(Long id);
 
     Set<Publisher> findAll();
+
+    PublisherCommand updatePublisher(PublisherCommand publisherCommand);
 }

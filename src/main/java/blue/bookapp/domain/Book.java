@@ -36,6 +36,7 @@ public class Book {
     private Author author;
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @Nullable
     private Publisher publisher;
 
 
@@ -53,6 +54,7 @@ public class Book {
 
     public void setPublisher(Publisher publisher) {
         this.publisher = publisher;
-        publisher.getBooks().add(this);
+        if (publisher != null)
+            publisher.getBooks().add(this);
     }
 }

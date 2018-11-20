@@ -3,6 +3,7 @@ package blue.bookapp.controllers;
 import blue.bookapp.commands.AuthorCommand;
 import blue.bookapp.commands.BookCommand;
 import blue.bookapp.commands.PagesCommand;
+import blue.bookapp.commands.PublisherCommand;
 import blue.bookapp.domain.Admin;
 import blue.bookapp.services.*;
 import lombok.extern.slf4j.Slf4j;
@@ -192,6 +193,29 @@ public class AdminController {
     {
         model.addAttribute("publishers", publisherService.findAll());
         return "admin/publisher/publisher-list";
+    }
+
+    @GetMapping("/publisher/{id}/delete")
+    public String deletePublisher_Admin(@PathVariable String id)
+    {
+        publisherService.removePublisherById(Long.valueOf(id));
+        return "redirect:/admin-publisher-list";
+    }
+
+    @GetMapping("/publisher/{id}/update")
+    public String updatePublisher_Admin(@PathVariable String id, Model model)
+    {
+        model.addAttribute(publisherService.findPublisherById(Long.valueOf(id)));
+        return "admin/publisher/publisher-update";
+    }
+
+    @PostMapping("publisher")
+    public String updatePublisher(@ModelAttribute PublisherCommand publisherCommand)
+    {
+        PublisherCommand savedCommand = publisherService.updatePublisher(publisherCommand);
+        log.debug("Model command ID: " + publisherCommand.getId());
+        log.debug("Saved publisher ID: " + savedCommand.getId());
+        return "redirect:/admin-publisher-list";
     }
 
 }
