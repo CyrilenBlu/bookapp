@@ -6,7 +6,7 @@ import blue.bookapp.domain.Author;
 import java.util.Set;
 
 public interface AuthorService {
-    void addAuthor(AuthorCommand authorCommand);
+    AuthorCommand addAuthor(AuthorCommand authorCommand);
 
     void removeAuthor(AuthorCommand authorCommand);
 

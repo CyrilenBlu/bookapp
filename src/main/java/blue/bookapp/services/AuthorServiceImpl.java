@@ -31,14 +31,14 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public void addAuthor(AuthorCommand authorCommand) {
-        Optional<Author> optionalAuthor = authorRepository.findById(authorCommandToAuthor.convert(authorCommand).getId());
-        if (!optionalAuthor.isPresent()) {
-            throw new RuntimeException("Author already exists.");
+    public AuthorCommand addAuthor(AuthorCommand authorCommand) {
+        Author author = authorCommandToAuthor.convert(authorCommand);
+        if (authorCommand.getId() == null)
+        {
+            authorRepository.save(author);
         }
-
         log.debug("Saving new author.");
-        authorRepository.save(authorCommandToAuthor.convert(authorCommand));
+        return authorToAuthorCommand.convert(author);
     }
 
     @Override

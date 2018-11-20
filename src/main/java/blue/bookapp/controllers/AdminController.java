@@ -205,6 +205,20 @@ public class AdminController {
 
     // AUTHOR CONTROL
 
+    @GetMapping("/author/new")
+    public String newAuthor_Admin(Model model)
+    {
+        model.addAttribute("author", new AuthorCommand());
+        return "admin/author/author-new";
+    }
+
+    @PostMapping("newauthor")
+    public String newAuthor(@ModelAttribute AuthorCommand authorCommand)
+    {
+        AuthorCommand savedCommand = authorService.addAuthor(authorCommand);
+        return "redirect:/admin-author-list";
+    }
+
     @GetMapping("/admin-author-list")
     public String listAuthors_Admin(Model model)
     {
