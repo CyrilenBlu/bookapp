@@ -174,6 +174,22 @@ public class AdminController {
         return "redirect:/book/{id}/update";
     }
 
+    @GetMapping("/book/{id}/pages/new")
+    public String newPage_Admin(@PathVariable String id, Model model)
+    {
+        PagesCommand pagesCommand = new PagesCommand();
+        pagesCommand.setBookId(Long.valueOf(id));
+        model.addAttribute("page", pagesCommand);
+        return "/admin/book/pages/pages-new";
+    }
+
+    @PostMapping("/newpage")
+    public String newPage(@ModelAttribute PagesCommand pagesCommand)
+    {
+        PagesCommand savedPages = pagesService.addCommand(pagesCommand);
+        return "redirect:/book/" + pagesCommand.getBookId() + "/pages";
+    }
+
     @GetMapping("/book/{id}/pages/{pageId}/delete")
     public String removePage_Admin(@PathVariable String id, @PathVariable String pageId)
     {

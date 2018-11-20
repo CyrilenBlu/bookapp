@@ -118,4 +118,23 @@ public class PagesServiceImpl implements PagesService {
 
         return pagesToPagesCommand.convert(savedPages.iterator().next());
     }
+
+    @Override
+    public PagesCommand addCommand(PagesCommand pagesCommand) {
+        Pages pages = pagesCommandToPages.convert(pagesCommand);
+        if (pages.getId() == null)
+        {
+            pagesRepository.save(pages);
+        }
+        Optional<Book> bookOptional = bookRepository.findById(pagesCommand.getBookId());
+        if (!bookOptional.isPresent())
+            throw new RuntimeException("Book not found!");
+        Book book = bookOptional.get();
+
+        book.getPages().add(pages);
+
+        bookRepository.save(book);
+
+        return pagesToPagesCommand.convert(pages);
+    }
 }

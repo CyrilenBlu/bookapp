@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New Page</title>
+</head>
+<body>
+<form th:object="${page}" th:action="@{/newpage/}" method="post">
+    <input type="hidden" th:field="*{id}"/>
+    <input type="hidden" th:field="*{bookId}"/>
+    <div>
+        <div>
+            <label>Page</label>
+            <input type="text" th:field="*{page}"/>
+        </div>
+        <div>
+            <label>Chapter</label>
+            <input type="text" th:field="*{chapter}"/>
+        </div>
+        <div>
+            <label>Content</label>
+            <textarea th:field="*{content}"></textarea>
+        </div>
+    </div>
+
+    <button type="submit">Submit</button>
+</form>
+
+</body>
+</html>
