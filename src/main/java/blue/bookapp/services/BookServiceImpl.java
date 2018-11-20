@@ -107,8 +107,13 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void addBook(BookCommand bookCommand) {
+    @Transactional
+    public BookCommand addBook(BookCommand bookCommand) {
         Book book = bookCommandToBook.convert(bookCommand);
+        if (bookCommand.getId() == null)
+        {
+            bookRepository.save(book);
+        }
         Optional<Book> optionalBook = bookRepository.findById(book.getId());
         if (!optionalBook.isPresent())
         {
@@ -116,6 +121,8 @@ public class BookServiceImpl implements BookService {
         }
         log.debug("Saving new book.");
         bookRepository.save(book);
+
+        return bookToBookCommand.convert(book);
     }
 
     @Override

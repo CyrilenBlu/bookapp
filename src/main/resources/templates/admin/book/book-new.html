@@ -8,10 +8,7 @@
     <form th:object="${book}" th:action="@{/book_add/}" method="post">
         <input type="hidden" th:field="*{id}"/>
         <input type="hidden" th:field="*{image}"/>
-        <input type="hidden" th:field="*{publisher}"/>
-        <input type="hidden" th:field="*{author}"/>
-        <input type="hidden" th:field="*{EAN}"/>
-        <h1>Edit Book Info</h1>
+        <h1>New Book Info</h1>
         <div>
             <div>
                 <label>Book Title</label>
@@ -31,6 +28,11 @@
             <div>
                 <label>Year</label>
                 <input type="number" th:field="*{year}"/>
+            </div>
+
+            <div>
+                <label>EAN Number</label>
+                <input type="number" th:field="*{EAN}"/>
             </div>
 
             <div>
