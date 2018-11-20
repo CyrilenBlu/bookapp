@@ -31,7 +31,6 @@ public class BookCommandToBook implements Converter<BookCommand, Book> {
         book.setPrice(bookCommand.getPrice());
         book.setEAN(bookCommand.getEAN());
         book.setYear(bookCommand.getYear());
-        book.setImage(bookCommand.getImage());
         book.setAuthor(bookCommand.getAuthor());
         book.setPublisher(bookCommand.getPublisher());
         book.setGenre(bookCommand.getGenre());

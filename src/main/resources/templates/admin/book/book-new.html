@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Book</title>
+</head>
+<body>
+    <form th:object="${book}" th:action="@{/book_add/}" method="post">
+        <input type="hidden" th:field="*{id}"/>
+        <input type="hidden" th:field="*{image}"/>
+        <input type="hidden" th:field="*{publisher}"/>
+        <input type="hidden" th:field="*{author}"/>
+        <input type="hidden" th:field="*{EAN}"/>
+        <h1>Edit Book Info</h1>
+        <div>
+            <div>
+                <label>Book Title</label>
+                <input type="text" th:field="*{title}">
+            </div>
+
+            <div>
+                <label>Book Description</label>
+                <input type="text" th:field="*{description}"/>
+            </div>
+
+            <div>
+                <label>Price</label>
+                <input type="text" th:field="*{price}"/>
+            </div>
+
+            <div>
+                <label>Year</label>
+                <input type="number" th:field="*{year}"/>
+            </div>
+
+            <div>
+                <select th:field="*{genre}">
+                    <option th:each="genre : ${T(blue.bookapp.domain.Genre).values()}"
+                            th:value="${genre.name()}"
+                            th:text="${genre.name()}">values</option>
+                </select>
+            </div>
+
+            <div>
+                <a href="#" th:href="@{'pages'}">View</a>
+                <ul>
+                    <li th:each="page : ${pages}"
+                        th:text="${page.getContent()}">
+                        Pages
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <button type="submit">Submit</button>
+
+    </form>
+</body>
+</html>

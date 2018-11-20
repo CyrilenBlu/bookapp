@@ -14,6 +14,9 @@
     <h1>Edit Book Info</h1>
     <div>
         <div>
+            <a href="#" th:href="@{'image'}">Change Image</a>
+        </div>
+        <div>
             <label>Book Title</label>
             <input type="text" th:field="*{title}">
         </div>
@@ -53,7 +56,7 @@
     </div>
 
 
-    <button type="submit">Submit</button>
+    <button type="submit">Submit</button><a href="#" th:href="@{'/admin-book-list'}">Cancel</a>
 </form>
 </body>
 </html>

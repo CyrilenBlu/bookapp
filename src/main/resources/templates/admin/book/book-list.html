@@ -7,16 +7,17 @@
 <body>
 <table >
     <tr>
-        <th>Id</th>
         <th>Image</th>
+        <th>Id</th>
         <th>Title</th>
         <th>View</th>
         <th>Update</th>
         <th>Delete</th>
     </tr>
     <tr th:each="book : ${books}">
+        <td><img src="../../../../../.bootstrapBookImages/book1.jpg"
+                 th:src="@{'book/' + ${book.getId()} + '/bookimage'}" style="width:100px;length:150px;"/></td>
         <td th:text="${book.getId()}">Id</td>
-        <td th:text="${book.getImage()}">Image</td>
         <td th:text="${book.getTitle()}">Title</td>
         <td ><a href="#" th:href="@{'book/' + ${book.getId()} +'/show'}">View</a></td>
         <td ><a href="#" th:href="@{'book/' + ${book.getId()} +'/update'}">Update</a></td>

@@ -117,6 +117,14 @@ public class AdminController {
         return "redirect:/book/" + savedCommand.getId() + "/show";
     }
 
+    @GetMapping("/book/add")
+    public String addBook_Admin(Model model)
+    {
+        model.addAttribute("book", new BookCommand());
+
+        return "admin/book/book-new";
+    }
+
     @GetMapping("/book/{id}/pages")
     public String pagesBook_Admin(@PathVariable String id, Model model)
     {

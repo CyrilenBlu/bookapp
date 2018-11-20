@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload new Book Image</title>
+</head>
+<body>
+<form action="http://localhost" method="post" enctype="multipart/form-data"
+    th:action="@{'/book/' + ${book.getId()} + '/image'}">
+
+    <label>Select File</label>
+    <input id="imagefile" name="imagefile" type="file" class="file">
+    <button type="submit">Submit</button> <a href="#" th:href="@{'/book/' + ${book.getId()} + '/update'}">Cancel</a>
+
+</form>
+
+</body>
+</html>
