@@ -6,8 +6,8 @@ import blue.bookapp.converters.*;
 import blue.bookapp.domain.Book;
 import blue.bookapp.domain.Pages;
 import blue.bookapp.domain.Publisher;
+import blue.bookapp.repositories.AuthorRepository;
 import blue.bookapp.repositories.BookRepository;
-import blue.bookapp.repositories.PagesRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -24,19 +24,23 @@ public class BookServiceImpl implements BookService {
     private BookRepository bookRepository;
     private BookCommandToBook bookCommandToBook;
     private BookToBookCommand bookToBookCommand;
-    private PublisherCommandToPublisher publisherCommandToPublisher;
-    private PagesRepository pagesRepository;
-    private PagesCommandToPages pagesCommandToPages;
     private PagesToPagesCommand pagesToPagesCommand;
+    private AuthorService authorService;
+    private PublisherService publisherService;
+    private AuthorToAuthorCommand authorToAuthorCommand;
+    private AuthorCommandToAuthor authorCommandToAuthor;
+    private AuthorRepository authorRepository;
 
-    public BookServiceImpl(BookRepository bookRepository, BookCommandToBook bookCommandToBook, BookToBookCommand bookToBookCommand, PublisherCommandToPublisher publisherCommandToPublisher, PagesRepository pagesRepository, PagesCommandToPages pagesCommandToPages, PagesToPagesCommand pagesToPagesCommand) {
+    public BookServiceImpl(BookRepository bookRepository, BookCommandToBook bookCommandToBook, BookToBookCommand bookToBookCommand, PagesToPagesCommand pagesToPagesCommand, AuthorService authorService, PublisherService publisherService, AuthorToAuthorCommand authorToAuthorCommand, AuthorCommandToAuthor authorCommandToAuthor, AuthorRepository authorRepository) {
         this.bookRepository = bookRepository;
         this.bookCommandToBook = bookCommandToBook;
         this.bookToBookCommand = bookToBookCommand;
-        this.publisherCommandToPublisher = publisherCommandToPublisher;
-        this.pagesRepository = pagesRepository;
-        this.pagesCommandToPages = pagesCommandToPages;
         this.pagesToPagesCommand = pagesToPagesCommand;
+        this.authorService = authorService;
+        this.publisherService = publisherService;
+        this.authorToAuthorCommand = authorToAuthorCommand;
+        this.authorCommandToAuthor = authorCommandToAuthor;
+        this.authorRepository = authorRepository;
     }
 
     @Override
@@ -179,5 +183,19 @@ public class BookServiceImpl implements BookService {
         }
 
         return bookToBookCommand.convert(bookOptional.get());
+    }
+
+    @Override
+    @Transactional
+    public BookCommand updateAuthorPublisher(BookCommand bookCommand) {
+
+        Optional<Book> bookOptional = bookRepository.findById(bookCommand.getId());
+        if (!bookOptional.isPresent())
+            throw new RuntimeException("Book not found!");
+        Book book = bookOptional.get();
+        book.setAuthorOnly(bookCommand.getAuthor());
+        book.setPublisherOnly(bookCommand.getPublisher());
+        bookRepository.save(book);
+        return bookToBookCommand.convert(book);
     }
 }

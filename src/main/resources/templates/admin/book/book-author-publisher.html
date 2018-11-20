@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Change Author and Publisher</title>
+</head>
+<body>
+<h1> Change Author and Publisher </h1>
+<form th:object="${book}" th:action="@{/author_publisher/}" method="post">
+    <input type="hidden" th:field="*{id}"/>
+    <label>Change Author</label>
+    <select th:field="*{author}">
+        <option th:each="author : ${authors}" th:value="${author.id}"
+                th:text="${author.name}" th:selected="${book.getAuthor()}">val</option>
+    </select>
+
+    <label>Change Publisher</label>
+    <select th:field="*{publisher}">
+        <option th:each="publisher : ${publishers}" th:value="${publisher.id}"
+                th:text="${publisher.name}" th:selected="${book.getPublisher()}">val</option>
+    </select>
+
+    <button type="submit">Submit</button>
+</form>
+
+</body>
+</html>

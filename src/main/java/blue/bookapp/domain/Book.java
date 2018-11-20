@@ -46,6 +46,16 @@ public class Book {
     inverseJoinColumns = @JoinColumn(name = "pages_id"))
     private Set<Pages> pages = new HashSet<>();
 
+    public void setAuthorOnly(Author authorOnly)
+    {
+        this.author = authorOnly;
+    }
+
+    public void setPublisherOnly(Publisher publisherOnly)
+    {
+        this.publisher = publisherOnly;
+    }
+
     public void setAuthor(Author author) {
         this.author = author;
         if (author != null)

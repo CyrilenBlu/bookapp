@@ -10,7 +10,7 @@ public interface PublisherService {
 
     void removePublisher(Publisher publisher);
 
-    void removePublisherById(Long id);
+    void removeById(Long id);
 
     Publisher findPublisherById(Long id);
 

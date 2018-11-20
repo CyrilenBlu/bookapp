@@ -132,6 +132,22 @@ public class AdminController {
         return "redirect:/admin-book-list";
     }
 
+    @GetMapping("/book/{id}/author_publisher")
+    public String changeAuthor_Admin(@PathVariable String id, Model model)
+    {
+        model.addAttribute("book", bookService.findCommandById(Long.valueOf(id)));
+        model.addAttribute("authors", authorService.findAll());
+        model.addAttribute("publishers", publisherService.findAll());
+        return "admin/book/book-author-publisher";
+    }
+
+    @PostMapping("author_publisher")
+    public String updateAuthorPublisher(@ModelAttribute BookCommand bookCommand)
+    {
+        BookCommand savedBook = bookService.updateAuthorPublisher(bookCommand);
+        return "redirect:/admin-book-list";
+    }
+
     @GetMapping("/book/{id}/pages")
     public String pagesBook_Admin(@PathVariable String id, Model model)
     {
@@ -213,7 +229,7 @@ public class AdminController {
     @GetMapping("/publisher/{id}/delete")
     public String deletePublisher_Admin(@PathVariable String id)
     {
-        publisherService.removePublisherById(Long.valueOf(id));
+        publisherService.removeById(Long.valueOf(id));
         return "redirect:/admin-publisher-list";
     }
 

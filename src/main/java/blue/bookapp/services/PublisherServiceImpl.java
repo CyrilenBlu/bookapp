@@ -36,7 +36,7 @@ public class PublisherServiceImpl implements PublisherService{
 
     @Override
     @Transactional
-    public void removePublisherById(Long id) {
+    public void removeById(Long id) {
         Optional<Publisher> publisherOptional = publisherRepository.findById(id);
         if (!publisherOptional.isPresent())
         {

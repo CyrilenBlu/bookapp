@@ -5,6 +5,7 @@ import blue.bookapp.converters.AuthorCommandToAuthor;
 import blue.bookapp.converters.AuthorToAuthorCommand;
 import blue.bookapp.domain.Author;
 import blue.bookapp.repositories.AuthorRepository;
+import blue.bookapp.repositories.BookRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -20,20 +21,19 @@ public class AuthorServiceImpl implements AuthorService {
     private AuthorRepository authorRepository;
     private AuthorCommandToAuthor authorCommandToAuthor;
     private AuthorToAuthorCommand authorToAuthorCommand;
-    private BookService bookService;
+    private BookRepository bookRepository;
 
-    public AuthorServiceImpl(AuthorRepository authorRepository, AuthorCommandToAuthor authorCommandToAuthor, AuthorToAuthorCommand authorToAuthorCommand, BookService bookService) {
+    public AuthorServiceImpl(AuthorRepository authorRepository, AuthorCommandToAuthor authorCommandToAuthor, AuthorToAuthorCommand authorToAuthorCommand, BookRepository bookRepository) {
         this.authorRepository = authorRepository;
         this.authorCommandToAuthor = authorCommandToAuthor;
         this.authorToAuthorCommand = authorToAuthorCommand;
-        this.bookService = bookService;
+        this.bookRepository = bookRepository;
     }
 
     @Override
     public void addAuthor(AuthorCommand authorCommand) {
         Optional<Author> optionalAuthor = authorRepository.findById(authorCommandToAuthor.convert(authorCommand).getId());
-        if (!optionalAuthor.isPresent())
-        {
+        if (!optionalAuthor.isPresent()) {
             throw new RuntimeException("Author already exists.");
         }
 
@@ -50,8 +50,7 @@ public class AuthorServiceImpl implements AuthorService {
     @Transactional
     public void removeById(Long id) {
         Optional<Author> authorOptional = authorRepository.findById(id);
-        if (!authorOptional.isPresent())
-        {
+        if (!authorOptional.isPresent()) {
             throw new RuntimeException("Author not found!");
         }
         Author author = authorOptional.get();
@@ -63,8 +62,7 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public AuthorCommand findCommandById(Long id) {
         Optional<Author> authorOptional = authorRepository.findById(id);
-        if (!authorOptional.isPresent())
-        {
+        if (!authorOptional.isPresent()) {
             throw new RuntimeException("Author with ID not found!");
         }
 
@@ -81,8 +79,7 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public AuthorCommand updateAuthor(AuthorCommand authorCommand) {
         Optional<Author> authorOptional = authorRepository.findById(authorCommand.getId());
-        if (!authorOptional.isPresent())
-        {
+        if (!authorOptional.isPresent()) {
             log.error("Author not found!");
             throw new RuntimeException("Author not found!");
         }

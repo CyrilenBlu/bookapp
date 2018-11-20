@@ -23,6 +23,8 @@ public interface BookService {
 
     BookCommand addBook(BookCommand bookCommand);
 
+    BookCommand updateAuthorPublisher(BookCommand bookCommand);
+
     void removeBookById(Long id);
 
     Set<Book> listBooks();
