@@ -2,6 +2,7 @@ package blue.bookapp.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -31,6 +32,7 @@ public class Book {
     private Byte[] image;
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @Nullable
     private Author author;
 
     @ManyToOne(cascade = CascadeType.ALL)
@@ -45,7 +47,8 @@ public class Book {
 
     public void setAuthor(Author author) {
         this.author = author;
-        author.getBooks().add(this);
+        if (author != null)
+            author.getBooks().add(this);
     }
 
     public void setPublisher(Publisher publisher) {

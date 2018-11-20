@@ -10,9 +10,11 @@ public interface AuthorService {
 
     void removeAuthor(AuthorCommand authorCommand);
 
-    void removeAuthorById(Long id);
+    void removeById(Long id);
 
-    Author findAuthorById(Long id);
+    AuthorCommand findCommandById(Long id);
+
+    AuthorCommand updateAuthor(AuthorCommand authorCommand);
 
     Set<Author> findAll();
 }

@@ -14,8 +14,8 @@
         <th>Genre</th>
         <th>Price</th>
         <th>Year</th>
-        <th>Author Name</th>
-        <th>Publisher Name</th>
+        <th  th:if="${book.getAuthor() != null}">Author Name</th>
+        <th th:if="${book.getPublisher() != null}">Publisher Name</th>
         <th>EAN No.</th>
     </tr>
     <tr>
@@ -26,8 +26,8 @@
         <td th:text="${book.getGenre()}">Genre</td>
         <td th:text="${book.getPrice()}">Price</td>
         <td th:text="${book.getYear()}">Year</td>
-        <td th:text="${book.getAuthor().getName()}">Author Name</td>
-        <td th:text="${book.getPublisher().getName()}">Publisher Name</td>
+        <td th:if="${book.getAuthor() != null}" th:text="${book.getAuthor().getName()}">Author Name</td>
+        <td th:if="${book.getPublisher() != null}" th:text="${book.getPublisher().getName()}">Publisher Name</td>
         <td th:text="${book.getEAN()}">EAN</td>
     </tr>
 </table>

@@ -1,5 +1,6 @@
 package blue.bookapp.controllers;
 
+import blue.bookapp.commands.AuthorCommand;
 import blue.bookapp.commands.BookCommand;
 import blue.bookapp.commands.PagesCommand;
 import blue.bookapp.domain.Admin;
@@ -31,7 +32,7 @@ public class AdminController {
         this.pagesService = pagesService;
     }
 
-    @GetMapping({"/admin-cpl", "/error"})
+    @GetMapping({"/admin-cpl"})
     public String adminNav(Model model)
     {
         Admin admin = new Admin();
@@ -74,6 +75,8 @@ public class AdminController {
         return "redirect:/home";
     }
 
+    //BOOK CONTROL
+
     @GetMapping("/admin-book-list")
     public String listBooks_Admin(Model model)
     {
@@ -86,6 +89,16 @@ public class AdminController {
     {
         model.addAttribute("book", bookService.bookInfoById(Long.valueOf(id)));
         return "admin/book/book-show";
+    }
+
+    @GetMapping("book/{id}/delete")
+    public String deleteBook(@PathVariable String id)
+    {
+        if (loggedAdmin.isCheckLogged())
+        {
+            bookService.removeBookById(Long.valueOf(id));
+        }
+        return "redirect:/admin-book-list";
     }
 
     @GetMapping("/book/{id}/update")
@@ -101,11 +114,6 @@ public class AdminController {
     {
         BookCommand savedCommand = bookService.updateBook(bookCommand);
         return "redirect:/book/" + savedCommand.getId() + "/show";
-    }
-    @GetMapping("/error")
-    public String errorRedirect()
-    {
-        return "redirect:/home";
     }
 
     @GetMapping("/book/{id}/pages")
@@ -145,11 +153,38 @@ public class AdminController {
 
     }
 
+    //END OF BOOK CONTROL
+
+    // AUTHOR CONTROL
+
     @GetMapping("/admin-author-list")
     public String listAuthors_Admin(Model model)
     {
         model.addAttribute("authors", authorService.findAll());
         return "admin/author/author-list";
+    }
+
+    @GetMapping("/author/{id}/delete")
+    public String deleteAuthor_Admin(@PathVariable String id)
+    {
+        authorService.removeById(Long.valueOf(id));
+        return "redirect:/admin-author-list";
+    }
+
+    @GetMapping("/author/{id}/update")
+    public String updateAuthors_Admin(@PathVariable String id, Model model)
+    {
+        model.addAttribute("author",authorService.findCommandById(Long.valueOf(id)));
+        return "admin/author/author-update";
+    }
+
+    @PostMapping("author")
+    public String updateAuthor(@ModelAttribute AuthorCommand authorCommand)
+    {
+        AuthorCommand savedCommand = authorService.updateAuthor(authorCommand);
+        log.debug("Model author ID: " + authorCommand.getId());
+        log.debug("Saved author ID: " + savedCommand.getId());
+        return "redirect:/admin-author-list";
     }
 
     @GetMapping("/admin-publisher-list")
@@ -159,15 +194,4 @@ public class AdminController {
         return "admin/publisher/publisher-list";
     }
 
-
-
-    @GetMapping("book/{id}/delete")
-    public String deleteBook(@PathVariable String id)
-    {
-        if (loggedAdmin.isCheckLogged())
-        {
-            bookService.removeBookById(Long.valueOf(id));
-        }
-        return "redirect:/admin-book-list";
-    }
 }

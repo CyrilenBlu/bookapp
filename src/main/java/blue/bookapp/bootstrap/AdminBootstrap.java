@@ -11,12 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class AdminBoostrap implements ApplicationListener<ContextRefreshedEvent> {
+public class AdminBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
     AdminRepository adminRepository;
     AdminService adminService;
 
-    public AdminBoostrap(AdminRepository adminRepository, AdminService adminService) {
+    public AdminBootstrap(AdminRepository adminRepository, AdminService adminService) {
         this.adminRepository = adminRepository;
         this.adminService = adminService;
     }

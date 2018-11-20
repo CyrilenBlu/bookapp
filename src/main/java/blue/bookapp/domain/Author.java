@@ -18,4 +18,6 @@ public class Author {
     private Set<Book> books = new HashSet<>();
 
     private String name;
+
+    private int age;
 }

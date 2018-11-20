@@ -9,7 +9,15 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class AuthorToAuthorCommand implements Converter<Author, AuthorCommand> {
-    @Synchronized
+
+    private BookToBookCommand bookToBookCommand;
+
+        public AuthorToAuthorCommand(BookToBookCommand bookToBookCommand) {
+            this.bookToBookCommand = bookToBookCommand;
+        }
+
+
+        @Synchronized
     @Nullable
     @Override
     public AuthorCommand convert(Author author) {
@@ -21,6 +29,8 @@ public class AuthorToAuthorCommand implements Converter<Author, AuthorCommand> {
         final AuthorCommand authorCommand = new AuthorCommand();
         authorCommand.setId(author.getId());
         authorCommand.setName(author.getName());
+        authorCommand.setAge(author.getAge());
+        authorCommand.setBooks(author.getBooks());
 
         return authorCommand;
     }
