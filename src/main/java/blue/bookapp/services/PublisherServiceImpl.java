@@ -2,6 +2,7 @@ package blue.bookapp.services;
 
 import blue.bookapp.commands.PublisherCommand;
 import blue.bookapp.converters.PublisherCommandToPublisher;
+import blue.bookapp.converters.PublisherToPublisherCommand;
 import blue.bookapp.domain.Publisher;
 import blue.bookapp.repositories.PublisherRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -18,15 +19,22 @@ public class PublisherServiceImpl implements PublisherService{
 
     private PublisherRepository publisherRepository;
     private PublisherCommandToPublisher publisherCommandToPublisher;
+    private PublisherToPublisherCommand publisherToPublisherCommand;
 
-    public PublisherServiceImpl(PublisherRepository publisherRepository, PublisherCommandToPublisher publisherCommandToPublisher) {
+    public PublisherServiceImpl(PublisherRepository publisherRepository, PublisherCommandToPublisher publisherCommandToPublisher, PublisherToPublisherCommand publisherToPublisherCommand) {
         this.publisherRepository = publisherRepository;
         this.publisherCommandToPublisher = publisherCommandToPublisher;
+        this.publisherToPublisherCommand = publisherToPublisherCommand;
     }
 
     @Override
-    public void addPublisher(Publisher publisher) {
-        publisherRepository.save(publisher);
+    public PublisherCommand addPublisher(PublisherCommand publisherCommand) {
+        Publisher publisher = publisherCommandToPublisher.convert(publisherCommand);
+        if (publisherCommand.getId() == null)
+        {
+            publisherRepository.save(publisher);
+        }
+        return publisherToPublisherCommand.convert(publisher);
     }
 
     @Override

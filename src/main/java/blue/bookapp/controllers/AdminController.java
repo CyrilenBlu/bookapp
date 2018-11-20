@@ -249,6 +249,24 @@ public class AdminController {
         return "redirect:/admin-author-list";
     }
 
+    //END OF AUTHOR CONTROL
+
+    //PUBLISHER CONTROL
+
+    @GetMapping("/publisher/new")
+    public String newPublisher_Admin(Model model)
+    {
+        model.addAttribute("publisher", new PublisherCommand());
+        return "admin/publisher/publisher-new";
+    }
+
+    @PostMapping("newpublisher")
+    public String newPublisher(@ModelAttribute PublisherCommand publisherCommand)
+    {
+        PublisherCommand savedPublisher = publisherService.addPublisher(publisherCommand);
+        return "redirect:/admin-publisher-list";
+    }
+
     @GetMapping("/admin-publisher-list")
     public String listPublishers_Admin(Model model)
     {
@@ -279,4 +297,5 @@ public class AdminController {
         return "redirect:/admin-publisher-list";
     }
 
+    //END OF PUBLISHER CONTROL
 }

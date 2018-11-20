@@ -6,7 +6,7 @@ import blue.bookapp.domain.Publisher;
 import java.util.Set;
 
 public interface PublisherService {
-    void addPublisher(Publisher publisher);
+    PublisherCommand addPublisher(PublisherCommand publisherCommand);
 
     void removePublisher(Publisher publisher);
 
