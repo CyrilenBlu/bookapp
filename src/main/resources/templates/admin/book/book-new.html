@@ -42,16 +42,6 @@
                             th:text="${genre.name()}">values</option>
                 </select>
             </div>
-
-            <div>
-                <a href="#" th:href="@{'pages'}">View</a>
-                <ul>
-                    <li th:each="page : ${pages}"
-                        th:text="${page.getContent()}">
-                        Pages
-                    </li>
-                </ul>
-            </div>
         </div>
 
 
