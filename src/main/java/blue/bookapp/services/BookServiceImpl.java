@@ -2,7 +2,9 @@ package blue.bookapp.services;
 
 import blue.bookapp.commands.BookCommand;
 import blue.bookapp.commands.PagesCommand;
-import blue.bookapp.converters.*;
+import blue.bookapp.converters.BookCommandToBook;
+import blue.bookapp.converters.BookToBookCommand;
+import blue.bookapp.converters.PagesToPagesCommand;
 import blue.bookapp.domain.Book;
 import blue.bookapp.domain.Pages;
 import blue.bookapp.domain.Publisher;
@@ -11,6 +13,7 @@ import blue.bookapp.repositories.BookRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.HashSet;
@@ -25,21 +28,15 @@ public class BookServiceImpl implements BookService {
     private BookCommandToBook bookCommandToBook;
     private BookToBookCommand bookToBookCommand;
     private PagesToPagesCommand pagesToPagesCommand;
-    private AuthorService authorService;
-    private PublisherService publisherService;
-    private AuthorToAuthorCommand authorToAuthorCommand;
-    private AuthorCommandToAuthor authorCommandToAuthor;
+    private EntityManager entityManager;
     private AuthorRepository authorRepository;
 
-    public BookServiceImpl(BookRepository bookRepository, BookCommandToBook bookCommandToBook, BookToBookCommand bookToBookCommand, PagesToPagesCommand pagesToPagesCommand, AuthorService authorService, PublisherService publisherService, AuthorToAuthorCommand authorToAuthorCommand, AuthorCommandToAuthor authorCommandToAuthor, AuthorRepository authorRepository) {
+    public BookServiceImpl(BookRepository bookRepository, BookCommandToBook bookCommandToBook, BookToBookCommand bookToBookCommand, PagesToPagesCommand pagesToPagesCommand, EntityManager entityManager, AuthorRepository authorRepository) {
         this.bookRepository = bookRepository;
         this.bookCommandToBook = bookCommandToBook;
         this.bookToBookCommand = bookToBookCommand;
         this.pagesToPagesCommand = pagesToPagesCommand;
-        this.authorService = authorService;
-        this.publisherService = publisherService;
-        this.authorToAuthorCommand = authorToAuthorCommand;
-        this.authorCommandToAuthor = authorCommandToAuthor;
+        this.entityManager = entityManager;
         this.authorRepository = authorRepository;
     }
 
@@ -193,9 +190,33 @@ public class BookServiceImpl implements BookService {
         if (!bookOptional.isPresent())
             throw new RuntimeException("Book not found!");
         Book book = bookOptional.get();
+
+        if (book.getAuthor() == null && book.getPublisher() == null) {
+                book.setAuthor(bookCommand.getAuthor());
+                book.setPublisher(bookCommand.getPublisher());
+                book.getAuthor().getBooks().add(book);
+                book.getPublisher().getBooks().add(book);
+                bookRepository.save(book);
+                return bookToBookCommand.convert(book);
+        }
+
+        book.getAuthor().getBooks().remove(book);
         book.setAuthorOnly(bookCommand.getAuthor());
+        book.getPublisher().getBooks().remove(book);
         book.setPublisherOnly(bookCommand.getPublisher());
+
+        entityManager.createNativeQuery(
+                "INSERT INTO AUTHOR_BOOKS (author_id, books_id) VALUES (" + book.getAuthor().getId() + ","
+                                            + book.getId()+")").executeUpdate();
+
+        entityManager.createNativeQuery(
+                "INSERT INTO PUBLISHER_BOOKS (publisher_id, books_id) VALUES (" + book.getPublisher().getId() + ","
+                + book.getId()+")").executeUpdate();
+
+
         bookRepository.save(book);
+
+
         return bookToBookCommand.convert(book);
     }
 }
