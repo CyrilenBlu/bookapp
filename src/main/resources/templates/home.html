@@ -5,9 +5,10 @@
     <title>home</title>
     <link type="text/css" rel="stylesheet" href="../static/css/navbar.css" title="navbar" th:href="@{/css/navbar.css}">
   </head>
-  <body background="../static/images/background.jpg" th:background="@{images/background.jpg}"
-        style="background-size: cover;background-repeat: no-repeat;
-        -webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;">
+  <body th:style="'background:url(' + @{/images/background.jpg} + ');
+        height: 100%;
+        background-size: 100vw 100vh;
+        background-repeat: no-repeat;'">
     <div id="tswcsstabs">
       <ul>
         <li><a href="home">Home </a></li>
@@ -25,7 +26,8 @@
     <p><br>
     </p>
     <img src="../../static/images/imageHome.png" th:src="@{/images/imageHome.png}" alt="Mobile and Web!"
-         title="Mobile and Web!" style="float:left;width: 850px; height: 650px;">
+         title="Mobile and Web!"
+          th:style="'width: 100%; height:auto; max-width: 500px;float:left;'">
     <h2><u><b><span style="color: #000099;">Welcome!</span></b></u></h2>
     <p style="color:#ffff99"> test hello human. whaa </p>
   </body>

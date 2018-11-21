@@ -1,0 +1,9 @@
+.flex-container{
+    display: -webkit-flex; /_ Safari _/
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    flex-flow: column wrap;
+    -webkit-align-items: flex-start;
+    align-items: flex-start;
+}
