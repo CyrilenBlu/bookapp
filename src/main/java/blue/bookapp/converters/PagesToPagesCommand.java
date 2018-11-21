@@ -24,7 +24,7 @@ public class PagesToPagesCommand implements Converter<Pages, PagesCommand> {
             pagesCommand.setBookId(pages.getBook().getId());
         }
         pagesCommand.setPage(pages.getPage());
-        pagesCommand.setChapter(pages.getChapter());
+        pagesCommand.setTitle(pages.getTitle());
         pagesCommand.setContent(pages.getContent());
         
         return  pagesCommand;

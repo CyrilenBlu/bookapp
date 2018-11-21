@@ -12,7 +12,6 @@
         <th>Description</th>
         <th>Image</th>
         <th>Genre</th>
-        <th>Price</th>
         <th>Year</th>
         <th  th:if="${book.getAuthor() != null}">Author Name</th>
         <th th:if="${book.getPublisher() != null}">Publisher Name</th>
@@ -24,7 +23,6 @@
         <td th:text="${book.getDescription()}">Description</td>
         <td th:text="${book.getImage()}">Image</td>
         <td th:text="${book.getGenre()}">Genre</td>
-        <td th:text="${book.getPrice()}">Price</td>
         <td th:text="${book.getYear()}">Year</td>
         <td th:if="${book.getAuthor() != null}" th:text="${book.getAuthor().getName()}">Author Name</td>
         <td th:if="${book.getPublisher() != null}" th:text="${book.getPublisher().getName()}">Publisher Name</td>

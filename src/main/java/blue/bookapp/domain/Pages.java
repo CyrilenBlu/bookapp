@@ -15,7 +15,7 @@ public class Pages {
 
     private int page;
 
-    private String chapter;
+    private String title;
 
     @Lob
     private String content;

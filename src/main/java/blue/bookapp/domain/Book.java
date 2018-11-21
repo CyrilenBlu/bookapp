@@ -5,7 +5,6 @@ import lombok.Setter;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,7 +20,6 @@ public class Book {
     @Lob
     private String description;
 
-    private BigDecimal price;
     private Long EAN;
     private int year;
 

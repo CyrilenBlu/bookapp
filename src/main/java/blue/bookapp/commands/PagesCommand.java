@@ -10,6 +10,6 @@ public class PagesCommand {
     private Long id;
     private Long bookId;
     private int page;
-    private String chapter;
+    private String title;
     private String content;
 }
