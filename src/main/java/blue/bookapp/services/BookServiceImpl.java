@@ -129,6 +129,16 @@ public class BookServiceImpl implements BookService {
     @Override
     @Transactional
     public void removeBookById(Long id) {
+        Optional<Book> bookOptional = bookRepository.findById(id);
+        if (!bookOptional.isPresent())
+            throw new RuntimeException("Book not found!");
+        Book book = bookOptional.get();
+        book.getAuthor().getBooks().remove(book);
+        book.setAuthor(null);
+
+        book.getPublisher().getBooks().remove(book);
+        book.setPublisher(null);
+
         bookRepository.deleteById(id);
     }
 
