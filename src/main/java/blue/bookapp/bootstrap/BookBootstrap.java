@@ -309,9 +309,117 @@ public class BookBootstrap implements ApplicationListener<ContextRefreshedEvent>
         pages2.add(pages2_3);
         book2.setPages(pages2);
 
+        Book book3 = new Book();
+        book3.setTitle("In a Moment");
+        book3.setDescription("Lindy Gordon is living the enviable life of an entrepreneur in San Francisco. " +
+                "Her public relations firm is thriving, her marriage is strong and her apartment at the top of Noe Valley is the envy of her friends. " +
+                "Then the unthinkable happens. " +
+                "An accident briefly ends her life, leaving her with a scar, cracked bones and fractured images that make no sense - at first. " +
+                "As her body heals, she learns little in her past was what she believed it to be. " +
+                "Relationships have soured, love and loyalty has been misplaced and the ultimate betrayal has devastating consequences to her financial life. " +
+                "With nothing more than wits and long-dormant faith to sustain her, Lindy works to save friendships, renew family ties and open her mind and heart to one who could truly love her.");
+        book3.setGenre(Genre.DRAMA);
+        book3.setEAN(Long.valueOf(1231545648));
+        book3.setYear(2018);
+        book3.setDate(LocalDate.now());
+
+        Author author3 = new Author();
+        author3.setName("Sarah Gerdes");
+        author3.setAge(0);
+        book3.setAuthor(author3);
+
+        Publisher publisher3 = new Publisher();
+        publisher3.setName("RPM Publishing");
+        publisher3.setCountry("Washington");
+        publisher3.setCity("Seattle");
+        book3.setPublisher(publisher3);
+
+        Set<Pages> pages3 = new HashSet<>();
+        Pages page3_1 = new Pages();
+        page3_1.setTitle("PREFACE");
+        page3_1.setContent("“Come on, Lindy, come on!” a voice commanded. “You can do it. Breathe! You can start again. " +
+                "I know you can!” I felt nothing as I hovered above, watching the doctor tape a device around my mouth, the cord stretching to a machine. " +
+                "The upside of having my spirit separated from my body was freedom from the pain I’d experienced during the accident.  " +
+                "My hand received a squeeze and I turned to my Grandfather who had been beside me since my death, moments before. " +
+                "“Now I’m not so sure I want to return,” I admitted. My body was jolting, blood was on my forehead and cheek, my ribs were black. " +
+                "Lines and pricks marked locations where glass had hit and embedded themselves in my skin.  " +
+                "But that was nothing compared to the images I’d seen. The quick, staccato spurts of disjointed visuals scared me more than a damaged body. " +
+                "A woman leaning on her side on a gurney, frozen with grief. Another being held down against her will, her back to me. " +
+                "A man, sitting in an elegant office, torn apart inside but pretending to be in control. " +
+                "A heavy-set woman behind a wall of glass, on the phone, counseling someone in a low, concerned voice. " +
+                "Me, walking beside a man on a beach, the sunset fading as the moon rose on the horizon. " +
+                "The faces were blurred, but the feelings were acutely clear; grief, heartache, pain, but also compassion, joy and love. " +
+                "The soft, loose skin on Grandfather’s cheeks dropped into his lips as his eyes glimmered.  " +
+                "“That’s a common feeling when it comes time to reenter the body,” he said as though I’d be comforted. " +
+                "I wasn’t, and he seemed to know this. “I ");
+        page3_1.setPage(1);
+        page3_1.setBook(book3);
+
+        Pages page3_2 = new Pages();
+        page3_2.setTitle("Sarah Gerdes");
+        page3_2.setContent("can tell you that your physical self will be just fine.”  " +
+                "“But the inside? My emotions and those who I saw?” He smiled, the hand that was holding mine started to release.  " +
+                "“Come on Lindy!” urged the doctor with such force I looked down at him. " +
+                "A flood of information passed to me from the doctor who feverishly worked on my motionless body. " +
+                "I could sense him using all his known techniques and skills in this moment to bring me back from the dead. " +
+                "He was fighting for my life in a way I though was admirable.  " +
+                "As if sensing my mood, Grandfather squeezed my hand again, his gaze firm and endowed with a faith far greater than what I possessed. " +
+                "“You are necessary. It is part of why you’ve made your choice.” " +
+                "I wanted to protest that I wasn’t strong enough to endure what I saw before me, but didn’t have the chance. " +
+                "The warmth of my Grandfather’s hand slipped away with his image. " +
+                "That instant, the doctor shouted and I felt a coldness followed by excruciating pain; a million nerve endings manually reconnecting. " +
+                "“That’s it! We have her heartbeat,” the doctor said triumphantly. I was lying on the operating room table, looking up at a silhouette of my Grandfather’s face. " +
+                "“Be patient and trust your inner promptings,” he said faintly. “The noise of your life will try to down them out, but listen,” he emphasized. " +
+                "“And Lindy. You will find love again, I promise.” " +
+                "As I strained and tried to cry out for him not to leave, another face came into focus; a man with white hair and green eyes. " +
+                "“That’s right. You’re getting stronger by the second. In, out, in, out.” He kept coaching me, drawing a hand over my eyes as I tried to open them. " +
+                "“Don’t try to look now. You will see soon enough.” " +
+                "Pain raced through my body and I heard myself choke, then scream with agony, the point where my eternal self made peace with my physical shell. " +
+                "Gradually, my aching eased into an exhausted, but stable state, the words of my Grandfather echoing in my mind.");
+        page3_2.setPage(2);
+        page3_2.setBook(book3);
+
+        Pages page3_3 = new Pages();
+        page3_3.setTitle("In A Moment");
+        page3_3.setContent("“You’re going to make it, Lindy,” the doctor said confidently, as if he knew what I was going through. " +
+                "“You’re right here with us, and you aren’t leaving.” " +
+                "I was returning to a world unlike the one I left, and I had asked for it. " +
+                "He said I’d find love again. " +
+                "In my haze of pain, I wondered why would I need to find something I already had?");
+        page3_3.setPage(3);
+        page3_3.setBook(book3);
+
+        Pages page3_4 = new Pages();
+        page3_4.setTitle("Chapter 1");
+        page3_4.setContent("“Well, Lindy Gordon, are you ready to hear what happened?” It was my doctor, Jake Redding, the one who’d been on call during my accident. " +
+                "I nodded, trying to focus on his face. " +
+                "I wondered if his insistence at using my first and last name was to keep reminding me of who I was. " +
+                "“Please call me Lindy,” I said, my voice rough, hoping to reassure him—and myself. " +
+                "“Of course,” he answered politely. “Focus on me so I can watch your eye movement as I speak." +
+                "” I did. The doctor had smooth skin and linen white hair, coarse and thick on the top and the sides, like he’d forgotten his last appointment with the hair dresser.  " +
+                "“To start, a car struck the cab you were in and your head smashed the window. " +
+                "Do you remember that?”  “Not the hit,” I answered slowly, starting to move my head.  " +
+                "“Don’t,” he cautioned, but his advice came too late. " +
+                "A spike shot from my shoulder blade to my temple. " +
+                "“When you came in, you were in pretty bad shape and we wanted to prevent you from going into cardiac arrest. " +
+                "We put you in a blue suit to cool you down, like an ice pack. You had it on from head to toe.” " +
+                "“You refrigerated me?” I asked. Dr. Redding chuckled. “In a manner of speaking, yes. " +
+                "No one knew how long your brain had been without oxygen, so we attempted to cool it down. " +
+                "It’s quite evident you have one that still works.” A functioning brain was good. " +
+                "A working body was better. In a panicked rush, I twitched my fingers, then my toes. " +
+                "I inhaled to speak, and caught myself.  ");
+        page3_4.setPage(4);
+        page3_4.setBook(book3);
+
+        pages3.add(page3_1);
+        pages3.add(page3_2);
+        pages3.add(page3_3);
+        pages3.add(page3_4);
+        book3.setPages(pages3);
 
         books.add(book1);
         books.add(book2);
+        books.add(book3);
 
         return books;
     }
@@ -321,12 +429,18 @@ public class BookBootstrap implements ApplicationListener<ContextRefreshedEvent>
         Set<Book> books = bookService.listBooks();
         MultipartFile multipartFile1 = new MockMultipartFile("book1.jpg", new FileInputStream(new File(".bootstrapBookImages/book1.jpg")));
         MultipartFile multipartFile2 = new MockMultipartFile("book2.jpg", new FileInputStream(new File(".bootstrapBookImages/book2.jpg")));
-        books.iterator().forEachRemaining(book ->
+        MultipartFile multipartFile3 = new MockMultipartFile("book3.jpg", new FileInputStream(new File(".bootstrapBookImages/book3.jpg")));
+        MultipartFile multipartFile4 = new MockMultipartFile("book4.jpg", new FileInputStream(new File(".bootstrapBookImages/book4.jpg")));
+                books.iterator().forEachRemaining(book ->
         {
             if (book.getId() == 1)
                 imageService.saveImageFile(book.getId(), multipartFile1);
             if (book.getId() == 2)
                 imageService.saveImageFile(book.getId(), multipartFile2);
+            if (book.getId() == 3)
+                imageService.saveImageFile(book.getId(), multipartFile3);
+            if (book.getId() == 4)
+                imageService.saveImageFile(book.getId(), multipartFile4);
         });
     }
 }

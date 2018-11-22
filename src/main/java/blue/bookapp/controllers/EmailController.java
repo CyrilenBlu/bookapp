@@ -22,7 +22,7 @@ public class EmailController {
     public ModelAndView receiveSendEmail(@RequestParam("name") String name, @RequestParam("message") String message,
                                          RedirectAttributes redirectAttributes){
         emailService.sendMessage("iexistlol123@gmail.com","Book App Mail","Name: " + name +"\n\nMessage: " + message);
-        redirectAttributes.addFlashAttribute("message", "Success");
+        redirectAttributes.addFlashAttribute("message", "Email Sent!");
         return new ModelAndView(new RedirectView("/contact"));
     }
 

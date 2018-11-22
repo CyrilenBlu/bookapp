@@ -47,7 +47,7 @@ public class AdminController {
     {
         model.addAttribute("admins", adminService.getAdmins());
         model.addAttribute("admin", loggedAdmin);
-        return "admin/home";
+        return "redirect:/admin-book-list";
     }
 
     @GetMapping("/check")
@@ -180,6 +180,7 @@ public class AdminController {
         PagesCommand pagesCommand = new PagesCommand();
         pagesCommand.setBookId(Long.valueOf(id));
         model.addAttribute("page", pagesCommand);
+        model.addAttribute("book", bookService.findCommandById(Long.valueOf(id)));
         return "/admin/book/pages/pages-new";
     }
 
