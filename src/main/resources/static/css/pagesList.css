@@ -1,10 +1,11 @@
 .page {
     width: 600px;
-    height: 600px;
+    height: 650px;
     margin: 20px;
     background-color: aliceblue;
     border: 2px solid #2f5266;
     padding: 10px;
+    font-size: 16px;
 }
 
 .nav {
