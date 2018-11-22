@@ -5,6 +5,7 @@ import lombok.Setter;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,6 +23,7 @@ public class Book {
 
     private Long EAN;
     private int year;
+    private LocalDate date;
 
     @Enumerated(value = EnumType.STRING)
     private Genre genre;

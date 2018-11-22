@@ -54,6 +54,7 @@ public class BookBootstrap implements ApplicationListener<ContextRefreshedEvent>
         book1.setEAN(Long.valueOf(1284712894));
         book1.setTitle("Killing Floor");
         book1.setGenre(Genre.TEEN_FICTION);
+        book1.setDate(LocalDate.now());
         //todo image storage
 
         book1.setYear(2018);
@@ -263,7 +264,6 @@ public class BookBootstrap implements ApplicationListener<ContextRefreshedEvent>
         publisher1.setCity("Cape Town");
         publisher1.setCountry("South Africa");
         publisher1.setName("Idk WallStreet Journal Incorpreitated.");
-        publisher1.setDate(LocalDate.now());
         book1.setPublisher(publisher1);
 
         Book book2 = new Book();
@@ -272,6 +272,7 @@ public class BookBootstrap implements ApplicationListener<ContextRefreshedEvent>
         book2.setGenre(Genre.COMEDY);
         book2.setEAN(Long.valueOf(1231545648));
         book2.setYear(2016);
+        book2.setDate(LocalDate.now());
 
         Author author2 = new Author();
         author2.setName("Jeff Wick");
@@ -281,7 +282,6 @@ public class BookBootstrap implements ApplicationListener<ContextRefreshedEvent>
         publisher2.setCity("England");
         publisher2.setCountry("United Kingdom");
         publisher2.setName("England is my City");
-        publisher2.setDate(LocalDate.now());
         book2.setPublisher(publisher2);
 
         Set<Pages> pages2 = new HashSet<>();

@@ -23,7 +23,6 @@ public class PublisherCommandToPublisher implements Converter<PublisherCommand, 
         publisher.setName(publisherCommand.getName());
         publisher.setCity(publisherCommand.getCity());
         publisher.setCountry(publisherCommand.getCountry());
-        publisher.setDate(publisherCommand.getDate());
         publisher.setBooks(publisherCommand.getBooks());
 
         return publisher;

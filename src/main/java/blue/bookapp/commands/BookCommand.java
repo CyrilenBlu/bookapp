@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,6 +18,7 @@ public class BookCommand {
     private String title;
     private String description;
     private Long EAN;
+    private LocalDate date;
     private int year;
     private Byte[] image;
     private Author author;

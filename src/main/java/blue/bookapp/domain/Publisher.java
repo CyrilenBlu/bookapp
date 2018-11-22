@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,5 +20,4 @@ public class Publisher {
     private String name;
     private String city;
     private String country;
-    private LocalDate date;
 }

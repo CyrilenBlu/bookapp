@@ -30,7 +30,6 @@
             <th>Name</th>
             <th>City</th>
             <th>Country</th>
-            <th>Date</th>
             <th>No. of Books</th>
             <th>Update</th>
             <th>Delete</th>
@@ -40,7 +39,6 @@
             <td th:text="${publisher.getName()}">Name</td>
             <td th:text="${publisher.getCity()}">City</td>
             <td th:text="${publisher.getCountry()}">Country</td>
-            <td th:text="${publisher.getDate()}">Date</td>
             <td th:text="${publisher.getBooks().size()}">No. of Books</td>
             <td><a href="#" th:href="@{'publisher/' + ${publisher.getId()} +'/update'}">Update</a></td>
             <td><a href="#" th:href="@{'publisher/' + ${publisher.getId()} +'/delete'}">Delete</a></td>
