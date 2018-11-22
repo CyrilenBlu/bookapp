@@ -8,6 +8,14 @@
         height: 100%;
         background-size: 100vw 100vh;
         background-repeat: no-repeat;'">
+<div class="container container-fluid">
+    <div class="table table-responsive">
+        <div class="panel panel-body">
+            <img src="../../../../../.bootstrapBookImages/book1.jpg"
+                th:src="@{'book/' + ${book.getId()} + '/bookimage'}" style="width:100px;length:150px;"/></a>
+        </div>
+    </div>
+</div>
 <p th:text="${book.getTitle()}"> Hey Dad </p>
 <a href="#" th:text="'Read ' + ${book.getTitle()}" th:href="@{'/book/' + ${book.getId()} + '/read/page/1'}">Read</a>
 </body>
