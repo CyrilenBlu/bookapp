@@ -2,21 +2,133 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Info</title>
+    <link type="text/css" rel="stylesheet" href="../../../static/css/navbar.css" th:href="@{/css/navbar.css}" title="navbar">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"
+          th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}">
+
+    <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"
+            th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
 </head>
-<body th:style="'background:url(' + @{/images/background.jpg} + ');
+
+<style>
+    .image{
+        margin-left: 60px;
+        border: 2px solid black;
+        width: 400px;
+        height: 475px;
+    }
+
+    #bInfo.blabel{
+        font-family: Arial, Helvetica, sans-serif;
+        color: #FFC738;
+    }
+
+    #bInfo.bp{
+        font-family: Arial, Helvetica, sans-serif;
+        color: #4173E6;
+    }
+
+</style>
+
+<body th:style="'background:url(' + @{/images/bookview.jpg} + ');
         height: 100%;
         background-size: 100vw 100vh;
         background-repeat: no-repeat;'">
-<div class="container container-fluid">
-    <div class="table table-responsive">
-        <div class="panel panel-body">
-            <img src="../../../../../.bootstrapBookImages/book1.jpg"
-                th:src="@{'book/' + ${book.getId()} + '/bookimage'}" style="width:100px;length:150px;"/></a>
+<div id="tswcsstabs">
+    <ul>
+        <li><a href="/home">Home <i class="fas fa-home"></i></a></li>
+
+        <li><a href="/list">Books <i class="fas fa-book"></i></a></li>
+
+        <li><a href="/contact">Contact <i class="fas fa-address-book"></i></a></li>
+
+        <li><a href="/admin-cpl">Admin <i class="fas fa-lock"></i></a></li> <br/>
+    </ul>
+</div>
+<h1><b><span style="font-family: Imprint MT Shadow; color: #d6ff8c;">&nbsp;&nbsp;&nbsp;&nbsp;
+          <span style="color: #2EB1C7;">- BOOK VIEW</span><br>
+        </span></b></h1>
+<hr style="color: #2f5266;height:5px;border:1px solid black;background-color:black;margin:0;">
+<br/><br/>
+<div style="float:left;">
+    <img  src="../../../../../.bootstrapBookImages/book1.jpg"
+        th:src="@{'/book/' + ${book.getId()} + '/bookimage'}"
+        class="image"/></a> <br/>
+    <div style="margin-left: 60px;">
+        <div class="row" th:if="${book.getAuthor() != null}" style="margin-right: 0">
+            <div class="col-md-5 form-group">
+                <label id="bInfo" class="blabel">Author Name:</label>
+            </div>
+            <div class="col-md-6 form-group">
+                <p id="bInfo" class="bp" th:text="${book.getAuthor().getName()}"> </p>
+            </div>
+        </div>
+        <div class="row" th:if="${book.getPublisher() != null}">
+            <div class="col-md-5 form-group">
+                <label id="bInfo" class="blabel">Publisher Name:</label>
+            </div>
+            <div class="col-md-6 form-group">
+                <p id="bInfo" class="bp" th:text="${book.getPublisher().getName()}"></p>
+            </div>
+            <div class="col-md-5 form-group">
+                <label id="bInfo" class="blabel">City:</label>
+            </div>
+            <div class="col-md-6 form-group">
+                <p id="bInfo" class="bp" th:text="${book.getPublisher().getCity()}"></p>
+            </div>
+            <div class="col-md-5 form-group">
+                <label id="bInfo" class="blabel">Country/State:</label>
+            </div>
+            <div class="col-md-6 form-group">
+                <p id="bInfo" class="bp" th:text="${book.getPublisher().getCountry()}"></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5 form-group">
+                <label id="bInfo" class="blabel">Date Published:</label>
+            </div>
+            <div class="col-md-6 form-group">
+                <p id="bInfo" class="bp" th:text="${book.getDate()}"></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5 form-group">
+                <label id="bInfo" class="blabel">EAN:</label>
+            </div>
+            <div class="col-md-6 form-group">
+                <p id="bInfo" class="bp" th:text="${book.getEAN()}"></p>
+            </div>
         </div>
     </div>
 </div>
-<p th:text="${book.getTitle()}"> Hey Dad </p>
-<a href="#" th:text="'Read ' + ${book.getTitle()}" th:href="@{'/book/' + ${book.getId()} + '/read/page/1'}">Read</a>
+
+<div style="margin-left: 30px;">
+    <center>
+        <div style="width: 550px;text-align: center; font-family: Arial, Helvetica, sans-serif; font-size: 20px;">
+            <h2 th:text="${book.getTitle()}" style="color: #FFC738; font-size:25px;"></h2>
+            <hr style="color: black;height: 2px;"/>
+            <p style="color: white;" th:text="${book.getDescription()}">
+                Description
+            </p>
+            <br/>
+            <a href="#"
+               th:if="${book.getPages().size() > 0}"
+               th:href="@{'/book/' + ${book.getId()} + '/read/page/1'}" role="button" class="btn btn-primary"
+                style="width: 100px; font-size: 20px;">Read</a>
+            <p th:if="${book.getPages().size() == 0}" style="font-size: 20px; font-family: Arial, Helvetica, sans-serif; color: white">No Pages Yet! - <a href="#" th:href="'/contact'">Contact</a></p>
+        </div>
+
+    </center>
+</div>
+
 </body>
 </html>

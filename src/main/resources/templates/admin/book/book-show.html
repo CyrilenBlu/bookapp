@@ -5,48 +5,73 @@
     <title>View Book</title>
     <link type="text/css" rel="stylesheet" href="../../static/css/navbar.css" th:href="@{/css/navbar.css}" title="navbar">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"
+          th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}">
+
+    <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"
+            th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
 </head>
-<body>
+<body th:style="'background:url(' + @{/images/admin-book-background.jpg} + ');
+        height: 100%;
+        background-size: 100vw 100vh;
+        background-repeat: no-repeat;'">
 <div id="tswcsstabs">
     <ul>
-        <li><a href="/admin-control" style="background-color: #2EB1C7;">Home <i class="fas fa-home"></i></a></li>
-
         <li><a href="/admin-book-list" style="background-color: #2EB1C7;">Book List <i class="fas fa-book"></i></a></li>
 
         <li><a href="/admin-author-list" style="background-color: #2EB1C7;">Author List <i class="fas fa-address-book"></i></a></li>
 
-        <li><a href="/admin-publisher-list" style="background-color: #2EB1C7;">Publisher List <i class="fas fa-lock"></i></a></li>
+        <li><a href="/admin-publisher-list" style="background-color: #2EB1C7;">Publisher List <i class="fas fa-book-reader"></i></a></li>
 
         <li><a href="/logout" style="background-color: #2EB1C7;">Logout <i class="fas fa-lock"></i></a></li>
         <br/>
     </ul>
-    <p>hello</p>
 </div>
-<table>
-    <tr>
-        <th>ID</th>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Image</th>
-        <th>Genre</th>
-        <th>Year</th>
-        <th>Date</th>
-        <th  th:if="${book.getAuthor() != null}">Author Name</th>
-        <th th:if="${book.getPublisher() != null}">Publisher Name</th>
-        <th>EAN No.</th>
-    </tr>
-    <tr>
-        <td th:text="${book.getId()}">ID</td>
-        <td th:text="${book.getTitle()}">Title</td>
-        <td th:text="${book.getDescription()}">Description</td>
-        <td th:text="${book.getImage()}">Image</td>
-        <td th:text="${book.getGenre()}">Genre</td>
-        <td th:text="${book.getYear()}">Year</td>
-        <td th:text="${book.getDate()}">Date</td>
-        <td th:if="${book.getAuthor() != null}" th:text="${book.getAuthor().getName()}">Author Name</td>
-        <td th:if="${book.getPublisher() != null}" th:text="${book.getPublisher().getName()}">Publisher Name</td>
-        <td th:text="${book.getEAN()}">EAN</td>
-    </tr>
-</table>
+
+<div class="container-fluid" style="margin-top: 20px">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h1 class="panel-title">Books</h1>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Image</th>
+                            <th>Genre</th>
+                            <th>Year</th>
+                            <th>Date</th>
+                            <th  th:if="${book.getAuthor() != null}">Author Name</th>
+                            <th th:if="${book.getPublisher() != null}">Publisher Name</th>
+                            <th>EAN No.</th>
+                        </tr>
+                        <tr>
+                            <td th:text="${book.getId()}">ID</td>
+                            <td th:text="${book.getTitle()}">Title</td>
+                            <td th:text="${book.getDescription()}">Description</td>
+                            <td th:text="${book.getImage()}">Image</td>
+                            <td th:text="${book.getGenre()}">Genre</td>
+                            <td th:text="${book.getYear()}">Year</td>
+                            <td th:text="${book.getDate()}">Date</td>
+                            <td th:if="${book.getAuthor() != null}" th:text="${book.getAuthor().getName()}">Author Name</td>
+                            <td th:if="${book.getPublisher() != null}" th:text="${book.getPublisher().getName()}">Publisher Name</td>
+                            <td th:text="${book.getEAN()}">EAN</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

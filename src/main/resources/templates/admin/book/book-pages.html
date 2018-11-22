@@ -15,7 +15,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"
             th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
 </head>
-<body>
+<body th:style="'background:url(' + @{/images/admin-book-background.jpg} + ');
+        height: 100%;
+        background-size: 100vw 100vh;'">
 <div class="container-fluid" style="margin-top: 20px">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
@@ -24,7 +26,7 @@
                     <h1 class="panel-title">Pages</h1>
                 </div>
                 <div class="col-md-6 col-md-3">
-                    <a class="btn btn-default" href="#" th:href="@{'/book/'+${book.getId()}+'/pages/new'}" role="button">Add New Page</a>
+                    <a class="btn btn-primary" href="#" th:href="@{'/book/'+${book.getId()}+'/pages/new'}" role="button">Add New Page</a> <a class="btn btn-info" href="#" th:href="@{'/book/'+${book.getId()}+'/update'}" role="button">Cancel</a>
                 </div> <br/><br/>
                 <div class="table-responsive" th:if="${not #lists.isEmpty(pages)}">
                     <table class="table table-hover">

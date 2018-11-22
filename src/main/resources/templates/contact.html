@@ -5,37 +5,80 @@
     <title>home</title>
     <link type="text/css" rel="stylesheet" href="../static/css/navbar.css" th:href="@{/css/navbar.css}" title="navbar">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+      <!-- Latest compiled and minified CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"
+            th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}">
+
+      <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+      <!-- Optional theme -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+      <!-- Latest compiled and minified JavaScript -->
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"
+              th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
   </head>
+
+  <style>
+    .bContact{
+        font-family: Arial, Helvetica, sans-serif;
+        color: #4173E6;
+        font-size: 20px;
+        margin: 5px;
+    }
+  </style>
+
   <body th:style="'background:url(' + @{/images/background.jpg} + ');
         height: 100%;
         background-size: 100vw 100vh;
         background-repeat: no-repeat;'">
   <div id="tswcsstabs">
     <ul>
-      <li><a href="home">Home <i class="fas fa-home"></i></a></li>
+      <li><a href="/home">Home <i class="fas fa-home"></i></a></li>
 
-      <li><a href="list">Books <i class="fas fa-book"></i></a></li>
+      <li><a href="/list">Books <i class="fas fa-book"></i></a></li>
 
-      <li><a href="contact">Contact <i class="fas fa-address-book"></i></a></li>
+      <li><a href="/contact">Contact <i class="fas fa-address-book"></i></a></li>
        
     </ul>
   </div>
     <h1><b><span style="font-family: Imprint MT Shadow; color: #d6ff8c;">&nbsp;&nbsp;&nbsp;&nbsp;
-          <span style="color: #000099;">- Contact</span><br>
+          <span style="color: #FFC738;">- CONTACT</span><br>
         </span></b></h1>
     <hr style="color: #2f5266;height:5px;border:1px solid black;background-color:black;margin:0;">
   <div style="margin:15px">
-    <h2>Send e-mail:</h2>
 
+<div class="col-md-6 col-md-offset-3">
+    <div class="col-md-offset-2">
+        <h2 class="bContact" style="color: #FFC738; font-size: 25px;">Send e-mail:</h2><br/>
+    </div>
     <form th:action="@{/sendemail}" method="post">
-      Name:<br>
-      <input type="text" id="name" name="name"><br>
-      Message:<br>
-      <input type="text" id="message" name="message" size="100"><br><br>
-        <button type="submit" >Submit</button>
-      <input type="reset" value="Reset">
+        <div class="row">
+            <div class="col-md-3 form-group">
+                <label class="bContact">Name:</label>
+            </div>
+            <div class="col-md-3 form-group">
+                <input type="text" id="name" name="name" placeholder="Name"><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 form-group">
+                <label class="bContact">Message:</label>
+            </div>
+            <div class="col-md-3 form-group">
+                <textarea type="text" id="message" name="message" maxlength="150" cols="20" rows="10" placeholder="Message"></textarea><br><br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 form-group"></div>
+            <div class="col-md-5 form-group">
+                <button type="submit" >Submit</button>
+                <input type="reset" value="Reset">
+            </div>
+        </div>
     </form>
-      <h2 th:if="${message}" th:text="${message}"/>
+      <h2 class="bContact" th:if="${message}" th:text="${message}"/>
   </div> <br/>
+
+  </div>
   </body>
 </html>

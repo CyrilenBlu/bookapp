@@ -3,25 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <title>Change Author and Publisher</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"
+          th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}">
+
+    <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"
+            th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
 </head>
-<body>
-<h1> Change Author and Publisher </h1>
+
+<style>
+    .bUpdate{
+        font-family: Arial, Helvetica, sans-serif;
+        color: black;
+        font-size: 20px;
+        margin: 5px;
+    }
+</style>
+<body th:style="'background:url(' + @{/images/admin-book-background.jpg} + ');
+        height: 100%;
+        background-size: 100vw 100vh;
+        background-repeat: no-repeat;'">
+<div class="col-md-6 col-md-offset-3" style="margin-top: 30px;">
+    <div class="panel">
+    <div class="panel-heading">
+        <div class="panel-title">
+            <h1 class="bUpdate" style="color: #FFC738; font-size: 25px;">Change Author and Publisher </h1><br/>
+        </div>
+    </div>
 <form th:object="${book}" th:action="@{/author_publisher/}" method="post">
     <input type="hidden" th:field="*{id}"/>
-    <label>Change Author</label>
-    <select th:field="*{author}">
-        <option th:each="author : ${authors}" th:value="${author.id}"
-                th:text="${author.name}" th:selected="${book.getAuthor()}">val</option>
-    </select>
-
-    <label>Change Publisher</label>
-    <select th:field="*{publisher}">
-        <option th:each="publisher : ${publishers}" th:value="${publisher.id}"
-                th:text="${publisher.name}" th:selected="${book.getPublisher()}">val</option>
-    </select>
-
-    <button type="submit">Submit</button>
+    <div class="row">
+        <div class="col-md-3 form-group">
+            <label class="bUpdate">Change Author</label>
+        </div>
+        <div class="col-md-3 form-group">
+            <select th:field="*{author}">
+                <option th:each="author : ${authors}" th:value="${author.id}"
+                        th:text="${author.name}" th:selected="${book.getAuthor()}">val</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 form-group">
+            <label class="bUpdate">Change Publisher</label>
+        </div>
+        <div class="col-md-3 form-group">
+            <select th:field="*{publisher}">
+                <option th:each="publisher : ${publishers}" th:value="${publisher.id}"
+                        th:text="${publisher.name}" th:selected="${book.getPublisher()}">val</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 form-group"></div>
+        <div class="col-md-5 form-group">
+            <button type="submit" class="btn btn-primary">Submit</button> <a role="button" class="btn btn-info" href="#" th:href="@{'/book/' + ${book.getId()} + '/update'}">Cancel</a>
+        </div>
+    </div>
 </form>
-
+    </div>
+</div>
 </body>
 </html>

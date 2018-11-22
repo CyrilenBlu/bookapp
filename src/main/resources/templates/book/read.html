@@ -4,11 +4,23 @@
     <meta charset="UTF-8">
     <title>Read Book</title>
     <link type="text/css" rel="stylesheet" href="/static/css/bookRead.css" th:href="@{/css/pagesList.css}"/>
+    <link type="text/css" rel="stylesheet" href="../../static/css/navbar.css" th:href="@{/css/navbar.css}" title="navbar">
 </head>
 <body th:style="'background:url(' + @{/images/background.jpg} + ');
         height: 100%;
         background-size: 100vw 100vh;
         background-repeat: no-repeat;'">
+
+<div id="tswcsstabs">
+    <ul>
+        <li><a href="/home">Home <i class="fas fa-home"></i></a></li>
+
+        <li><a href="/list">Books <i class="fas fa-book"></i></a></li>
+
+        <li><a href="/contact">Contact <i class="fas fa-address-book"></i></a></li><br/>
+    </ul>
+</div>
+
 <center>
     <div class="page">
         <div>
@@ -17,6 +29,7 @@
             <p th:text="${page.getPage()}">1</p>
         </div>
     </div><br/>
+
     <a href="#" th:href="@{'/book/' + ${book.getId()} + '/read/page/' + ${page.getPage() - 1}}"
        th:if="${page.getPage()-1 != 0}" class="nav">Previous</a>
 

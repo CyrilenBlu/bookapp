@@ -2,12 +2,29 @@
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <title>home</title>
+    <title>Home</title>
     <link type="text/css" rel="stylesheet" href="../static/css/navbar.css" title="navbar" th:href="@{/css/navbar.css}">
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
 
   </head>
+
+  <style>
+      .main{
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: 40px;
+          color: #FFC738;
+      }
+
+      .main_body{
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: 20px;
+          line-height: 35px;
+          color: #98ebf1;
+
+      }
+  </style>
+
   <body th:style="'background:url(' + @{/images/background.jpg} + ');
         height: 100%;
         background-size: 100vw 100vh;
@@ -15,17 +32,17 @@
 
     <div id="tswcsstabs">
       <ul>
-          <li><a href="home">Home <i class="fas fa-home"></i></a></li>
+          <li><a href="/home">Home <i class="fas fa-home"></i></a></li>
 
-          <li><a href="list">Books <i class="fas fa-book"></i></a></li>
+          <li><a href="/list">Books <i class="fas fa-book"></i></a></li>
 
-          <li><a href="contact">Contact <i class="fas fa-address-book"></i></a></li>
+          <li><a href="/contact">Contact <i class="fas fa-address-book"></i></a></li>
          
       </ul>
     </div>
 
     <h1><b><span style="font-family: Imprint MT Shadow; color: #d6ff8c;">&nbsp;&nbsp;&nbsp;&nbsp;
-          <span style="color: #000099;">- Blue Books</span><br>
+          <span style="color: #FFC738;">- BLUE BOOKS</span><br>
         </span></b></h1>
     <hr style="color: #2f5266;height:5px;border:1px solid black;background-color:black;margin:0;">
     <p><br>
@@ -33,7 +50,17 @@
     <img src="../../static/images/imageHome.png" th:src="@{/images/imageHome.png}" alt="Mobile and Web!"
          title="Mobile and Web!"
           th:style="'width: 100%; height:auto; max-width: 500px;float:left;'">
-    <h2><u><b><span style="color: #000099;">Welcome!</span></b></u></h2>
-    <p style="color:#ffff99"> test hello human. whaa </p>
+    <center>
+        <div>
+            <h2 class="main">Welcome!</h2>
+            <br/>
+            <div class="main_body">
+                Hello my dudes. and welcome to my amazing website. <br/>
+                Full of joy, happiness and joy i guess?! <br/>
+                Enjoy your stay my dudes! <br/>
+                Don't forget to smash subscribe!
+            </div>
+        </div>
+    </center>
   </body>
 </html>

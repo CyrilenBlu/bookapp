@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <title>list</title>
+    <title>Books</title>
     <link type="text/css" rel="stylesheet" href="../../static/css/navbar.css" th:href="@{/css/navbar.css}" title="navbar">
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
       <!-- Latest compiled and minified CSS -->
@@ -17,33 +17,34 @@
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"
               th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
   </head>
-  <body th:style="'background:url(' + @{/images/background.jpg} + ');
+  <body th:style="'background:url(' + @{/images/books.jpg} + ');
         height: 100%;
         background-size: 100vw 100vh;
         background-repeat: no-repeat;'">
   <div id="tswcsstabs">
       <ul>
-          <li><a href="home">Home <i class="fas fa-home"></i></a></li>
+          <li><a href="/home">Home <i class="fas fa-home"></i></a></li>
 
-          <li><a href="list">Books <i class="fas fa-book"></i></a></li>
+          <li><a href="/list">Books <i class="fas fa-book"></i></a></li>
 
-          <li><a href="contact">Contact <i class="fas fa-address-book"></i></a></li>
+          <li><a href="/contact">Contact <i class="fas fa-address-book"></i></a></li>
 
-          <li><a href="admin-cpl">Admin <i class="fas fa-lock"></i></a></li>
+          <li><a href="/admin-cpl">Admin <i class="fas fa-lock"></i></a></li>
           <br/>
       </ul>
   </div>
     <h1><b><span style="font-family: Imprint MT Shadow; color: #d6ff8c;">&nbsp;&nbsp;&nbsp;&nbsp;
-          <span style="color: #000099;">- Book List</span><br>
+          <span style="color: #FFC738;">- BOOK LIST</span><br>
         </span></b></h1>
     <hr style="color: #2f5266;height:5px;border:1px solid black;background-color:black;margin:0;">
 
     <div th:each="book : ${books}" class="flex-container">
-        <div style="text-align: center; float: left;border: 3px solid #98ebf1;margin:10px;
+        <div style="text-align: center; float: left;margin:10px;
                 width: 150px; height: 150px;">
             <a th:href="@{'book/' + ${book.getId()} + '/info'}">
                 <img src="../../../../../.bootstrapBookImages/book1.jpg"
-                     th:src="@{'/bookimage'}" style="width:100px;length:150px;"/></a>
+                     th:src="@{'book/' + ${book.getId()} + '/bookimage'}"
+                     style="border: 3px solid black;width:100px;height:150px;"/></a>
             <br/>
             <th><a th:text="${book.getTitle()}" href="#" th:href="@{'book/' + ${book.getId()} + '/info'}">John</a></th>
         </div>

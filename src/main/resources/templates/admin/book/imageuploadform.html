@@ -3,16 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <title>Upload new Book Image</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"
+          th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}">
+
+    <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"
+            th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
 </head>
-<body>
-<form action="http://localhost" method="post" enctype="multipart/form-data"
-    th:action="@{'/book/' + ${book.getId()} + '/image'}">
 
-    <label>Select File</label>
-    <input id="imagefile" name="imagefile" type="file" class="file">
-    <button type="submit">Submit</button> <a href="#" th:href="@{'/book/' + ${book.getId()} + '/update'}">Cancel</a>
+<style>
+    .bImage{
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 20px;
+        color: #4173E6;
+    }
+</style>
 
-</form>
+<body th:style="'background:url(' + @{/images/admin-book-background.jpg} + ');
+        height: 100%;
+        background-size: 100vw 100vh;
+        background-repeat: no-repeat;'">
 
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-primary">
+                <form action="http://localhost" method="post" enctype="multipart/form-data"
+                      th:action="@{'/book/' + ${book.getId()} + '/image'}">
+
+                    <h1 class="bImage">Select File</h1>
+                    <input id="imagefile" name="imagefile" type="file" class="file"><br/>
+                    <button class="btn btn-primary" type="submit">Submit</button> <a class="btn btn-info" role="button" href="#" th:href="@{'/book/' + ${book.getId()} + '/update'}">Cancel</a>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
