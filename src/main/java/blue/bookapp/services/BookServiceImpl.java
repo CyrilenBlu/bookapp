@@ -157,7 +157,8 @@ public class BookServiceImpl implements BookService {
         bookCommand.setPages(pagesCommands);
 
         Book book = bookCommandToBook.convert(bookCommand);
-
+        if (book.getImage() != null)
+            book.setImage(bookCommand.getImage());
         bookRepository.save(book);
         return bookToBookCommand.convert(book);
     }
