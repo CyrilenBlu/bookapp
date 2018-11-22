@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>New Page</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 </head>
 <body>
 <form th:object="${page}" th:action="@{/newpage/}" method="post">
@@ -19,7 +20,7 @@
         </div>
         <div>
             <label>Content</label>
-            <textarea th:field="*{content}"></textarea>
+            <textarea th:field="*{content}"  minlength="50" maxlength="2600" rows="20" cols="50"></textarea>
         </div>
     </div>
 

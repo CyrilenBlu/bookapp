@@ -4,25 +4,35 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link type="text/css" rel="stylesheet" href="../static/css/navbar.css" th:href="@{/css/navbar.css}" title="navbar">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 </head>
-<body background="/static/images/background.jpg" th:background="@{/images/background.jpg}" style="background-size:cover;">
+<body th:style="'background:url(' + @{/images/admin-background.png} + ');
+        height: 100%;
+        background-size: 100vw 100vh;
+        background-repeat: no-repeat;'">
     <div th:if="${not admin.isCheckLogged()}">
-        <p>Error please login</p>
+        <span style="font-size: 20px;color: #EF9CA0">An error has occurred, <i class="fas fa-exclamation-circle"></i>
+            <br/> Please login <a href="admin-cpl" style="color: #FFC738">here</a> or return
+            <a href="home" style="color: #FFC738">home</a>.</span>
         <a type="button" href="#" th:href="@{'/error'}"></a>
     </div>
 
     <div th:if="${admin.isCheckLogged()}">
         <div id="tswcsstabs">
             <ul>
-                <li><a href="admin-book-list">Book List </a></li>
-                 
-                <li><a href="admin-author-list">Author List</a></li>
-                 
-                <li><a href="admin-publisher-list">Publisher List</a></li>
-                 
-                <li><a href="/logout">Logout</a></li>
+                <li><a href="/admin-control" style="background-color: #2EB1C7;">Home <i class="fas fa-home"></i></a></li>
+
+                <li><a href="/admin-book-list" style="background-color: #2EB1C7;">Book List <i class="fas fa-book"></i></a></li>
+
+                <li><a href="/admin-author-list" style="background-color: #2EB1C7;">Author List <i class="fas fa-address-book"></i></a></li>
+
+                <li><a href="/admin-publisher-list" style="background-color: #2EB1C7;">Publisher List <i class="fas fa-lock"></i></a></li>
+
+                <li><a href="/logout" style="background-color: #2EB1C7;">Logout <i class="fas fa-lock"></i></a></li>
+                <br/>
             </ul>
         <p>hello</p>
+        </div>
     </div>
 </body>
 </html>

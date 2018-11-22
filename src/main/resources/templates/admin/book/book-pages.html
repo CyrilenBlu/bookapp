@@ -3,26 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <title>Pages</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"
+          th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}">
+
+    <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"
+            th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
 </head>
 <body>
-<a href="#" th:href="@{'pages/new'}">Add new page</a>
-<table>
-    <tbody>
-    <tr>
-        <th>ID</th>
-        <th>Page Number</th>
-        <th>Content</th>
-        <th>Update</th>
-        <th>Delete</th>
-    </tr>
-    <tr th:each="page : ${pages}">
-        <td th:text="${page.getId()}">ID</td>
-        <td th:text="${page.getPage()}">Page Number</td>
-        <td th:text="${page.getContent()}">Content</td>
-        <td><a href="#" th:href="@{'pages/'+${page.getId()} + '/update'}">Update</a></td>
-        <td><a href="#" th:href="@{'pages/'+${page.getId()} + '/delete'}">Delete</a></td>
-    </tr>
-    </tbody>
-</table>
+<div class="container-fluid" style="margin-top: 20px">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h1 class="panel-title">Pages</h1>
+                </div>
+                <div class="col-md-6 col-md-3">
+                    <a class="btn btn-default" href="#" th:href="@{'/book/'+${book.getId()}+'/pages/new'}" role="button">Add New Page</a>
+                </div> <br/><br/>
+                <div class="table-responsive" th:if="${not #lists.isEmpty(pages)}">
+                    <table class="table table-hover">
+                        <tbody>
+                        <tr>
+                            <th>ID</th>
+                            <th>Page Number</th>
+                            <th>Content</th>
+                            <th>Update</th>
+                            <th>Delete</th>
+                        </tr>
+                        <tr th:each="page : ${pages}">
+                            <td th:text="${page.getId()}">ID</td>
+                            <td th:text="${page.getPage()}">Page Number</td>
+                            <td th:text="${page.getContent()}">Content</td>
+                            <td><a href="#" th:href="@{'pages/'+${page.getId()} + '/update'}">Update</a></td>
+                            <td><a href="#" th:href="@{'pages/'+${page.getId()} + '/delete'}">Delete</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

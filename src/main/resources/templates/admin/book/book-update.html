@@ -3,56 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit Book</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"
+          th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}">
+
+    <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"
+            th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
 </head>
-<body>
-<form th:object="${book}" th:action="@{/book/}" method="post">
-    <input type="hidden" th:field="*{id}"/>
-    <input type="hidden" th:field="*{image}"/>
-    <input type="hidden" th:field="*{publisher}"/>
-    <input type="hidden" th:field="*{author}"/>
-    <input type="hidden" th:field="*{EAN}"/>
-    <h1>Edit Book Info</h1>
-    <div>
-        <div>
-            <a href="#" th:href="@{'image'}">Change Image</a>
-        </div>
-        <div><a href="#" th:href="@{'/book/' + ${book.getId()} + '/author_publisher'}">Change author/publisher</a></div>
-        <div>
-            <label>Book Title</label>
-            <input type="text" th:field="*{title}">
-        </div>
+<body th:style="'background:url(' + @{/images/admin-book-background.jpg} + ');
+        height: 100%;
+        background-size: 100vw 100vh;
+        background-repeat: no-repeat;'">
 
-        <div>
-            <label>Book Description</label>
-            <input type="text" th:field="*{description}"/>
-        </div>
-
-        <div>
-            <label>Year</label>
-            <input type="number" th:field="*{year}"/>
-        </div>
-
-        <div>
-            <select th:field="*{genre}">
-                <option th:each="genre : ${T(blue.bookapp.domain.Genre).values()}"
-                        th:value="${genre.name()}"
-                        th:text="${genre.name()}">values</option>
-            </select>
-        </div>
-
-        <div>
-            <a href="#" th:href="@{'pages'}">View</a>
-            <ul>
-                <li th:each="page : ${pages}"
-                th:text="${page.getContent()}">
-                Pages
-                </li>
-            </ul>
+<div class="container-fluid" style="margin-top: 20px">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <form th:object="${book}" th:action="@{/book/}" method="post">
+                <input type="hidden" th:field="*{id}"/>
+                <input type="hidden" th:field="*{image}"/>
+                <input type="hidden" th:field="*{publisher}"/>
+                <input type="hidden" th:field="*{author}"/>
+                <input type="hidden" th:field="*{EAN}"/>
+                <div class="panel-group">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h1 class="panel-title">Edit Book</h1>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-3 form-group">
+                                    <img src="../../../../../.bootstrapBookImages/book1.jpg"
+                                         th:src="@{'/book/' + ${book.getId()} + '/bookimage'}" style="width:100px;length:150px;"/>
+                                    <a href="#" th:href="@{'image'}">Change Image</a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 form-group">
+                                    <a href="#" th:href="@{'/book/' + ${book.getId()} + '/author_publisher'}">
+                                        Change Author / Publisher
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 form-group">
+                                    <label>Title</label>
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <input type="text" th:field="*{title}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 form-group">
+                                    <label>Description</label>
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <input type="text" th:field="*{description}"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 form-group">
+                                    <label>Year</label>
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <input type="number" th:field="*{year}"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 form-group">
+                                    <label>Genre</label>
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <select th:field="*{genre}">
+                                        <option th:each="genre : ${T(blue.bookapp.domain.Genre).values()}"
+                                                th:value="${genre.name()}"
+                                                th:text="${genre.name()}">values</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 form-group">
+                                    <label>Pages</label>
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <a href="#" th:href="@{'pages'}">View Pages</a>
+                                    <ul>
+                                        <li th:each="page : ${pages}"
+                                            th:text="${page.getPage()}">
+                                            Pages
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 form-group"></div>
+                                <div class="col-md-3 form-group">
+                                    <button class="btn btn-primary" type="submit">Submit</button><a href="#" th:href="@{'/admin-book-list'}" role="button" class="btn btn-info">Cancel</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
-
-
-    <button type="submit">Submit</button><a href="#" th:href="@{'/admin-book-list'}">Cancel</a>
-</form>
+</div>
 </body>
 </html>

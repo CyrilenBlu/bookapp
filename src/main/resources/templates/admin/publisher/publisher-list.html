@@ -3,8 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Publisher List</title>
+    <link type="text/css" rel="stylesheet" href="../static/css/navbar.css" th:href="@{/css/navbar.css}" title="navbar">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 </head>
 <body>
+<div id="tswcsstabs">
+    <ul>
+        <li><a href="/admin-control" style="background-color: #2EB1C7;">Home <i class="fas fa-home"></i></a></li>
+
+        <li><a href="/admin-book-list" style="background-color: #2EB1C7;">Book List <i class="fas fa-book"></i></a></li>
+
+        <li><a href="/admin-author-list" style="background-color: #2EB1C7;">Author List <i class="fas fa-address-book"></i></a></li>
+
+        <li><a href="/admin-publisher-list" style="background-color: #2EB1C7;">Publisher List <i class="fas fa-lock"></i></a></li>
+
+        <li><a href="/logout" style="background-color: #2EB1C7;">Logout <i class="fas fa-lock"></i></a></li>
+        <br/>
+    </ul>
+    <p>hello</p>
+</div>
 <a href="#" th:href="@{'/publisher/new'}">Add new Publisher</a>
 <table>
     <tbody>

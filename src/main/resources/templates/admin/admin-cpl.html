@@ -3,20 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
+    <link type="text/css" rel="stylesheet" href="../../static/css/navbar.css" title="navbar" th:href="@{/css/navbar.css}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 </head>
-<body>
-<p> default text</p>
-    <form th:object="${admin}" th:action="@{'/check'}" method="get">
-        <input type="hidden" th:field="*{id}"/>
-        <p>Username</p>
-        <input type="text" th:field="*{username}"/>
-        <br/>
-        <p>Password</p>
-        <input type="text" th:field="*{password}"/>
-        <br/>
-        <button type="submit">Submit</button>
+<style>
+    .label {
+        font-family: 'Proxima Nova Soft', Arial, Helvetica, sans-serif;
+        color: #FFC738;
+    }
+</style>
+<body th:style="'background:url(' + @{/images/admin-background.png} + ');
+        height: 100%;
+        background-size: 100vw 100vh;
+        background-repeat: no-repeat;'">
+<div id="tswcsstabs">
+    <ul>
+        <li><a href="home" style="background-color: #2EB1C7;">Home <i class="fas fa-home"></i></a></li>
 
-    </form>
+        <li><a href="list" style="background-color: #2EB1C7;">Books <i class="fas fa-book"></i></a></li>
+
+        <li><a href="contact" style="background-color: #2EB1C7;">Contact <i class="fas fa-address-book"></i></a></li>
+
+        <li><a href="admin-cpl" style="background-color: #2EB1C7;">Admin <i class="fas fa-lock"></i></a></li>
+        <br/>
+    </ul>
+</div>
+
+<!-- formatting -->
+<h1><b><span><span></span><br></span></b></h1>
+
+<div>
+    <center><br/><br/>
+        <div id="login">
+            <h1 style="color: #FFC738; font-family: Helvetica;">Admin Login</h1>
+            <form th:object="${admin}" th:action="@{'/check'}" method="get">
+                <input type="hidden" th:field="*{id}"/>
+                <label class="label">Username</label>
+                <br/>
+                <input type="text" th:field="*{username}"/>
+                <br/>
+                <label class="label">Password</label>
+                <br/>
+                <input type="password" th:field="*{password}"/>
+                <br/>
+                <br/>
+                <div>
+                    <button type="submit">Submit <i class="fas fa-sign-in-alt"></i></button>
+                </div>
+
+            </form>
+        </div>
+    </center>
+
+</div>
 
 </body>
 </html>
