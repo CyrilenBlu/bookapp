@@ -202,11 +202,16 @@ public class BookServiceImpl implements BookService {
             throw new RuntimeException("Book not found!");
         Book book = bookOptional.get();
 
-        if (book.getAuthor() == null && book.getPublisher() == null) {
+        if (book.getAuthor() == null || book.getPublisher() == null) {
+            if (book.getAuthor() == null)
+            {
                 book.setAuthor(bookCommand.getAuthor());
-                book.setPublisher(bookCommand.getPublisher());
                 book.getAuthor().getBooks().add(book);
+            }
+            if (book.getPublisher() == null) {
+                book.setPublisher(bookCommand.getPublisher());
                 book.getPublisher().getBooks().add(book);
+            }
                 bookRepository.save(book);
                 return bookToBookCommand.convert(book);
         }
