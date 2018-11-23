@@ -49,11 +49,13 @@ public class BookBootstrap implements ApplicationListener<ContextRefreshedEvent>
         List<Book> books = new ArrayList<>(2);
 
         Book book1 = new Book();
-        book1.setDescription("A book about absolutely nothing");
+        book1.setDescription("Ex-military policeman Jack Reacher is a drifter. " +
+                "He's just passing through Margrave, Georgia, and in less than an hour, he's arrested for murder. " +
+                "Not much of a welcome. All Jack knows is that he didn't kill anybody. At least not here. Not lately. " +
+                "But he doesn't stand a chance of convincing anyone. not in Margrave, Georgia. Not a chance in hell.");
         book1.setEAN(Long.valueOf(1284712894));
         book1.setTitle("Killing Floor");
-        book1.setGenre(Genre.TEEN_FICTION);
-        //todo image storage
+        book1.setGenre(Genre.THRILLER);
 
         book1.setYear(2018);
 
@@ -259,9 +261,8 @@ public class BookBootstrap implements ApplicationListener<ContextRefreshedEvent>
         book1.setPages(pages1);
 
         Publisher publisher1 = new Publisher();
-        publisher1.setCity("Cape Town");
-        publisher1.setCountry("South Africa");
-        publisher1.setName("Idk WallStreet Journal Incorpreitated.");
+        publisher1.setCountry("United Kingdom");
+        publisher1.setName("Putnam");
         book1.setPublisher(publisher1);
 
         Book book2 = new Book();
@@ -307,33 +308,222 @@ public class BookBootstrap implements ApplicationListener<ContextRefreshedEvent>
         book2.setPages(pages2);
 
         Book book3 = new Book();
-        book3.setTitle("In a Moment");
-        book3.setDescription("Lindy Gordon is living the enviable life of an entrepreneur in San Francisco. " +
+        book3.setTitle("My Past Life");
+        book3.setDescription("This is a short fiction about a young man who gets shot on Christmas Eve and goes to heaven. Then he is given a second chance and he is reborn. Read to find out more!");
+        book3.setGenre(Genre.SHORT_STORY);
+        book3.setEAN(Long.valueOf(9385202));
+        book3.setYear(2018);
+
+        Author author3 = new Author();
+        author3.setName("Alina Udrea");
+        author3.setAge(35);
+        book3.setAuthor(author3);
+
+        Set<Pages> pages3 = new HashSet<>();
+        Pages page3_1 = new Pages();
+        page3_1.setTitle("Chapter 1");
+        page3_1.setContent("Dave was hurrying home to his future wife. He would " +
+                "propose tonight. He checked the small bump on his chest to " +
+                "make sure the tiny box containing the ring was there. He had " +
+                "just bought it. He had paid all his savings to buy her the most " +
+                "beautiful ring he could afford. Yep, that was it, the most " +
+                "beautiful ring he could ever afford, not the most beautiful ring " +
+                "there was in store. But he hoped it would be good enough for " +
+                "her. The love of his life, Jasmin.They had been together for " +
+                "three years and he felt it was the right time to propose. " +
+                "Tonight, on Christmas Eve, he would do it.Aftertheir annoying " +
+                "relatives would leave, when he would have her for himself, he " +
+                "would kneel before her and pop the question. It would be " +
+                "perfect. He would first make her think he didn’t get her " +
+                "anything this Christmas and then he would propose to her and " +
+                "put the ring on her finger. " +
+                " Dave could almost see it, how she would cry with joy and " +
+                "hug him and everything would be perfect. And by this time next " +
+                "year she would be Mrs. Rogers. Jasmin Rogers. Yup. Perfect. His " +
+                "heart was beating so fast that he had to focus to calm down. He " +
+                "was a strong man, but his heart was racing in anticipation. He " +
+                "searched his pockets for his car keys as he was slowly walking ");
+        page3_1.setPage(1);
+        page3_1.setBook(book3);
+
+        Pages page3_2 = new Pages();
+        page3_2.setTitle("");
+        page3_2.setContent("down a dark alley as it was the only place where he had found a " +
+                "parking spot for his car.There were street lights everywhere but " +
+                "the ones on this alley were flickering until they stopped doing " +
+                "even that. Just a few more meters and he would start his car " +
+                "and go home. " +
+                "Finally, he found his car keys in the back of his right pocketof " +
+                "his blue-jeans.Then things took a turn for the worse. Everything " +
+                "he had dreamed of, everything he had hoped for, all his life " +
+                "raced in his head in jumbled blurry images when he felt the " +
+                "cold steel of a gun pointed at him and a hoarse male voice " +
+                "telling him to give him his wallet. Somehow, he knew this " +
+                "wouldn’t end well. He just couldn’t have that perfect life he had " +
+                "dreamed of, could he? " +
+                "- Wait, please, it's Christmas Eve. I just want to get home to " +
+                "my future wife, Dave said with a pleading voice. " +
+                "- Give me your wallet and your phone or you won't be " +
+                "getting anywhere, got that? Came the answer and the man " +
+                "nudged him towards his car, putting the gun to his head " +
+                "now. " +
+                "- And don't turn around, hurry up!, the man went on, " +
+                "nervous now and waiting for him to give him his money. " +
+                "- I can give you my wallet, but it's empty! And so are my " +
+                "credit cards! " +
+                "- Damn! I don't believe you, just give it to me, give me your " +
+                "damned wallet man if you want to live for Christmas!");
+        page3_2.setPage(2);
+        page3_2.setBook(book3);
+
+        Pages page3_3 = new Pages();
+        page3_3.setTitle("");
+        page3_3.setContent("Here, take it, and Dave gave him his empty wallet. Even if " +
+                "he had had money, he would have given him. It wasn't " +
+                "worth to die for coins. And he treasured his life. Since he " +
+                "met Jasmin three years ago, his life meant something. It " +
+                "was worth living and it was good to be him only for having " +
+                "met her. " +
+                " The man grabbed his wallet and when he saw that it " +
+                "was indeed empty, he spit on it and threw it on the wet " +
+                "pavement. Then Dave turned around but he could only see " +
+                "the man's dirty clothes and a glimpse of his face. Then it all " +
+                "went dark. " +
+                "- Damn, why did you have to turn? I am not going back to " +
+                "jail!! Then he shot him in his head and ran away. The bullet " +
+                "went through his leftarcade, just a little above his eye. " +
+                " As he was falling to the pavement, Dave saw him ditch " +
+                "the gun in a trash can next to an empty diner. Then " +
+                "everything went black. " +
+                "He didn’t know how much time had passed, but when he " +
+                "woke up he was blinded bya white light that at first he " +
+                "couldn’t see anything. He felt disoriented and dizzy and at " +
+                "first he couldn’t remember anything. Then little by little he " +
+                "began to distinguish and to remember. He remembered " +
+                "everything, how he was eager to get home to Jasmin, how " +
+                "he was attacked and killed. Shot to death. But then where " +
+                "was he? Was he still alive? " +
+                " He took a few steps towards an elderly woman who " +
+                "was coming his way. He looked around and he didn’t ");
+        page3_3.setPage(3);
+        page3_3.setBook(book3);
+
+        Pages page3_4 = new Pages();
+        page3_4.setTitle("");
+        page3_4.setContent("recognize the place. When he was next to her, he stopped " +
+                "and cleared his throat to make her look at him. " +
+                "- Hi, excuse me, do you know where we are? " +
+                " She just smiled at him and went on without answering. " +
+                "He thought it was odd but he didn’t want to panic even " +
+                "more so he decided to ask someone else. He looked " +
+                "around one more time but no one was coming his way. His " +
+                "head hurt and he was sure he had been shot in his head. " +
+                "But why wasn’t he in the hospital? And where was the " +
+                "wound? He touched his head where the wound should " +
+                "have been but there was nothing there. Then it dawned on " +
+                "him: he was in Heaven!! Which meant he was dead!! " +
+                "- Damn! Oops, sorry for the language, he immediately " +
+                "thought! This sucks! Is this heaven? God, where are you? " +
+                "Why did I have to die on Christmas Eve? I was going to " +
+                "propose to Jasmin tonight! We were supposed to get " +
+                "married next year and now nothing will be the way I " +
+                "imagined! Why?? And he began to cry like a helpless baby " +
+                "thinking of everything that could have been but wouldn’t " +
+                "be, of the life he could have lived with Jasmin, of the " +
+                "children they could have had. " +
+                " He sat on a bench and tried to recollect himself. " +
+                "There was no point in crying over spilled milk. He would " +
+                "have to find God and see if there was anything he could do " +
+                "to help him. Or at least tell him why he let him die and did " +
+                "not save him. But which way to go? ");
+        page3_4.setPage(4);
+        page3_4.setBook(book3);
+
+        Pages page3_5 = new Pages();
+        page3_5.setTitle("");
+        page3_5.setContent("He wiped his tears and waited on the bench till he saw " +
+                "someone coming. It was a little girl. As she got near him, " +
+                "he saw that she was limping. He felt sorry for her and " +
+                "thought that maybe she could tell him something about " +
+                "this place. " +
+                "- Hey little girl, he shyly said, could you tell me what is this " +
+                "place? Is this Heaven? Because I can't see any other " +
+                "explanation. I mean someone just shot me and then next " +
+                "thing I know is that I got to this place. " +
+                "- It must be. I was crossing the street when a car hit me. " +
+                "Mom was there too but she must have survived. Because I " +
+                "can’t find her here. I am scared. " +
+                "- That makes two of us. Come, let's go this way and find " +
+                "God. He must have a plan for us. " +
+                "- By the way, my name is Amy, the little girl said with sorrow " +
+                "in her voice. " +
+                "- I'm Dave, he simply answered and smiled at her.");
+        page3_5.setPage(5);
+        page3_5.setBook(book3);
+
+        Pages page3_6 = new Pages();
+        page3_6.setTitle("Chapter 2");
+        page3_6.setContent("Dave and Amy, the little girl, went silently side by side in search " +
+                "of God.All this time he was thinking that she was too young too " +
+                "die. But even so, God had taken her to him. Finally, he had to " +
+                "ask her: " +
+                "- Amy, are you upset that you…. " +
+                "- Died? She ended his sentence. No, my parents have always " +
+                "taught me to believe in God and that He knows best what " +
+                "he does and why he does it. If he called me to him, then I " +
+                "know it's for the best. " +
+                "- How? Dave asked failing to understand her judgment. " +
+                "- Who knows? Maybe if I had lived, I would have developed " +
+                "some bad illness and suffered even more. I don’t know. " +
+                "And I don’t even want to think about it. " +
+                "- Wow, you are pretty smart for your age. But, Dave went " +
+                "on, I see the sorrow on your face. You are sad! " +
+                "- Yes, but not for me! I have no idea what happened to my " +
+                "mom. We were crossing the street when that car hit us. I " +
+                "don’t know if she is hurt bad. And she must be really sad " +
+                "for me. " +
+                "- Oh…. Was all Dave could say. Then they were both silent " +
+                "again for a while.");
+        page3_6.setPage(6);
+        page3_6.setBook(book3);
+
+        pages3.add(page3_1);
+        pages3.add(page3_2);
+        pages3.add(page3_3);
+        pages3.add(page3_4);
+        pages3.add(page3_5);
+        pages3.add(page3_6);
+
+        book3.setPages(pages3);
+
+        Book book4 = new Book();
+        book4.setTitle("In a Moment");
+        book4.setDescription("Lindy Gordon is living the enviable life of an entrepreneur in San Francisco. " +
                 "Her public relations firm is thriving, her marriage is strong and her apartment at the top of Noe Valley is the envy of her friends. " +
                 "Then the unthinkable happens. " +
                 "An accident briefly ends her life, leaving her with a scar, cracked bones and fractured images that make no sense - at first. " +
                 "As her body heals, she learns little in her past was what she believed it to be. " +
                 "Relationships have soured, love and loyalty has been misplaced and the ultimate betrayal has devastating consequences to her financial life. " +
                 "With nothing more than wits and long-dormant faith to sustain her, Lindy works to save friendships, renew family ties and open her mind and heart to one who could truly love her.");
-        book3.setGenre(Genre.DRAMA);
-        book3.setEAN(Long.valueOf(1231545648));
-        book3.setYear(2018);
+        book4.setGenre(Genre.DRAMA);
+        book4.setEAN(Long.valueOf(1231545648));
+        book4.setYear(2018);
 
-        Author author3 = new Author();
-        author3.setName("Sarah Gerdes");
-        author3.setAge(0);
-        book3.setAuthor(author3);
+        Author author4 = new Author();
+        author4.setName("Sarah Gerdes");
+        author4.setAge(0);
+        book4.setAuthor(author4);
 
-        Publisher publisher3 = new Publisher();
-        publisher3.setName("RPM Publishing");
-        publisher3.setCountry("Washington");
-        publisher3.setCity("Seattle");
-        book3.setPublisher(publisher3);
+        Publisher publisher4 = new Publisher();
+        publisher4.setName("RPM Publishing");
+        publisher4.setCountry("Washington");
+        publisher4.setCity("Seattle");
+        book4.setPublisher(publisher4);
 
-        Set<Pages> pages3 = new HashSet<>();
-        Pages page3_1 = new Pages();
-        page3_1.setTitle("PREFACE");
-        page3_1.setContent("“Come on, Lindy, come on!” a voice commanded. “You can do it. Breathe! You can start again. " +
+        Set<Pages> pages4 = new HashSet<>();
+        Pages page4_1 = new Pages();
+        page4_1.setTitle("PREFACE");
+        page4_1.setContent("“Come on, Lindy, come on!” a voice commanded. “You can do it. Breathe! You can start again. " +
                 "I know you can!” I felt nothing as I hovered above, watching the doctor tape a device around my mouth, the cord stretching to a machine. " +
                 "The upside of having my spirit separated from my body was freedom from the pain I’d experienced during the accident.  " +
                 "My hand received a squeeze and I turned to my Grandfather who had been beside me since my death, moments before. " +
@@ -348,12 +538,12 @@ public class BookBootstrap implements ApplicationListener<ContextRefreshedEvent>
                 "The soft, loose skin on Grandfather’s cheeks dropped into his lips as his eyes glimmered.  " +
                 "“That’s a common feeling when it comes time to reenter the body,” he said as though I’d be comforted. " +
                 "I wasn’t, and he seemed to know this. “I ");
-        page3_1.setPage(1);
-        page3_1.setBook(book3);
+        page4_1.setPage(1);
+        page4_1.setBook(book4);
 
-        Pages page3_2 = new Pages();
-        page3_2.setTitle("Sarah Gerdes");
-        page3_2.setContent("can tell you that your physical self will be just fine.”  " +
+        Pages pages4_2 = new Pages();
+        pages4_2.setTitle("Sarah Gerdes");
+        pages4_2.setContent("can tell you that your physical self will be just fine.”  " +
                 "“But the inside? My emotions and those who I saw?” He smiled, the hand that was holding mine started to release.  " +
                 "“Come on Lindy!” urged the doctor with such force I looked down at him. " +
                 "A flood of information passed to me from the doctor who feverishly worked on my motionless body. " +
@@ -372,22 +562,22 @@ public class BookBootstrap implements ApplicationListener<ContextRefreshedEvent>
                 "“Don’t try to look now. You will see soon enough.” " +
                 "Pain raced through my body and I heard myself choke, then scream with agony, the point where my eternal self made peace with my physical shell. " +
                 "Gradually, my aching eased into an exhausted, but stable state, the words of my Grandfather echoing in my mind.");
-        page3_2.setPage(2);
-        page3_2.setBook(book3);
+        pages4_2.setPage(2);
+        pages4_2.setBook(book4);
 
-        Pages page3_3 = new Pages();
-        page3_3.setTitle("In A Moment");
-        page3_3.setContent("“You’re going to make it, Lindy,” the doctor said confidently, as if he knew what I was going through. " +
+        Pages page4_3 = new Pages();
+        page4_3.setTitle("In A Moment");
+        page4_3.setContent("“You’re going to make it, Lindy,” the doctor said confidently, as if he knew what I was going through. " +
                 "“You’re right here with us, and you aren’t leaving.” " +
                 "I was returning to a world unlike the one I left, and I had asked for it. " +
                 "He said I’d find love again. " +
                 "In my haze of pain, I wondered why would I need to find something I already had?");
-        page3_3.setPage(3);
-        page3_3.setBook(book3);
+        page4_3.setPage(3);
+        page4_3.setBook(book4);
 
-        Pages page3_4 = new Pages();
-        page3_4.setTitle("Chapter 1");
-        page3_4.setContent("“Well, Lindy Gordon, are you ready to hear what happened?” It was my doctor, Jake Redding, the one who’d been on call during my accident. " +
+        Pages page4_4 = new Pages();
+        page4_4.setTitle("Chapter 1");
+        page4_4.setContent("“Well, Lindy Gordon, are you ready to hear what happened?” It was my doctor, Jake Redding, the one who’d been on call during my accident. " +
                 "I nodded, trying to focus on his face. " +
                 "I wondered if his insistence at using my first and last name was to keep reminding me of who I was. " +
                 "“Please call me Lindy,” I said, my voice rough, hoping to reassure him—and myself. " +
@@ -404,18 +594,19 @@ public class BookBootstrap implements ApplicationListener<ContextRefreshedEvent>
                 "It’s quite evident you have one that still works.” A functioning brain was good. " +
                 "A working body was better. In a panicked rush, I twitched my fingers, then my toes. " +
                 "I inhaled to speak, and caught myself.  ");
-        page3_4.setPage(4);
-        page3_4.setBook(book3);
+        page4_4.setPage(4);
+        page4_4.setBook(book4);
 
-        pages3.add(page3_1);
-        pages3.add(page3_2);
-        pages3.add(page3_3);
-        pages3.add(page3_4);
-        book3.setPages(pages3);
+        pages4.add(page4_1);
+        pages4.add(pages4_2);
+        pages4.add(page4_3);
+        pages4.add(page4_4);
+        book4.setPages(pages4);
 
         books.add(book1);
         books.add(book2);
         books.add(book3);
+        books.add(book4);
 
         return books;
     }
