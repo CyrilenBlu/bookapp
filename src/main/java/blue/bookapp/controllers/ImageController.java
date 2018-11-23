@@ -44,7 +44,7 @@ public class ImageController {
             e.printStackTrace();
         }
         imageService.saveImageFile(Long.valueOf(id), multipartFile);
-        return "redirect:/book/" + id + "/show";
+        return "redirect:/book/" + id + "/update";
     }
 
 

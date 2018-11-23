@@ -13,7 +13,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -54,7 +53,6 @@ public class BookBootstrap implements ApplicationListener<ContextRefreshedEvent>
         book1.setEAN(Long.valueOf(1284712894));
         book1.setTitle("Killing Floor");
         book1.setGenre(Genre.TEEN_FICTION);
-        book1.setDate(LocalDate.now());
         //todo image storage
 
         book1.setYear(2018);
@@ -272,7 +270,6 @@ public class BookBootstrap implements ApplicationListener<ContextRefreshedEvent>
         book2.setGenre(Genre.COMEDY);
         book2.setEAN(Long.valueOf(1231545648));
         book2.setYear(2016);
-        book2.setDate(LocalDate.now());
 
         Author author2 = new Author();
         author2.setName("Jeff Wick");
@@ -321,7 +318,6 @@ public class BookBootstrap implements ApplicationListener<ContextRefreshedEvent>
         book3.setGenre(Genre.DRAMA);
         book3.setEAN(Long.valueOf(1231545648));
         book3.setYear(2018);
-        book3.setDate(LocalDate.now());
 
         Author author3 = new Author();
         author3.setName("Sarah Gerdes");

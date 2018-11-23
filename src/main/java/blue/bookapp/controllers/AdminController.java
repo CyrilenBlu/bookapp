@@ -47,7 +47,9 @@ public class AdminController {
     {
         model.addAttribute("admins", adminService.getAdmins());
         model.addAttribute("admin", loggedAdmin);
-        return "redirect:/admin-book-list";
+        if (loggedAdmin.isCheckLogged())
+            return "redirect:/admin-book-list";
+        return "redirect:/admin-cpl";
     }
 
     @GetMapping("/check")
@@ -82,14 +84,18 @@ public class AdminController {
     public String listBooks_Admin(Model model)
     {
         model.addAttribute("books", bookService.listBooks());
-        return "admin/book/book-list";
+        if (loggedAdmin.isCheckLogged())
+            return "admin/book/book-list";
+        return "redirect:/admin-cpl";
     }
 
     @GetMapping("/book/{id}/show")
     public String viewBook_Admin(@PathVariable String id, Model model)
     {
         model.addAttribute("book", bookService.bookInfoById(Long.valueOf(id)));
-        return "admin/book/book-show";
+        if (loggedAdmin.isCheckLogged())
+            return "admin/book/book-show";
+        return "redirect:/admin-cpl";
     }
 
     @GetMapping("book/{id}/delete")
@@ -98,8 +104,9 @@ public class AdminController {
         if (loggedAdmin.isCheckLogged())
         {
             bookService.removeBookById(Long.valueOf(id));
-        }
-        return "redirect:/admin-book-list";
+            return "redirect:/admin-book-list";
+        } else return "redirect:/admin-cpl";
+
     }
 
     @GetMapping("/book/{id}/update")
@@ -107,7 +114,9 @@ public class AdminController {
     {
         model.addAttribute("book", bookService.bookInfoById(Long.valueOf(id)));
         model.addAttribute("pages", pagesService.listPagesByBookId(Long.valueOf(id)));
-        return "admin/book/book-update";
+        if (loggedAdmin.isCheckLogged())
+            return "admin/book/book-update";
+        return "redirect:/admin-cpl";
     }
 
     @PostMapping("book")
@@ -121,8 +130,9 @@ public class AdminController {
     public String addBook_Admin(Model model)
     {
         model.addAttribute("book", new BookCommand());
-
-        return "admin/book/book-new";
+        if (loggedAdmin.isCheckLogged())
+            return "admin/book/book-new";
+        return "redirect:/admin-cpl";
     }
 
     @PostMapping("book_add")
@@ -138,7 +148,9 @@ public class AdminController {
         model.addAttribute("book", bookService.findCommandById(Long.valueOf(id)));
         model.addAttribute("authors", authorService.findAll());
         model.addAttribute("publishers", publisherService.findAll());
-        return "admin/book/book-author-publisher";
+        if (loggedAdmin.isCheckLogged())
+            return "admin/book/book-author-publisher";
+        return "redirect:/admin-cpl";
     }
 
     @PostMapping("author_publisher")
@@ -153,14 +165,18 @@ public class AdminController {
     {
         model.addAttribute("pages", pagesService.listPagesByBookId(Long.valueOf(id)));
         model.addAttribute("book", bookService.bookInfoById(Long.valueOf(id)));
-        return "admin/book/book-pages";
+        if (loggedAdmin.isCheckLogged())
+            return "admin/book/book-pages";
+        return "redirect:/admin-cpl";
     }
 
     @GetMapping("/book/{id}/pages/{pageId}/update")
     public String viewPage_Admin(@PathVariable String id, @PathVariable String pageId, Model model) {
         model.addAttribute("book", bookService.bookInfoById(Long.valueOf(id)));
         model.addAttribute("page", pagesService.getCommandByBookByIdAndPageId(Long.valueOf(id), Long.valueOf(pageId)));
-        return "admin/book/pages/pages-update";
+        if (loggedAdmin.isCheckLogged())
+            return "admin/book/pages/pages-update";
+        return "redirect:/admin-cpl";
     }
 
     @PostMapping("/book/{id}/page")
@@ -181,7 +197,9 @@ public class AdminController {
         pagesCommand.setBookId(Long.valueOf(id));
         model.addAttribute("page", pagesCommand);
         model.addAttribute("book", bookService.findCommandById(Long.valueOf(id)));
-        return "admin/book/pages/pages-new";
+        if (loggedAdmin.isCheckLogged())
+            return "admin/book/pages/pages-new";
+        return "redirect:/admin-cpl";
     }
 
     @PostMapping("/newpage")
@@ -197,7 +215,7 @@ public class AdminController {
         if (loggedAdmin.isCheckLogged())
         {
             pagesService.removeById(Long.valueOf(id), Long.valueOf(pageId));
-        } else return "redirect:/admin-book-list";
+        } else return "redirect:/admin-cpl";
         return "redirect:/book/{id}/pages";
 
     }
@@ -210,7 +228,9 @@ public class AdminController {
     public String newAuthor_Admin(Model model)
     {
         model.addAttribute("author", new AuthorCommand());
-        return "admin/author/author-new";
+        if (loggedAdmin.isCheckLogged())
+            return "admin/author/author-new";
+        return "redirect:/admin-cpl";
     }
 
     @PostMapping("newauthor")
@@ -224,21 +244,28 @@ public class AdminController {
     public String listAuthors_Admin(Model model)
     {
         model.addAttribute("authors", authorService.findAll());
-        return "admin/author/author-list";
+        if (loggedAdmin.isCheckLogged())
+            return "admin/author/author-list";
+        return "redirect:/admin-cpl";
     }
 
     @GetMapping("/author/{id}/delete")
     public String deleteAuthor_Admin(@PathVariable String id)
     {
-        authorService.removeById(Long.valueOf(id));
-        return "redirect:/admin-author-list";
+        if (loggedAdmin.isCheckLogged()) {
+            authorService.removeById(Long.valueOf(id));
+            return "redirect:/admin-author-list";
+        }
+        return "redirect:/admin-cpl";
     }
 
     @GetMapping("/author/{id}/update")
     public String updateAuthors_Admin(@PathVariable String id, Model model)
     {
         model.addAttribute("author",authorService.findCommandById(Long.valueOf(id)));
-        return "admin/author/author-update";
+        if (loggedAdmin.isCheckLogged())
+            return "admin/author/author-update";
+        return "redirect:/admin-cpl";
     }
 
     @PostMapping("author")
@@ -258,7 +285,9 @@ public class AdminController {
     public String newPublisher_Admin(Model model)
     {
         model.addAttribute("publisher", new PublisherCommand());
-        return "admin/publisher/publisher-new";
+        if (loggedAdmin.isCheckLogged())
+            return "admin/publisher/publisher-new";
+        return "redirect:/admin-cpl";
     }
 
     @PostMapping("newpublisher")
@@ -272,14 +301,19 @@ public class AdminController {
     public String listPublishers_Admin(Model model)
     {
         model.addAttribute("publishers", publisherService.findAll());
-        return "admin/publisher/publisher-list";
+        if (loggedAdmin.isCheckLogged())
+            return "admin/publisher/publisher-list";
+        return "redirect:/admin-cpl";
     }
 
     @GetMapping("/publisher/{id}/delete")
     public String deletePublisher_Admin(@PathVariable String id)
     {
-        publisherService.removeById(Long.valueOf(id));
-        return "redirect:/admin-publisher-list";
+        if (loggedAdmin.isCheckLogged()) {
+            publisherService.removeById(Long.valueOf(id));
+            return "redirect:/admin-publisher-list";
+        }
+        return "redirect:/admin-cpl";
     }
 
     @GetMapping("/publisher/{id}/update")
