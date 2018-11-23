@@ -181,7 +181,7 @@ public class AdminController {
         pagesCommand.setBookId(Long.valueOf(id));
         model.addAttribute("page", pagesCommand);
         model.addAttribute("book", bookService.findCommandById(Long.valueOf(id)));
-        return "/admin/book/pages/pages-new";
+        return "admin/book/pages/pages-new";
     }
 
     @PostMapping("/newpage")
