@@ -8,7 +8,6 @@ import blue.bookapp.converters.PagesToPagesCommand;
 import blue.bookapp.domain.Book;
 import blue.bookapp.domain.Pages;
 import blue.bookapp.domain.Publisher;
-import blue.bookapp.repositories.AuthorRepository;
 import blue.bookapp.repositories.BookRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -29,15 +28,13 @@ public class BookServiceImpl implements BookService {
     private BookToBookCommand bookToBookCommand;
     private PagesToPagesCommand pagesToPagesCommand;
     private EntityManager entityManager;
-    private AuthorRepository authorRepository;
 
-    public BookServiceImpl(BookRepository bookRepository, BookCommandToBook bookCommandToBook, BookToBookCommand bookToBookCommand, PagesToPagesCommand pagesToPagesCommand, EntityManager entityManager, AuthorRepository authorRepository) {
+    public BookServiceImpl(BookRepository bookRepository, BookCommandToBook bookCommandToBook, BookToBookCommand bookToBookCommand, PagesToPagesCommand pagesToPagesCommand, EntityManager entityManager) {
         this.bookRepository = bookRepository;
         this.bookCommandToBook = bookCommandToBook;
         this.bookToBookCommand = bookToBookCommand;
         this.pagesToPagesCommand = pagesToPagesCommand;
         this.entityManager = entityManager;
-        this.authorRepository = authorRepository;
     }
 
     @Override
@@ -168,17 +165,6 @@ public class BookServiceImpl implements BookService {
         Set<Book> books = new HashSet<>();
         bookRepository.findAll().iterator().forEachRemaining(books::add);
         return books;
-    }
-
-    @Override
-    public Book bookInfoById(Long id) {
-        Optional<Book> optionalBook = bookRepository.findById(id);
-        if (!optionalBook.isPresent())
-        {
-            throw new RuntimeException("Book not found!");
-        }
-
-        return optionalBook.get();
     }
 
     @Override

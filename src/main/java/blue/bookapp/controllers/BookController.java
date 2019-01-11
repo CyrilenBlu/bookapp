@@ -22,7 +22,7 @@ public class BookController {
     @GetMapping("book/{id}/info")
     public String viewBook(Model model, @PathVariable String id)
     {
-        model.addAttribute("book", bookService.bookInfoById(Long.valueOf(id)));
+        model.addAttribute("book", bookService.findCommandById(Long.valueOf(id)));
         model.addAttribute("page", pagesService.listPagesByBookId(Long.valueOf(id)));
         return "book/viewBook";
     }
@@ -30,7 +30,7 @@ public class BookController {
     @GetMapping("book/{id}/read/page/{pageId}")
     public String readBook(@PathVariable String id, @PathVariable String pageId, Model model)
     {
-        model.addAttribute("book", bookService.bookInfoById(Long.valueOf(id)));
+        model.addAttribute("book", bookService.findCommandById(Long.valueOf(id)));
         model.addAttribute("pages", pagesService.listPagesByBookId(Long.valueOf(id)));
         model.addAttribute("page", pagesService.getCommandByBookById(Long.valueOf(id), Long.valueOf(pageId)));
         return "book/read";

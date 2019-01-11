@@ -29,7 +29,5 @@ public interface BookService {
 
     Set<Book> listBooks();
 
-    Book bookInfoById(Long id);
-
     BookCommand updateBook(BookCommand bookCommand);
 }

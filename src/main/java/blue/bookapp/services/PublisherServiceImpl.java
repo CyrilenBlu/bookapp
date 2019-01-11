@@ -30,16 +30,11 @@ public class PublisherServiceImpl implements PublisherService{
     @Override
     public PublisherCommand addPublisher(PublisherCommand publisherCommand) {
         Publisher publisher = publisherCommandToPublisher.convert(publisherCommand);
-        if (publisherCommand.getId() == null)
+        if (publisher.getId() == null)
         {
             publisherRepository.save(publisher);
         }
         return publisherToPublisherCommand.convert(publisher);
-    }
-
-    @Override
-    public void removePublisher(Publisher publisher) {
-        publisherRepository.delete(publisher);
     }
 
     @Override
@@ -57,15 +52,14 @@ public class PublisherServiceImpl implements PublisherService{
     }
 
     @Override
-    public Publisher findPublisherById(Long id) {
+    public PublisherCommand findPublisherById(Long id) {
         Optional<Publisher> optionalPublisher = publisherRepository.findById(id);
         if (!optionalPublisher.isPresent())
         {
             throw new RuntimeException("Publisher not found!");
         }
-        Publisher publisher = optionalPublisher.get();
 
-        return publisher;
+        return publisherToPublisherCommand.convert(optionalPublisher.get());
     }
 
     @Override
@@ -76,6 +70,7 @@ public class PublisherServiceImpl implements PublisherService{
     }
 
     @Override
+    @Transactional
     public PublisherCommand updatePublisher(PublisherCommand publisherCommand) {
         Optional<Publisher> authorOptional = publisherRepository.findById(publisherCommand.getId());
         if (!authorOptional.isPresent())

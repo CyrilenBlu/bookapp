@@ -1,5 +1,6 @@
 package blue.bookapp.services;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.Properties;
 
 @Service
+@Slf4j
 public class EmailServiceImpl implements EmailService {
 
     @Autowired
@@ -39,5 +41,6 @@ public class EmailServiceImpl implements EmailService {
         message.setSubject(subject);
         message.setText(text);
         emailSender.send(message);
+        log.debug("Mail sent");
     }
 }

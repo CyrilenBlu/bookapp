@@ -10,7 +10,7 @@ import java.util.Set;
 @Service
 public class AdminServiceImpl implements AdminService{
 
-    AdminRepository adminRepository;
+    private final AdminRepository adminRepository;
 
     public AdminServiceImpl(AdminRepository adminRepository) {
         this.adminRepository = adminRepository;

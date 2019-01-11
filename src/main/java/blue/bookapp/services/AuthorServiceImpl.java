@@ -5,7 +5,6 @@ import blue.bookapp.converters.AuthorCommandToAuthor;
 import blue.bookapp.converters.AuthorToAuthorCommand;
 import blue.bookapp.domain.Author;
 import blue.bookapp.repositories.AuthorRepository;
-import blue.bookapp.repositories.BookRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -21,23 +20,21 @@ public class AuthorServiceImpl implements AuthorService {
     private AuthorRepository authorRepository;
     private AuthorCommandToAuthor authorCommandToAuthor;
     private AuthorToAuthorCommand authorToAuthorCommand;
-    private BookRepository bookRepository;
 
-    public AuthorServiceImpl(AuthorRepository authorRepository, AuthorCommandToAuthor authorCommandToAuthor, AuthorToAuthorCommand authorToAuthorCommand, BookRepository bookRepository) {
+    public AuthorServiceImpl(AuthorRepository authorRepository, AuthorCommandToAuthor authorCommandToAuthor, AuthorToAuthorCommand authorToAuthorCommand) {
         this.authorRepository = authorRepository;
         this.authorCommandToAuthor = authorCommandToAuthor;
         this.authorToAuthorCommand = authorToAuthorCommand;
-        this.bookRepository = bookRepository;
     }
 
     @Override
     public AuthorCommand addAuthor(AuthorCommand authorCommand) {
         Author author = authorCommandToAuthor.convert(authorCommand);
-        if (authorCommand.getId() == null)
+        if (author.getId() == null)
         {
-            authorRepository.save(author);
+            Author savedAuthor = authorRepository.save(author);
+            log.debug("Saving new author.");
         }
-        log.debug("Saving new author.");
         return authorToAuthorCommand.convert(author);
     }
 

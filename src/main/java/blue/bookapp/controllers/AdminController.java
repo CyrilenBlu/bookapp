@@ -92,7 +92,7 @@ public class AdminController {
     @GetMapping("/book/{id}/show")
     public String viewBook_Admin(@PathVariable String id, Model model)
     {
-        model.addAttribute("book", bookService.bookInfoById(Long.valueOf(id)));
+        model.addAttribute("book", bookService.findCommandById(Long.valueOf(id)));
         if (loggedAdmin.isCheckLogged())
             return "admin/book/book-show";
         return "redirect:/admin-cpl";
@@ -112,7 +112,7 @@ public class AdminController {
     @GetMapping("/book/{id}/update")
     public String updateBook_Admin(@PathVariable String id, Model model)
     {
-        model.addAttribute("book", bookService.bookInfoById(Long.valueOf(id)));
+        model.addAttribute("book", bookService.findCommandById(Long.valueOf(id)));
         model.addAttribute("pages", pagesService.listPagesByBookId(Long.valueOf(id)));
         if (loggedAdmin.isCheckLogged())
             return "admin/book/book-update";
@@ -164,7 +164,7 @@ public class AdminController {
     public String pagesBook_Admin(@PathVariable String id, Model model)
     {
         model.addAttribute("pages", pagesService.listPagesByBookId(Long.valueOf(id)));
-        model.addAttribute("book", bookService.bookInfoById(Long.valueOf(id)));
+        model.addAttribute("book", bookService.findCommandById(Long.valueOf(id)));
         if (loggedAdmin.isCheckLogged())
             return "admin/book/book-pages";
         return "redirect:/admin-cpl";
@@ -172,7 +172,7 @@ public class AdminController {
 
     @GetMapping("/book/{id}/pages/{pageId}/update")
     public String viewPage_Admin(@PathVariable String id, @PathVariable String pageId, Model model) {
-        model.addAttribute("book", bookService.bookInfoById(Long.valueOf(id)));
+        model.addAttribute("book", bookService.findCommandById(Long.valueOf(id)));
         model.addAttribute("page", pagesService.getCommandByBookByIdAndPageId(Long.valueOf(id), Long.valueOf(pageId)));
         if (loggedAdmin.isCheckLogged())
             return "admin/book/pages/pages-update";

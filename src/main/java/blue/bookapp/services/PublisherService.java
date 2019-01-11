@@ -8,11 +8,9 @@ import java.util.Set;
 public interface PublisherService {
     PublisherCommand addPublisher(PublisherCommand publisherCommand);
 
-    void removePublisher(Publisher publisher);
-
     void removeById(Long id);
 
-    Publisher findPublisherById(Long id);
+    PublisherCommand findPublisherById(Long id);
 
     Set<Publisher> findAll();
 
