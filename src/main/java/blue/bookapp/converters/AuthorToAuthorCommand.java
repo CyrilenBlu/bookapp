@@ -9,15 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class AuthorToAuthorCommand implements Converter<Author, AuthorCommand> {
-
-    private BookToBookCommand bookToBookCommand;
-
-        public AuthorToAuthorCommand(BookToBookCommand bookToBookCommand) {
-            this.bookToBookCommand = bookToBookCommand;
-        }
-
-
-        @Synchronized
+    @Synchronized
     @Nullable
     @Override
     public AuthorCommand convert(Author author) {
