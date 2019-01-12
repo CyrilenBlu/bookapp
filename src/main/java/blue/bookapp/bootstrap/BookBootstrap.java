@@ -1,5 +1,6 @@
 package blue.bookapp.bootstrap;
 
+import blue.bookapp.commands.BookCommand;
 import blue.bookapp.domain.*;
 import blue.bookapp.repositories.BookRepository;
 import blue.bookapp.services.BookService;
@@ -613,7 +614,7 @@ public class BookBootstrap implements ApplicationListener<ContextRefreshedEvent>
 
     private void saveImages() throws IOException
     {
-        Set<Book> books = bookService.listBooks();
+        Set<BookCommand> books = bookService.listBooks();
         MultipartFile multipartFile1 = new MockMultipartFile("book1.jpg", new FileInputStream(new File(".bootstrapBookImages/book1.jpg")));
         MultipartFile multipartFile2 = new MockMultipartFile("book2.jpg", new FileInputStream(new File(".bootstrapBookImages/book2.jpg")));
         MultipartFile multipartFile3 = new MockMultipartFile("book3.jpg", new FileInputStream(new File(".bootstrapBookImages/book3.jpg")));

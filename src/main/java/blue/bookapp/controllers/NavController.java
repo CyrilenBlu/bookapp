@@ -16,14 +16,14 @@ public class NavController {
         this.bookService = bookService;
     }
 
-    @GetMapping({"/","/home"})
+    @GetMapping({"/","/homepage"})
     public String indexPage()
     {
         log.debug("Loading index page.");
         return "home";
     }
 
-    @GetMapping("/list")
+    @GetMapping("/listpage")
     public String listPage(Model model)
     {
         model.addAttribute("books", bookService.listBooks());
@@ -31,7 +31,7 @@ public class NavController {
         return "book/list";
     }
 
-    @GetMapping("/contact")
+    @GetMapping("/contactpage")
     public String contactPage()
     {
         log.debug("Loading contact page.");

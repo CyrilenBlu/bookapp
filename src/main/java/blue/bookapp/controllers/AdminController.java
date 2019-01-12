@@ -75,7 +75,7 @@ public class AdminController {
         loggedAdmin.setPassword(null);
         loggedAdmin.setUsername(null);
         loggedAdmin.setCheckLogged(false);
-        return "redirect:/home";
+        return "redirect:/homepage";
     }
 
     //BOOK CONTROL
@@ -319,8 +319,10 @@ public class AdminController {
     @GetMapping("/publisher/{id}/update")
     public String updatePublisher_Admin(@PathVariable String id, Model model)
     {
-        model.addAttribute(publisherService.findPublisherById(Long.valueOf(id)));
-        return "admin/publisher/publisher-update";
+        model.addAttribute("publisher",publisherService.findPublisherById(Long.valueOf(id)));
+        if (loggedAdmin.isCheckLogged())
+            return "admin/publisher/publisher-update";
+        return "redirect:/admin-cpl";
     }
 
     @PostMapping("publisher")

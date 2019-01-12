@@ -38,10 +38,10 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Set<Book> listBooksByAuthorName(String author) {
-        Set<Book> books = new HashSet<>();
-        bookRepository.findAll().iterator().forEachRemaining(books::add);
-        Set<Book> savedBooks = new HashSet<>();
+    public Set<BookCommand> listBooksByAuthorName(String author) {
+        Set<BookCommand> books = new HashSet<>();
+        bookRepository.findAll().iterator().forEachRemaining(book -> books.add(bookToBookCommand.convert(book)));
+        Set<BookCommand> savedBooks = new HashSet<>();
         books.stream().forEach(book ->
         {
             if (book.getAuthor().getName() == author)
@@ -54,10 +54,10 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Set<Book> listBooksByPublisher(Publisher publisher) {
-        Set<Book> books = new HashSet<>();
-        bookRepository.findAll().iterator().forEachRemaining(books::add);
-        Set<Book> savedBooks = new HashSet<>();
+    public Set<BookCommand> listBooksByPublisher(Publisher publisher) {
+        Set<BookCommand> books = new HashSet<>();
+        bookRepository.findAll().iterator().forEachRemaining(book -> books.add(bookToBookCommand.convert(book)));
+        Set<BookCommand> savedBooks = new HashSet<>();
         books.stream().forEach(book ->
         {
             if (book.getPublisher() == publisher)
@@ -69,10 +69,10 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Set<Book> listBooksByYear(int year) {
-        Set<Book> books = new HashSet<>();
-        bookRepository.findAll().iterator().forEachRemaining(books::add);
-        Set<Book> savedBooks = new HashSet<>();
+    public Set<BookCommand> listBooksByYear(int year) {
+        Set<BookCommand> books = new HashSet<>();
+        bookRepository.findAll().iterator().forEachRemaining(book -> books.add(bookToBookCommand.convert(book)));
+        Set<BookCommand> savedBooks = new HashSet<>();
         books.stream().forEach(book ->
         {
             if (book.getYear() == year)
@@ -90,10 +90,10 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Set<Book> listByTitle(String title) {
-        Set<Book> books = new HashSet<>();
-        bookRepository.findAll().iterator().forEachRemaining(books::add);
-        Set<Book> savedBooks = new HashSet<>();
+    public Set<BookCommand> listByTitle(String title) {
+        Set<BookCommand> books = new HashSet<>();
+        bookRepository.findAll().iterator().forEachRemaining(book -> books.add(bookToBookCommand.convert(book)));
+        Set<BookCommand> savedBooks = new HashSet<>();
         books.stream().forEach(book ->
         {
             if (book.getTitle() == title)
@@ -161,9 +161,9 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Set<Book> listBooks() {
-        Set<Book> books = new HashSet<>();
-        bookRepository.findAll().iterator().forEachRemaining(books::add);
+    public Set<BookCommand> listBooks() {
+        Set<BookCommand> books = new HashSet<>();
+        bookRepository.findAll().iterator().forEachRemaining(book -> books.add(bookToBookCommand.convert(book)));
         return books;
     }
 
