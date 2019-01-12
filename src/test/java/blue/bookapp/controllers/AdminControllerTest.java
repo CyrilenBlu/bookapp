@@ -2,7 +2,10 @@ package blue.bookapp.controllers;
 
 import blue.bookapp.commands.BookCommand;
 import blue.bookapp.commands.PagesCommand;
-import blue.bookapp.domain.*;
+import blue.bookapp.domain.Admin;
+import blue.bookapp.domain.Author;
+import blue.bookapp.domain.Pages;
+import blue.bookapp.domain.Publisher;
 import blue.bookapp.services.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -44,7 +47,7 @@ public class AdminControllerTest {
 
     @Test
     public void testListBooks_Admin() throws Exception {
-        Set<Book> books = new HashSet<>();
+        Set<BookCommand> books = new HashSet<>();
 
         when(bookService.listBooks()).thenReturn(books);
 
