@@ -4,6 +4,7 @@ import blue.bookapp.domain.Admin;
 import blue.bookapp.repositories.AdminRepository;
 import blue.bookapp.services.AdminService;
 import org.springframework.context.ApplicationListener;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@Profile("h2")
 public class AdminBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
     AdminRepository adminRepository;
