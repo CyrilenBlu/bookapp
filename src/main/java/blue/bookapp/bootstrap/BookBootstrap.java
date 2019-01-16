@@ -6,6 +6,7 @@ import blue.bookapp.repositories.BookRepository;
 import blue.bookapp.services.BookService;
 import blue.bookapp.services.ImageService;
 import org.springframework.context.ApplicationListener;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Component;
@@ -20,6 +21,7 @@ import java.util.List;
 import java.util.Set;
 
 @Component
+@Profile("h2")
 public class BookBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
     private BookRepository bookRepository;

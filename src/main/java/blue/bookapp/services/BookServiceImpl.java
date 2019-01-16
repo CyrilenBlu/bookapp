@@ -130,11 +130,17 @@ public class BookServiceImpl implements BookService {
         if (!bookOptional.isPresent())
             throw new RuntimeException("Book not found!");
         Book book = bookOptional.get();
-        book.getAuthor().getBooks().remove(book);
-        book.setAuthor(null);
 
-        book.getPublisher().getBooks().remove(book);
-        book.setPublisher(null);
+        if (book.getAuthor() != null) {
+            book.getAuthor().getBooks().remove(book);
+            book.setAuthor(null);
+        }
+
+        if (book.getPublisher() != null) {
+            book.getPublisher().getBooks().remove(book);
+            book.setPublisher(null);
+        }
+
 
         bookRepository.deleteById(id);
     }

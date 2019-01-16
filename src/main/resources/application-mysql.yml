@@ -1,0 +1,35 @@
+spring:
+    datasource:
+        url: jdbc:mysql://localhost:3306/sfb_dev
+        username: sfb_dev_user
+        password: springblue
+    jpa:
+        hibernate:
+            ddl-auto: validate
+        database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+        database: mysql
+        show-sql: true
+#        properties:
+#            javax:
+#                persistence:
+#                    schema-generation:
+#                        create-source: metadata
+#                        scripts:
+#                            action: create
+#                            create-target: blue_database_create.sql
+    banner:
+        location: banner.txt
+    servlet:
+        multipart:
+            max-file-size: 5MB
+    mail:
+        host: smtp.gmail.com
+        port: 587
+        username: "iexistlol123@gmail.com"
+        password: "!existlol"
+        properties:
+            mail:
+                smtp:
+                    auth: true
+                    starttls:
+                        enable: true
