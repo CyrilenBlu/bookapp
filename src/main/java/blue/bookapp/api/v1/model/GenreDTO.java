@@ -1,0 +1,8 @@
+package blue.bookapp.api.v1.model;
+
+
+public enum GenreDTO {
+    HORROR, FANTASY, COMEDY, SUPERNATURAL,
+    ROMANCE, MYSTERY, THRILLER, SHORT_STORY,
+    TEEN_FICTION, CHILDREN_BOOKS, DRAMA
+}
