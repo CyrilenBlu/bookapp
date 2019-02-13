@@ -19,6 +19,12 @@ public interface BookMapper {
     })
     BookDTO bookToBookDTO(Book book);
 
+    @Mappings({
+            @Mapping(target = "genre", source = "genreDTO"),
+            @Mapping(target = "author", source = "authorDTO"),
+            @Mapping(target = "pages", source = "pagesDTOS"),
+            @Mapping(target = "publisher", source = "publisherDTO")
+    })
     Book bookDtoToBook(BookDTO bookDTO);
 
 //    default GenreDTO map(Genre genre)

@@ -3,10 +3,7 @@ package blue.bookapp.controllers.rest;
 import blue.bookapp.api.v1.model.AuthorDTO;
 import blue.bookapp.services.rest_services.RestAuthorService;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,10 +18,31 @@ public class RestAuthorController {
         this.restAuthorService = restAuthorService;
     }
 
-    @GetMapping
+    @GetMapping({"","/"})
     @ResponseStatus(HttpStatus.OK)
     private List<AuthorDTO> getAuthors()
     {
         return restAuthorService.getAuthors();
+    }
+
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    private AuthorDTO getAuthorById(@PathVariable Long id)
+    {
+        return restAuthorService.getAuthorById(id);
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    private AuthorDTO createNewAuthor(@RequestBody AuthorDTO authorDTO)
+    {
+        return restAuthorService.createNewAuthor(authorDTO);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    private String deleteAuthorById(@PathVariable Long id)
+    {
+        return restAuthorService.deleteAuthorById(id);
     }
 }

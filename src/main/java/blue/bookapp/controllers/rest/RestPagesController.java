@@ -3,10 +3,7 @@ package blue.bookapp.controllers.rest;
 import blue.bookapp.api.v1.model.PagesDTO;
 import blue.bookapp.services.rest_services.RestPagesService;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,10 +18,24 @@ public class RestPagesController {
         this.restPagesService = restPagesService;
     }
 
-    @GetMapping
+    @GetMapping({"","/"})
     @ResponseStatus(HttpStatus.OK)
     private List<PagesDTO> getPages()
     {
         return restPagesService.getPages();
+    }
+
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    private PagesDTO getPagesById(@PathVariable Long id)
+    {
+        return restPagesService.getPagesById(id);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    private String deletePagesById(@PathVariable Long id)
+    {
+        return restPagesService.deletePagesById(id);
     }
 }

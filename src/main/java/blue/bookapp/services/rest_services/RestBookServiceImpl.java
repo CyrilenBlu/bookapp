@@ -33,4 +33,52 @@ public class RestBookServiceImpl implements RestBookService {
         });
         return bookDTOS;
     }
+
+    @Override
+    public BookDTO getBookById(Long id) {
+        if (bookRepository.findById(id).isPresent()) {
+            return bookMapper.bookToBookDTO(bookRepository.findById(id).get());
+        } else return null;
+    }
+
+    @Override
+    public BookDTO getBookByIdExclImg(Long id) {
+        if (bookRepository.findById(id).isPresent()) {
+            BookDTO bookDTO = bookMapper.bookToBookDTO(bookRepository.findById(id).get());
+            bookDTO.setImage(new Byte[0]);
+            return bookDTO;
+        } else return null;
+    }
+
+    @Override
+    public BookDTO createBook(BookDTO bookDTO) {
+        BookDTO book = new BookDTO();
+        if (book.getId() == null)
+        {
+            Book savedBook = bookRepository.save(bookMapper.bookDtoToBook(bookDTO));
+            return bookMapper.bookToBookDTO(savedBook);
+        } else return null;
+    }
+
+    @Override
+    public BookDTO saveBook() {
+        return null;
+    }
+
+    @Override
+    public BookDTO patchBook() {
+        return null;
+    }
+
+    @Override
+    public String deleteBookById(Long id) {
+        if (bookRepository.findById(id).isPresent()) {
+            BookDTO bookDTO = bookMapper.bookToBookDTO(bookRepository.findById(id).get());
+            bookRepository.deleteById(id);
+            return "Book " + id + " deleted. \n" + "Book Deleted:\n" +
+                    "Title: \t" + bookDTO.getTitle() + "\n" +
+                    "Desc: \t" + bookDTO.getDescription() + "\n" +
+                    "Genre: \t" + bookDTO.getGenreDTO();
+        } else return "Book not found.";
+    }
 }

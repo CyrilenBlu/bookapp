@@ -6,4 +6,8 @@ import java.util.List;
 
 public interface RestPagesService {
     List<PagesDTO> getPages();
+
+    PagesDTO getPagesById(Long id);
+
+    String deletePagesById(Long id);
 }

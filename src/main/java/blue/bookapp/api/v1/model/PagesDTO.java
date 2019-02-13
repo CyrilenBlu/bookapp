@@ -8,5 +8,6 @@ public class PagesDTO {
     private int page;
     private String title;
     private String content;
-    private BookDTO bookDTO;
+    private Long bookId;
+    private String bookTitle;
 }

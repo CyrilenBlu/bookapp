@@ -6,4 +6,10 @@ import java.util.List;
 
 public interface RestAuthorService {
     List<AuthorDTO> getAuthors();
+
+    AuthorDTO getAuthorById(Long id);
+
+    String deleteAuthorById(Long id);
+
+    AuthorDTO createNewAuthor(AuthorDTO authorDTO);
 }

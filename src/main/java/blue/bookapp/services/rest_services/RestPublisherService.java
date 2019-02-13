@@ -6,4 +6,10 @@ import java.util.List;
 
 public interface RestPublisherService {
     List<PublisherDTO> getPublishers();
+
+    PublisherDTO getPublisherById(Long id);
+
+    PublisherDTO createNewPublisher(PublisherDTO publisherDTO);
+
+    String deletePublisherById(Long id);
 }

@@ -2,6 +2,7 @@ package blue.bookapp.services.rest_services;
 
 import blue.bookapp.api.v1.mapping.PublisherMapper;
 import blue.bookapp.api.v1.model.PublisherDTO;
+import blue.bookapp.domain.Publisher;
 import blue.bookapp.repositories.PublisherRepository;
 import org.springframework.stereotype.Service;
 
@@ -27,5 +28,32 @@ public class RestPublisherServiceImpl implements RestPublisherService {
             publisherDTOS.add(publisherMapper.publisherToPublisherDTO(publisher));
         });
         return publisherDTOS;
+    }
+
+    @Override
+    public PublisherDTO getPublisherById(Long id) {
+        return null;
+    }
+
+    @Override
+    public PublisherDTO createNewPublisher(PublisherDTO publisherDTO) {
+        PublisherDTO publisher = new PublisherDTO();
+        if (publisher.getId() == null)
+        {
+            Publisher savedPublisher = publisherRepository.save(publisherMapper.publisherDtoToPublisher(publisher));
+            return publisherMapper.publisherToPublisherDTO(savedPublisher);
+        } else return null;
+    }
+
+    @Override
+    public String deletePublisherById(Long id) {
+        if (publisherRepository.findById(id).isPresent())
+        {
+            PublisherDTO publisherDTO = publisherMapper.publisherToPublisherDTO(publisherRepository.findById(id).get());
+            publisherRepository.deleteById(id);
+            return "Publisher " + id + " Deleted.\n"
+                    + "Publisher name: " + publisherDTO.getName()
+                    + "\n Publisher country: " + publisherDTO.getCountry();
+        } else return "Publisher not found.";
     }
 }
