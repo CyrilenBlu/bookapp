@@ -32,7 +32,10 @@ public class RestPublisherServiceImpl implements RestPublisherService {
 
     @Override
     public PublisherDTO getPublisherById(Long id) {
-        return null;
+        if (publisherRepository.findById(id).isPresent())
+        {
+            return publisherMapper.publisherToPublisherDTO(publisherRepository.findById(id).get());
+        } else return null;
     }
 
     @Override
@@ -43,6 +46,16 @@ public class RestPublisherServiceImpl implements RestPublisherService {
             Publisher savedPublisher = publisherRepository.save(publisherMapper.publisherDtoToPublisher(publisher));
             return publisherMapper.publisherToPublisherDTO(savedPublisher);
         } else return null;
+    }
+
+    @Override
+    public PublisherDTO updatePublisher(Long id, PublisherDTO publisherDTO) {
+        return publisherRepository.findById(id)
+                .map(publisher ->
+                {
+                    publisher = publisherMapper.publisherDtoToPublisher(publisherDTO);
+                    return publisherMapper.publisherToPublisherDTO(publisherRepository.save(publisher));
+                }).orElseThrow(null);
     }
 
     @Override

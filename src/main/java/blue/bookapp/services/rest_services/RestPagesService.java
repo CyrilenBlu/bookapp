@@ -9,5 +9,7 @@ public interface RestPagesService {
 
     PagesDTO getPagesById(Long id);
 
+    PagesDTO patchPage(Long id, PagesDTO pagesDTO);
+
     String deletePagesById(Long id);
 }

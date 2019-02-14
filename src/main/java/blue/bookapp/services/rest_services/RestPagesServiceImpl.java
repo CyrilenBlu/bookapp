@@ -41,6 +41,22 @@ public class RestPagesServiceImpl implements RestPagesService {
     }
 
     @Override
+    public PagesDTO patchPage(Long id, PagesDTO pagesDTO) {
+        return pagesRepository.findById(id)
+                .map(pages ->
+                {
+                    if (pagesDTO.getPage() != 0)
+                        pages.setPage(pagesDTO.getPage());
+                    if (pagesDTO.getTitle() != null)
+                        pages.setTitle(pagesDTO.getTitle());
+                    if (pagesDTO.getContent() != null)
+                        pages.setContent(pagesDTO.getContent());
+
+                    return pagesMapper.pagesToPagesDTO(pagesRepository.save(pages));
+                }).orElseThrow(null);
+    }
+
+    @Override
     public String deletePagesById(Long id) {
         if (pagesRepository.findById(id).isPresent())
         {

@@ -39,6 +39,13 @@ public class RestAuthorController {
         return restAuthorService.createNewAuthor(authorDTO);
     }
 
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    private AuthorDTO updateAuthor(@PathVariable Long id, @RequestBody AuthorDTO authorDTO)
+    {
+        return restAuthorService.updateAuthor(id, authorDTO);
+    }
+
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     private String deleteAuthorById(@PathVariable Long id)

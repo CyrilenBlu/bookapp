@@ -9,6 +9,8 @@ public interface RestAuthorService {
 
     AuthorDTO getAuthorById(Long id);
 
+    AuthorDTO updateAuthor(Long id, AuthorDTO authorDTO);
+
     String deleteAuthorById(Long id);
 
     AuthorDTO createNewAuthor(AuthorDTO authorDTO);

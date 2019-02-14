@@ -32,6 +32,13 @@ public class RestPagesController {
         return restPagesService.getPagesById(id);
     }
 
+    @PatchMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    private PagesDTO patchPage(@PathVariable Long id, @RequestBody PagesDTO pagesDTO)
+    {
+        return restPagesService.patchPage(id, pagesDTO);
+    }
+
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     private String deletePagesById(@PathVariable Long id)

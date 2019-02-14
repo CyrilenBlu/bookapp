@@ -11,5 +11,7 @@ public interface RestPublisherService {
 
     PublisherDTO createNewPublisher(PublisherDTO publisherDTO);
 
+    PublisherDTO updatePublisher(Long id, PublisherDTO publisherDTO);
+
     String deletePublisherById(Long id);
 }

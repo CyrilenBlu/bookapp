@@ -36,6 +36,13 @@ public class RestPublisherController {
         return restPublisherService.createNewPublisher(publisherDTO);
     }
 
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    private PublisherDTO updatePublisher(@PathVariable Long id, @RequestBody PublisherDTO publisherDTO)
+    {
+        return restPublisherService.updatePublisher(id, publisherDTO);
+    }
+
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     private String deletePublisherById(@PathVariable Long id) { return restPublisherService.deletePublisherById(id); }

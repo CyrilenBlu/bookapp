@@ -41,6 +41,18 @@ public class RestAuthorServiceImpl implements RestAuthorService {
     }
 
     @Override
+    public AuthorDTO updateAuthor(Long id, AuthorDTO authorDTO) {
+        return authorRepository.findById(id)
+                    .map(author -> {
+                        author = authorMapper.authorDtoToAuthor(authorDTO);
+                        return authorMapper.authorToAuthorDTO(authorRepository.save(author));
+                    })
+                    .orElseThrow(null);
+    }
+
+
+
+    @Override
     public String deleteAuthorById(Long id) {
         if (authorRepository.findById(id).isPresent())
         {
