@@ -1,6 +1,7 @@
 package blue.bookapp.services.rest_services;
 
 import blue.bookapp.api.v1.model.BookDTO;
+import blue.bookapp.api.v1.model.PagesDTO;
 
 import java.util.List;
 
@@ -11,7 +12,13 @@ public interface RestBookService {
 
     BookDTO getBookByIdExclImg(Long id);
 
+    PagesDTO getPageNumberByBookId(Long bookId, int pageNumber);
+
+    List<PagesDTO> getPagesByBookId(Long bookId);
+
     BookDTO createBook(BookDTO bookDTO);
+
+    PagesDTO createNewPage(Long bookId, PagesDTO pagesDTO);
 
     BookDTO saveBook();
 

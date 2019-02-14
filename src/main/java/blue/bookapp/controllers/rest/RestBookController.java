@@ -1,6 +1,7 @@
 package blue.bookapp.controllers.rest;
 
 import blue.bookapp.api.v1.model.BookDTO;
+import blue.bookapp.api.v1.model.PagesDTO;
 import blue.bookapp.services.rest_services.RestBookService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -37,6 +38,27 @@ public class RestBookController {
     private BookDTO getBookByIdExclImg(@PathVariable Long id)
     {
         return restBookService.getBookByIdExclImg(id);
+    }
+
+    @GetMapping("/{bookId}/page/{pageNumber}")
+    @ResponseStatus(HttpStatus.OK)
+    private PagesDTO getPageNumberByBookId(@PathVariable Long bookId, @PathVariable int pageNumber)
+    {
+        return restBookService.getPageNumberByBookId(bookId, pageNumber);
+    }
+
+    @GetMapping("/{bookId}/pages")
+    @ResponseStatus(HttpStatus.OK)
+    private List<PagesDTO> getPagesByBookId(@PathVariable Long bookId)
+    {
+        return restBookService.getPagesByBookId(bookId);
+    }
+
+    @PostMapping("{bookId}/pages")
+    @ResponseStatus(HttpStatus.CREATED)
+    private PagesDTO createNewPage(@PathVariable Long bookId, @RequestBody PagesDTO pagesDTO)
+    {
+        return restBookService.createNewPage(bookId, pagesDTO);
     }
 
     @PostMapping

@@ -3,24 +3,34 @@ package blue.bookapp.services.rest_services;
 import blue.bookapp.api.v1.mapping.BookMapper;
 import blue.bookapp.api.v1.mapping.PagesMapper;
 import blue.bookapp.api.v1.model.BookDTO;
+import blue.bookapp.api.v1.model.PagesDTO;
 import blue.bookapp.domain.Book;
+import blue.bookapp.domain.Pages;
 import blue.bookapp.repositories.BookRepository;
+import blue.bookapp.repositories.PagesRepository;
+import blue.bookapp.services.PagesService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class RestBookServiceImpl implements RestBookService {
+@Slf4j
+public class RestBookServiceImpl implements RestBookService { //todo error response implementation for null returns.
 
     private final BookMapper bookMapper;
     private final PagesMapper pagesMapper;
     private final BookRepository bookRepository;
+    private final PagesRepository pagesRepository;
+    private final PagesService pagesService;
 
-    public RestBookServiceImpl(BookMapper bookMapper, PagesMapper pagesMapper, BookRepository bookRepository) {
+    public RestBookServiceImpl(BookMapper bookMapper, PagesMapper pagesMapper, BookRepository bookRepository, PagesRepository pagesRepository, PagesService pagesService) {
         this.bookMapper = bookMapper;
         this.pagesMapper = pagesMapper;
         this.bookRepository = bookRepository;
+        this.pagesRepository = pagesRepository;
+        this.pagesService = pagesService;
     }
 
     @Override
@@ -51,12 +61,67 @@ public class RestBookServiceImpl implements RestBookService {
     }
 
     @Override
+    public PagesDTO getPageNumberByBookId(Long bookId, int pageNumber) {
+        final PagesDTO[] pagesDTO = {new PagesDTO()};
+        if (bookRepository.findById(bookId).isPresent())
+        {
+            pagesRepository.findAll().forEach(pages -> {
+                if (pages.getBook().getId().equals(bookId) && pages.getPage() == pageNumber)
+                {
+                    pagesDTO[0] = pagesMapper.pagesToPagesDTO(pages);
+                }
+            });
+            return pagesDTO[0];
+        } else return null;
+    }
+
+    @Override
+    public List<PagesDTO> getPagesByBookId(Long bookId) {
+        List<PagesDTO> pagesDTOS = new ArrayList<>();
+        pagesRepository.findAll().forEach(pages ->
+        {
+            if (pages.getBook().getId() == null)
+            {
+                log.error("Null bookID found for page: " + pages.getId());
+            } else
+            {
+                if (pages.getBook().getId().equals(bookId))
+                    pagesDTOS.add(pagesMapper.pagesToPagesDTO(pages));
+            }
+        });
+
+        if (pagesDTOS.size() > 0)
+        {
+            return pagesDTOS;
+        } else return null;
+
+    }
+
+    @Override
     public BookDTO createBook(BookDTO bookDTO) {
         BookDTO book = new BookDTO();
         if (book.getId() == null)
         {
             Book savedBook = bookRepository.save(bookMapper.bookDtoToBook(bookDTO));
             return bookMapper.bookToBookDTO(savedBook);
+        } else return null;
+    }
+
+    @Override
+    public PagesDTO createNewPage(Long bookId, PagesDTO pagesDTO) {
+        if (bookRepository.findById(bookId).isPresent()) {
+            if (pagesDTO.getId() == null) {
+                Pages pages = pagesMapper.pagesDtoToPages(pagesDTO);
+                Book book = bookRepository.findById(bookId).get();
+
+                pages.setBook(book);
+                book.getPages().add(pages);
+
+                pagesRepository.save(pages);
+                bookRepository.save(book);
+
+                return pagesMapper.pagesToPagesDTO(pages);
+            } else return null;
         } else return null;
     }
 
