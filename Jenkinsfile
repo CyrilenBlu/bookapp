@@ -14,22 +14,19 @@ pipeline {
       }
     }
     stage('Build') {
-      parallel {
-        stage('Build') {
-          steps {
-            sh 'mvn clean package'
-          }
-        }
-        stage('Test') {
-          steps {
-            sh 'mvn test'
-          }
-        }
+      steps {
+        sh 'mvn clean package'
+      }
+    }
+    stage('Test') {
+      steps {
+        echo 'Testing pipieline'
+        sh 'mvn test'
       }
     }
     stage('End') {
       steps {
-        echo 'Finished pipeline'
+        echo 'End pipeiline'
       }
     }
   }
