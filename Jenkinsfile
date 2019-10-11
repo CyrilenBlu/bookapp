@@ -14,14 +14,17 @@ pipeline {
       }
     }
     stage('Build') {
-      steps {
-        sh 'mvn clean package'
-      }
-    }
-    stage('Test') {
-      steps {
-        echo 'Testing pipieline'
-        sh 'mvn test'
+      parallel {
+        stage('Build') {
+          steps {
+            sh 'mvn clean package'
+          }
+        }
+        stage('Test') {
+          steps {
+            sh 'mvn test'
+          }
+        }
       }
     }
     stage('End') {
